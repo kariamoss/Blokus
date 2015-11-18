@@ -1,5 +1,8 @@
+package Model;
+
 /**
  * Created by Jehan Milleret on 14/11/2015.
  */
-public class ControlButton {
+public class General_m {
+
 }

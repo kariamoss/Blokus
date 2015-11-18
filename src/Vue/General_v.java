@@ -1,17 +1,17 @@
+package Vue;
+
+import Model.General_m;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Jehan Milleret on 29/04/2015.
  */
-public class Vue extends JFrame {
-    protected Model model;
+public class General_v extends JFrame {
+    protected General_m model;
     protected JPanel fenetre;
 
-    public Vue(Model model){
+    public General_v(General_m model){
         this.model = model;
         setTitle("Blokus");
         initAttribute();
@@ -22,7 +22,7 @@ public class Vue extends JFrame {
     }
 
     public void initAttribute() {
-
+        
         fenetre = new JPanel();
     }
 

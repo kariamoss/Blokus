@@ -1,3 +1,6 @@
+import Controler.ControlGroup;
+import Model.General_m;
+
 /**
  * Created by Jehan Milleret on 14/11/2015.
  */
@@ -8,8 +11,8 @@ public class Blokus {
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
 
             public void run() {
-                Model model = new Model();
-                ControlGroup control = new ControlGroup(model);
+                General_m generalm = new General_m();
+                ControlGroup control = new ControlGroup(generalm);
 
             }
 
