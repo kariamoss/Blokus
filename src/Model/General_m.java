@@ -2,5 +2,5 @@ package Model;
 
 
 public class General_m {
-    Piece_m pieceM;
+    Inventaire_m pieceM;
 }
