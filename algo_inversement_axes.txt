@@ -1,4 +1,4 @@
-// ATTENTION
+﻿// ATTENTION
 // J'ai testé seulement sur un seul exemple, il faudra surement faire des tests !
 
 //-------------------------------------------------------------------
@@ -22,7 +22,17 @@ while(iterator.hasNext())
 
     //On actualise la couleur de la case sur la grille
     //Je sais pas comment sera définit le tableau, mais l'idée est là
-    grille[i+k][j+l].setCouleur() = case_m.getCouleur();
+    if (verifCase(i+k, j+l))
+    {
+        grille[i+k][j+l].setCouleur() = case_m.getCouleur();
+    }
+    else
+    {
+        //erreur
+        break;
+    }
+}
+
 }
 
 
@@ -49,7 +59,15 @@ while(iterator.hasNext())
     int l = case_m.getPosY;
 
     //On actualise la couleur de la case sur la grille
-    grille[i-k][j+l].setCouleur() = case_m.getCouleur();
+    if (verifCase(i-k, j+l))
+    {
+        grille[i-k][j+l].setCouleur() = case_m.getCouleur();
+    }
+    else
+    {
+        //erreur
+        break;
+    }
 }
 
 
@@ -76,8 +94,17 @@ while(iterator.hasNext())
     int l = case_m.getPosY;
 
     //On actualise la couleur de la case sur la grille
-    grille[i-l][j+k].setCouleur() = case_m.getCouleur();
+    if (verifCase(i-l, j+k))
+    {
+        grille[i-l][j+k].setCouleur() = case_m.getCouleur();
+    }
+    else
+    {
+        //erreur
+        break;
+    }
 }
+    
 
 
 
@@ -103,5 +130,28 @@ while(iterator.hasNext())
     int l = case_m.getPosY;
 
     //On actualise la couleur de la case sur la grille
-    grille[i+l][j-k].setCouleur() = case_m.getCouleur();
+    if (verifCase(i+l, j-k))
+    {
+        grille[i+l][j-k].setCouleur() = case_m.getCouleur();
+    }
+    else
+    {
+        //erreur
+        break;
+    }
 }
+
+
+
+public boolean verifCase(int i, int j){
+
+	//Vérifie si grille[i][j] est dans le tableau
+    //Si oui, vérifie que la case n'est pas déjà occupé
+        if(i>=0 && i<20 && j>=0 && <20){
+            if (grille[i][j].getCouleur()==null){
+                return true ;
+            }
+        }
+        return false;
+}
+
