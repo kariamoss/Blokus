@@ -16,8 +16,12 @@ public class Case_m {
         this.couleur = couleur;
     }
 
-    public int[] getPos() {
-        return pos;
+    public int getPosX() {
+        return pos[0];
+    }
+
+    public int getPosY() {
+        return pos[1];
     }
 
     public void setPos(int[] pos) {
