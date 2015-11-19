@@ -3,6 +3,7 @@ package Vue;
 import Model.General_m;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Jehan Milleret on 29/04/2015.
@@ -24,6 +25,8 @@ public class General_v extends JFrame {
     public void initAttribute() {
         
         fenetre = new JPanel();
+        fenetre.setBackground(Color.GRAY);
+        fenetre.add(new Grille_v().getGrille());
     }
 
     public void display() {
