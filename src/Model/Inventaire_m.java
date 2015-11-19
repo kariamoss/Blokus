@@ -30,7 +30,6 @@ public class Inventaire_m
 
     public Inventaire_m(String couleur)
     {
-
         this.couleur=couleur;
 
         //Déclaration des cases
