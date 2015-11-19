@@ -27,6 +27,7 @@ public class General_v extends JFrame {
         fenetre = new JPanel();
         fenetre.setBackground(Color.GRAY);
         fenetre.add(new Grille_v().getGrille());
+
     }
 
     public void display() {
