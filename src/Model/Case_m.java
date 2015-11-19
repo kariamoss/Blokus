@@ -11,9 +11,6 @@ public class Case_m {
         pos[1] = j;
     }
 
-
-
-
     //Getters Setters
     public void setCouleur(String couleur) {
         this.couleur = couleur;
@@ -30,10 +27,6 @@ public class Case_m {
     public String getCouleur() {
         return couleur;
     }
-
-
-
-
 }
 
 
