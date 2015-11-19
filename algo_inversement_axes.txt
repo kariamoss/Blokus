@@ -4,7 +4,7 @@
 //-------------------------------------------------------------------
 
 
-// => Exemple : placement de la pièce 5 (01,10,11,12)
+// => Exemple : placement de la pièce 6 (01,10,11,12)
 //				en [2][3]
 //				Orientation : OUEST
 
@@ -32,7 +32,7 @@ while(iterator.hasNext())
 
 
 
-// => Exemple : placement de la pièce 5 (01,10,11,12)
+// => Exemple : placement de la pièce 6 (01,10,11,12)
 //				en [2][3]
 //				Orientation : EST
 
@@ -59,7 +59,7 @@ while(iterator.hasNext())
 
 
 
-// => Exemple : placement de la pièce 5 (01,10,11,12)
+// => Exemple : placement de la pièce 6 (01,10,11,12)
 //				en [2][3]
 //				Orientation : NORD
 
@@ -86,7 +86,7 @@ while(iterator.hasNext())
 
 
 
-// => Exemple : placement de la pièce 5 (01,10,11,12)
+// => Exemple : placement de la pièce 6 (01,10,11,12)
 //				en [2][3]
 //				Orientation :SUD
 
