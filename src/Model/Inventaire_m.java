@@ -181,4 +181,172 @@ public class Inventaire_m
         piece21.add(case12);
         piece21.add(case13);
     }
+
+    public List<Case_m> getPiece1() {
+        return piece1;
+    }
+
+    public void setPiece1(List<Case_m> piece1) {
+        this.piece1 = piece1;
+    }
+
+    public List<Case_m> getPiece2() {
+        return piece2;
+    }
+
+    public void setPiece2(List<Case_m> piece2) {
+        this.piece2 = piece2;
+    }
+
+    public List<Case_m> getPiece3() {
+        return piece3;
+    }
+
+    public void setPiece3(List<Case_m> piece3) {
+        this.piece3 = piece3;
+    }
+
+    public List<Case_m> getPiece4() {
+        return piece4;
+    }
+
+    public void setPiece4(List<Case_m> piece4) {
+        this.piece4 = piece4;
+    }
+
+    public List<Case_m> getPiece5() {
+        return piece5;
+    }
+
+    public void setPiece5(List<Case_m> piece5) {
+        this.piece5 = piece5;
+    }
+
+    public List<Case_m> getPiece6() {
+        return piece6;
+    }
+
+    public void setPiece6(List<Case_m> piece6) {
+        this.piece6 = piece6;
+    }
+
+    public List<Case_m> getPiece7() {
+        return piece7;
+    }
+
+    public void setPiece7(List<Case_m> piece7) {
+        this.piece7 = piece7;
+    }
+
+    public List<Case_m> getPiece8() {
+        return piece8;
+    }
+
+    public void setPiece8(List<Case_m> piece8) {
+        this.piece8 = piece8;
+    }
+
+    public List<Case_m> getPiece9() {
+        return piece9;
+    }
+
+    public void setPiece9(List<Case_m> piece9) {
+        this.piece9 = piece9;
+    }
+
+    public List<Case_m> getPiece10() {
+        return piece10;
+    }
+
+    public void setPiece10(List<Case_m> piece10) {
+        this.piece10 = piece10;
+    }
+
+    public List<Case_m> getPiece11() {
+        return piece11;
+    }
+
+    public void setPiece11(List<Case_m> piece11) {
+        this.piece11 = piece11;
+    }
+
+    public List<Case_m> getPiece12() {
+        return piece12;
+    }
+
+    public void setPiece12(List<Case_m> piece12) {
+        this.piece12 = piece12;
+    }
+
+    public List<Case_m> getPiece13() {
+        return piece13;
+    }
+
+    public void setPiece13(List<Case_m> piece13) {
+        this.piece13 = piece13;
+    }
+
+    public List<Case_m> getPiece14() {
+        return piece14;
+    }
+
+    public void setPiece14(List<Case_m> piece14) {
+        this.piece14 = piece14;
+    }
+
+    public List<Case_m> getPiece15() {
+        return piece15;
+    }
+
+    public void setPiece15(List<Case_m> piece15) {
+        this.piece15 = piece15;
+    }
+
+    public List<Case_m> getPiece16() {
+        return piece16;
+    }
+
+    public void setPiece16(List<Case_m> piece16) {
+        this.piece16 = piece16;
+    }
+
+    public List<Case_m> getPiece17() {
+        return piece17;
+    }
+
+    public void setPiece17(List<Case_m> piece17) {
+        this.piece17 = piece17;
+    }
+
+    public List<Case_m> getPiece18() {
+        return piece18;
+    }
+
+    public void setPiece18(List<Case_m> piece18) {
+        this.piece18 = piece18;
+    }
+
+    public List<Case_m> getPiece19() {
+        return piece19;
+    }
+
+    public void setPiece19(List<Case_m> piece19) {
+        this.piece19 = piece19;
+    }
+
+    public List<Case_m> getPiece20() {
+        return piece20;
+    }
+
+    public void setPiece20(List<Case_m> piece20) {
+        this.piece20 = piece20;
+    }
+
+    public List<Case_m> getPiece21() {
+        return piece21;
+    }
+
+    public void setPiece21(List<Case_m> piece21) {
+        this.piece21 = piece21;
+    }
 }
