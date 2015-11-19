@@ -1,0 +1,80 @@
+// ATTENTION
+// J'ai testé seulement sur un seul exemple, il faudra surement faire des tests !
+
+//-------------------------------------------------------------------
+
+
+// => Exemple : placement de la pièce 5 (01,10,11,12)
+//				en [2][3]
+//				Orientation : OUEST
+
+int i = 2;
+int j = 3;
+
+//Parcours de toute les cases de la pièce
+iterator iterator = new piece5.getListeCase().Interator();
+while(iterator.hasNext())
+{
+    //Récupère la position de la case dans la pièce
+    Case_m case_m = iterator.next();
+    int k = case_m.getPosX;
+    int l = case_m.getPosY;
+
+    //On actualise la couleur de la case sur la grille
+    //Je sais pas comment sera définit le tableau, mais l'idée est là
+    grille[i+k][j+l].setCouleur() = case_m.getCouleur();
+}
+
+
+
+
+//-------------------------------------------------------------------
+
+
+
+// => Exemple : placement de la pièce 5 (01,10,11,12)
+//				en [2][3]
+//				Orientation : EST
+
+int i = 2;
+int j = 3;
+
+//Parcours de toute les cases de la pièce
+iterator iterator = new piece5.getListeCase().Interator();
+while(iterator.hasNext())
+{
+    //Récupère la position de la case dans la pièce
+    Case_m case_m = iterator.next();
+    int k = case_m.getPosX;
+    int l = case_m.getPosY;
+
+    //On actualise la couleur de la case sur la grille
+    grille[i-k][j+l].setCouleur() = case_m.getCouleur();
+}
+
+
+
+
+//-------------------------------------------------------------------
+
+
+
+// => Exemple : placement de la pièce 5 (01,10,11,12)
+//				en [2][3]
+//				Orientation : EST
+
+int i = 2;
+int j = 3;
+
+//Parcours de toute les cases de la pièce
+iterator iterator = new piece5.getListeCase().Interator();
+while(iterator.hasNext())
+{
+    //Récupère la position de la case dans la pièce
+    Case_m case_m = iterator.next();
+    int k = case_m.getPosX;
+    int l = case_m.getPosY;
+
+    //On actualise la couleur de la case sur la grille
+    grille[i-k][j+l].setCouleur() = case_m.getCouleur();
+}
