@@ -11,9 +11,6 @@ import java.awt.*;
 public class Grille_v {
     JPanel grille;
 
-
-
-
     public Grille_v(){
         initGrid(600/3, 20, true);
     }
