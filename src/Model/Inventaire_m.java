@@ -35,19 +35,20 @@ public class Inventaire_m {
         this.couleur = couleur;
 
         //Déclaration des cases
+        //Si le chiffre est précédé de m, c'est une représentation d'un chiffre négatif
         Case_m case00 = new Case_m(couleur, 0, 0);
         Case_m case01 = new Case_m(couleur, 0, 1);
         Case_m case02 = new Case_m(couleur, 0, 2);
         Case_m case03 = new Case_m(couleur, 0, 3);
         Case_m case10 = new Case_m(couleur, 1, 0);
         Case_m case11 = new Case_m(couleur, 1, 1);
-        Case_m case12 = new Case_m(couleur, 1, 2);
-        Case_m case13 = new Case_m(couleur, 1, 3);
         Case_m case20 = new Case_m(couleur, 2, 0);
-        Case_m case21 = new Case_m(couleur, 2, 1);
-        Case_m case22 = new Case_m(couleur, 2, 2);
-        Case_m case30 = new Case_m(couleur, 3, 0);
-        Case_m case40 = new Case_m(couleur, 4, 0);
+        Case_m casem10 = new Case_m(couleur, -1, 0);
+        Case_m casem20 = new Case_m(couleur, -2, 0);
+        Case_m case0m1 = new Case_m(couleur, 0, -1);
+        Case_m case1m1 = new Case_m(couleur, 0, -1);
+        Case_m case0m2 = new Case_m(couleur, 0, -2);
+        Case_m casem11 = new Case_m(couleur, -1, 1);
 
         //Piece 1
         List<Case_m> caseL = new ArrayList<>();
@@ -67,8 +68,8 @@ public class Inventaire_m {
 
         //Piece 3
         caseL.add(case00);
-        caseL.add(case01);
-        caseL.add(case11);
+        caseL.add(case0m1);
+        caseL.add(case10);
         image = "images/" + couleur + "/piece" + 3 + ".png";
         piece3 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece3);
@@ -76,8 +77,8 @@ public class Inventaire_m {
 
         //Piece 4
         caseL.add(case00);
+        caseL.add(case0m1);
         caseL.add(case01);
-        caseL.add(case02);
         image = "images/" + couleur + "/piece" + 4 + ".png";
         piece4 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece4);
@@ -94,62 +95,62 @@ public class Inventaire_m {
         caseL.clear();
 
         //Piece 6
+        caseL.add(case00);
+        caseL.add(case0m1);
         caseL.add(case01);
-        caseL.add(case10);
-        caseL.add(case11);
-        caseL.add(case12);
+        caseL.add(casem10);
         image = "images/" + couleur + "/piece" + 6 + ".png";
         piece6 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece6);
         caseL.clear();
 
         //Piece 7
-        caseL.add(case03);
         caseL.add(case00);
         caseL.add(case01);
         caseL.add(case02);
+        caseL.add(case03);
         image = "images/" + couleur + "/piece" + 7 + ".png";
         piece7 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece7);
         caseL.clear();
 
         //Piece 8
-        caseL.add(case12);
-        caseL.add(case02);
-        caseL.add(case11);
-        caseL.add(case10);
+        caseL.add(case00);
+        caseL.add(case0m1);
+        caseL.add(case0m2);
+        caseL.add(casem10);
         image = "images/" + couleur + "/piece" + 8 + ".png";
         piece8 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece8);
         caseL.clear();
 
         //Piece 9
+        caseL.add(case00);
         caseL.add(case01);
-        caseL.add(case11);
         caseL.add(case10);
-        caseL.add(case02);
+        caseL.add(case1m1);
         image = "images/" + couleur + "/piece" + 9 + ".png";
         piece9 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece9);
         caseL.clear();
 
         //Piece 10
-        caseL.add(case13);
-        caseL.add(case12);
-        caseL.add(case11);
-        caseL.add(case10);
         caseL.add(case00);
+        caseL.add(casem10);
+        caseL.add(case01);
+        caseL.add(case02);
+        caseL.add(case03);
         image = "images/" + couleur + "/piece" + 10 + ".png";
         piece10 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece10);
         caseL.clear();
 
         //Piece 11
-        caseL.add(case22);
-        caseL.add(case20);
-        caseL.add(case21);
+        caseL.add(case00);
+        caseL.add(case0m1);
         caseL.add(case01);
-        caseL.add(case11);
+        caseL.add(casem10);
+        caseL.add(casem20);
         image = "images/" + couleur + "/piece" + 11 + ".png";
         piece11 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece11);
@@ -157,22 +158,22 @@ public class Inventaire_m {
 
 
         //Piece 12
-        caseL.add(case20);
-        caseL.add(case21);
-        caseL.add(case22);
         caseL.add(case00);
-        caseL.add(case10);
+        caseL.add(case01);
+        caseL.add(case02);
+        caseL.add(casem10);
+        caseL.add(casem20);
         image = "images/" + couleur + "/piece" + 12 + ".png";
         piece12 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece12);
         caseL.clear();
 
         //Piece 13
-        caseL.add(case10);
-        caseL.add(case11);
+        caseL.add(case00);
         caseL.add(case01);
         caseL.add(case02);
-        caseL.add(case03);
+        caseL.add(case10);
+        caseL.add(case1m1);
         image = "images/" + couleur + "/piece" + 13 + ".png";
         piece13 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece13);
@@ -180,11 +181,11 @@ public class Inventaire_m {
 
 
         //Piece 14
-        caseL.add(case10);
-        caseL.add(case20);
-        caseL.add(case11);
-        caseL.add(case12);
-        caseL.add(case02);
+        caseL.add(case00);
+        caseL.add(case01);
+        caseL.add(case0m1);
+        caseL.add(case1m1);
+        caseL.add(casem11);
         image = "images/" + couleur + "/piece" + 14 + ".png";
         piece14 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece14);
@@ -192,10 +193,10 @@ public class Inventaire_m {
 
         //Piece 15
         caseL.add(case00);
+        caseL.add(casem10);
+        caseL.add(casem20);
         caseL.add(case10);
         caseL.add(case20);
-        caseL.add(case30);
-        caseL.add(case40);
         image = "images/" + couleur + "/piece" + 15 + ".png";
         piece15 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece15);
@@ -203,21 +204,21 @@ public class Inventaire_m {
 
         //Piece 16
         caseL.add(case00);
-        caseL.add(case10);
-        caseL.add(case20);
-        caseL.add(case11);
-        caseL.add(case21);
+        caseL.add(case01);
+        caseL.add(casem10);
+        caseL.add(casem20);
+        caseL.add(casem11);
         image = "images/" + couleur + "/piece" + 16 + ".png";
         piece16 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece16);
         caseL.clear();
 
         //Piece 17
-        caseL.add(case11);
-        caseL.add(case10);
-        caseL.add(case20);
-        caseL.add(case01);
-        caseL.add(case02);
+        caseL.add(case00);
+        caseL.add(casem10);
+        caseL.add(casem11);
+        caseL.add(case0m1);
+        caseL.add(case1m1);
         image = "images/" + couleur + "/piece" + 17 + ".png";
         piece17 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece17);
@@ -225,43 +226,43 @@ public class Inventaire_m {
 
         //Piece 18
         caseL.add(case00);
-        caseL.add(case01);
         caseL.add(case10);
-        caseL.add(case20);
-        caseL.add(case21);
+        caseL.add(case11);
+        caseL.add(casem10);
+        caseL.add(casem11);
         image = "images/" + couleur + "/piece" + 18 + ".png";
         piece18 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece18);
         caseL.clear();
 
         //Piece 19
+        caseL.add(case00);
         caseL.add(case10);
-        caseL.add(case01);
-        caseL.add(case11);
-        caseL.add(case02);
-        caseL.add(case21);
+        caseL.add(case0m1);
+        caseL.add(casem10);
+        caseL.add(casem11);
         image = "images/" + couleur + "/piece" + 19 + ".png";
         piece19 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece19);
         caseL.clear();
 
         //Piece 20
+        caseL.add(case00);
+        caseL.add(case0m1);
         caseL.add(case01);
-        caseL.add(case11);
-        caseL.add(case21);
+        caseL.add(casem10);
         caseL.add(case10);
-        caseL.add(case12);
         image = "images/" + couleur + "/piece" + 20 + ".png";
         piece20 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece20);
         caseL.clear();
 
         //Piece 21
+        caseL.add(case00);
+        caseL.add(case0m1);
         caseL.add(case01);
-        caseL.add(case10);
-        caseL.add(case11);
-        caseL.add(case12);
-        caseL.add(case13);
+        caseL.add(case02);
+        caseL.add(casem10);
         image = "images/" + couleur + "/piece" + 21 + ".png";
         piece21 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece21);
