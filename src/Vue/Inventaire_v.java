@@ -36,7 +36,7 @@ public class Inventaire_v {
             ImageIcon imageIcon = new ImageIcon(inventaire_m.getPiece(i).getImage());
             Image image = imageIcon.getImage();
             Image newImage = image.getScaledInstance(45, 45,  java.awt.Image.SCALE_SMOOTH ) ;
-            ImageIcon icon = new ImageIcon( newImage );
+            ImageIcon icon = new ImageIcon(newImage);
 
             inventaire[i].setIcon(icon);
             panelInventaire.add(inventaire[i]);
