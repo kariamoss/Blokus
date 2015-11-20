@@ -1,6 +1,6 @@
 import Model.Inventaire_m;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class InventaireUnitTest {
     @Test
