@@ -5,7 +5,7 @@ public class Case_m {
     String couleur;
     int[] pos = new int[2];
 
-    public Case_m(String couleur, int i, int j){
+    public Case_m(String couleur, int i, int j) {
         this.couleur = couleur;
         pos[0] = i;
         pos[1] = j;
@@ -32,5 +32,3 @@ public class Case_m {
         return couleur;
     }
 }
-
-

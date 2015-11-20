@@ -23,15 +23,12 @@ public class General_v extends JFrame {
     }
 
     public void initAttribute() {
-        
         fenetre = new JPanel();
         fenetre.setBackground(Color.GRAY);
-        fenetre.add(new Grille_v().getGrille());
-
+        fenetre.add(new Grille_v(550, 20, true).getGrille());
     }
 
     public void display() {
-
         setVisible(true);
     }
 
