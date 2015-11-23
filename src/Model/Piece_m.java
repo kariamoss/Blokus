@@ -6,10 +6,12 @@ import java.util.List;
 public class Piece_m {
     List<Case_m> listeCase= new ArrayList<>();
     String orientation;
+    String image;
 
-    public Piece_m(List<Case_m> liste, String orientation){
+    public Piece_m(List<Case_m> liste, String orientation, String image){
         this.orientation = orientation;
         listeCase = liste;
+        this.image=image;
     }
 
     public List<Case_m> getListeCase() {
@@ -27,4 +29,13 @@ public class Piece_m {
     public void setOrientation(String orientation) {
         this.orientation = orientation;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }
