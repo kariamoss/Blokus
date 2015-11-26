@@ -12,8 +12,11 @@ public class PlateauUnitTest {
     public void testGenererPlateau(){
         Plateau_m plateau = new Plateau_m();
 
-        plateau.genererPlateau(plateau.getTaillePlateau(),plateau.getNbCases());
-        Assert.assertEquals(plateau.getNbCases(),400);
         Assert.assertEquals(plateau.getTaillePlateau(),20);
+        Assert.assertEquals(plateau.getCase(0,0).getCouleur(), "White");
+        plateau.getCase(19,19).setCouleur("Red");
+        Assert.assertEquals(plateau.getCase(19,19).getCouleur(), "Red");
+
+
     }
 }
