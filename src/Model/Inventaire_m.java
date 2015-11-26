@@ -270,6 +270,21 @@ public class Inventaire_m {
 
     }
 
+    public void selectPiece(int index){
+        for(int i = 0; i< listePiece.size(); i++){
+            listePiece.get(i).setPieceSelection(false);
+        }
+        listePiece.get(index).setPieceSelection(true);
+    }
+    public Piece_m selectPieceActive(){
+        for(int i = 0; i< listePiece.size(); i++){
+            if(listePiece.get(i).isSelected()){
+                return listePiece.get(i);
+            }
+        }
+        return null;
+    }
+
     //Getters
     public Piece_m getPiece(int index) {
         return listePiece.get(index);
