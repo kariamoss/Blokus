@@ -141,8 +141,6 @@ while(iterator.hasNext())
     }
 }
 
-
-
 public boolean verifCase(int i, int j){
 
 	//Vérifie si grille[i][j] est dans le tableau
