@@ -11,6 +11,9 @@ public class BoutonsControleJeu_v extends JFrame {
     protected JButton btAbandonner;
     protected JButton btPause;
     protected JButton btPlay;
+    protected ImageIcon imgAbandonner;
+    protected ImageIcon imgPause;
+    protected ImageIcon imgPlay;
 
     public BoutonsControleJeu_v(){
         init();
@@ -19,15 +22,28 @@ public class BoutonsControleJeu_v extends JFrame {
     }
 
     public void init(){
-        btAbandonner = new JButton("Abandonner");
-        btPause = new JButton("Pause");
-        btPlay = new JButton("Play");
+        imgAbandonner = new ImageIcon(new ImageIcon("images/boutons_controle/giveup_PLS.jpg").getImage().getScaledInstance(40, 32, Image.SCALE_DEFAULT ));
+        imgPause = new ImageIcon(new ImageIcon("images/boutons_controle/pause31.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
+        imgPlay = new ImageIcon(new ImageIcon("images/boutons_controle/play.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
+        btAbandonner = new JButton(imgAbandonner);
+        btAbandonner.setOpaque(false);
+        btAbandonner.setContentAreaFilled(false);
+        btAbandonner.setBorderPainted(false);
+        btPause = new JButton(imgPause);
+        btPlay = new JButton(imgPlay);
+        btPause.setOpaque(false);
+        btPause.setContentAreaFilled(false);
+        btPause.setBorderPainted(false);
+        btPlay.setOpaque(false);
+        btPlay.setContentAreaFilled(false);
+        btPlay.setBorderPainted(false);
+
 
     }
 
     public void dessinerBoutons(){
         panelDeControle=new JPanel();
-        panelDeControle.setLayout(new BoxLayout(panelDeControle, BoxLayout.X_AXIS));
+       // panelDeControle.setLayout(new BoxLayout(panelDeControle, BoxLayout.X_AXIS));
         panelDeControle.add(btAbandonner);
         panelDeControle.add(btPause);
         panelDeControle.add(btPlay);
