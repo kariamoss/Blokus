@@ -16,11 +16,11 @@ public class Case_m {
         this.couleur = couleur;
     }
 
-    public int getPosX() {
+    public int getPosI() {
         return pos[0];
     }
 
-    public int getPosY() {
+    public int getPosJ() {
         return pos[1];
     }
 
