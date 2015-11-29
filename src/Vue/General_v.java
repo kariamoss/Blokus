@@ -22,7 +22,8 @@ public class General_v extends JFrame {
 
     protected JPanel panel_principal;
     protected JPanel fenetre_Grille;
-    protected JPanel panel_gauche;
+    protected JPanel panel_droite;
+    protected JPanel panel_retourner;
 
     public General_v(General_m model){
         this.model = model;
@@ -39,27 +40,31 @@ public class General_v extends JFrame {
     public void initAttribute() {
         panel_principal = new JPanel();
         fenetre_Grille = new JPanel();
-        panel_gauche = new JPanel(new GridLayout(5,1));
+        panel_retourner= new JPanel();
+        panel_droite = new JPanel(new GridLayout(5,1));
         fenetre_Grille.setPreferredSize(new Dimension(600, 600));
-        panel_gauche.setPreferredSize(new Dimension(265, 600));
+        panel_droite.setPreferredSize(new Dimension(265, 600));
 
-        //panel_gauche.add(fenetreJoueur.getJoueur());
+        //panel_droite.add(fenetreJoueur.getJoueur());
 
-        //panel_gauche.add(new BoutonsControleJeu_v().getPanelDeControle());
-        panel_gauche.add(fenetreControle.getPanelDeControle());
+        //panel_droite.add(new BoutonsControleJeu_v().getPanelDeControle());
+        panel_droite.add(fenetreControle.getPanelDeControle());
+
         //fenetreControle.getPanelDeControle().setBorder(new LineBorder(Color.DARK_GRAY, 1));
 
 
         //fenetreInventaire.getInventaire().setBorder(new LineBorder(Color.DARK_GRAY, 1));
-        panel_gauche.add(fenetreInventaire.getInventaire());
+        panel_droite.add(fenetreInventaire.getInventaire());
+        panel_droite.add(fenetreControle.getPanelRetourner());
 
-        //panel_gauche.add(fenetreVuePiece.getVuePiece());
 
-        //panel_gauche.add(fenetreProgressBar.getProgressBar());
+        //panel_droite.add(fenetreVuePiece.getVuePiece());
+
+        //panel_droite.add(fenetreProgressBar.getProgressBar());
 
         fenetre_Grille.add(new Grille_v(600, 20, true).getGrille());
         panel_principal.add(fenetre_Grille);
-        panel_principal.add(panel_gauche);
+        panel_principal.add(panel_droite);
     }
 
     public void display() {
