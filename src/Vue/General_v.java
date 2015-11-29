@@ -49,7 +49,7 @@ public class General_v extends JFrame {
         //panel_droite.add(fenetreJoueur.getJoueur());
 
         //panel_droite.add(new BoutonsControleJeu_v().getPanelDeControle());7
-        panel_droite.add(new PlayerCard_v().getPlayerCard());
+        panel_droite.add(new GameStats_v().getGameStats());
         panel_droite.add(fenetreControle.getPanelDeControle());
 
         //fenetreControle.getPanelDeControle().setBorder(new LineBorder(Color.DARK_GRAY, 1));
