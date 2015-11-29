@@ -25,6 +25,10 @@ public class General_v extends JFrame {
     protected JPanel panel_droite;
     protected JPanel panel_retourner;
 
+
+
+
+
     public General_v(General_m model){
         this.model = model;
         setTitle("Blokus");
@@ -37,6 +41,8 @@ public class General_v extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+
+
     public void initAttribute() {
         panel_principal = new JPanel();
         fenetre_Grille = new JPanel();
@@ -47,7 +53,8 @@ public class General_v extends JFrame {
 
         //panel_droite.add(fenetreJoueur.getJoueur());
 
-        //panel_droite.add(new BoutonsControleJeu_v().getPanelDeControle());
+        //panel_droite.add(new BoutonsControleJeu_v().getPanelDeControle());7
+        panel_droite.add(new PlayerCard_v().getPlayerCard());
         panel_droite.add(fenetreControle.getPanelDeControle());
 
         //fenetreControle.getPanelDeControle().setBorder(new LineBorder(Color.DARK_GRAY, 1));
@@ -67,8 +74,14 @@ public class General_v extends JFrame {
         panel_principal.add(panel_droite);
     }
 
+
+
     public void display() {
         setVisible(true);
     }
+
+
+
+
 
 }
