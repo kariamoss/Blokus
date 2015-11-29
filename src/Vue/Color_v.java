@@ -7,7 +7,7 @@ import java.awt.*;
  * Property of Mc-Tag's corporation, all rights reserved.
  */
 public class Color_v {
-    Color color;
+    private Color color;
 
 
 
@@ -26,9 +26,7 @@ public class Color_v {
 
 
 
-    public Color getColor(){
-        return this.color;
-    }
+    public Color getColor(){ return this.color; }
 
 
 
