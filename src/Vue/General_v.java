@@ -2,13 +2,8 @@ package Vue;
 
 import Model.General_m;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 
 public class General_v extends JFrame {
@@ -37,7 +32,7 @@ public class General_v extends JFrame {
         fenetreControle.dessinerBoutons();
         setSize(900, 650);
         setContentPane(panel_principal);
-        //setResizable(false);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
