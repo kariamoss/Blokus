@@ -9,8 +9,7 @@ import javax.swing.border.LineBorder;
  */
 public class PlayerCard_v {
     private JPanel componentPanel;
-    private Border playerCardBoarder;
-     private JPanel playerColor;
+    private JPanel playerColor;
      private JPanel playerName;
       private JLabel playerName_l;
      private JPanel playerScore;
@@ -30,7 +29,7 @@ public class PlayerCard_v {
         BoxLayout componentLayout= new BoxLayout(componentPanel, BoxLayout.X_AXIS);
         componentPanel.setLayout(componentLayout);
 
-        playerCardBoarder= new LineBorder(new Color_v().getColor(),1);
+        Border playerCardBoarder = new LineBorder(new Color_v(0,0,0).getColor(), 2);
         componentPanel.setBorder(playerCardBoarder);
 
         mountSubComponents();
