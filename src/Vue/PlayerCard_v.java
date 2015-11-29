@@ -21,6 +21,11 @@ public class PlayerCard_v {
         initComponent();
     }
 
+    public PlayerCard_v(String playerName){
+        componentPanel= new JPanel();
+        initComponent();
+    }
+
 
 
     private void initComponent(){
@@ -47,21 +52,39 @@ public class PlayerCard_v {
             initLabels();
         }
             private void initLabels(){
-                playerName_l= new JLabel("new_player");
+                initLabels("new_player", String.valueOf(0));
+                mountLabels();
+            }
+            //initialise labels with "playerName", and a score of 0.
+            private void initLabels(String playerName){
+                initLabels(playerName, String.valueOf(0));
+                mountLabels();
+            }
+            //initialise labels with "playerName", and "score"...no matter if it's an int, a double or a String.
+            private void initLabels(String playerName, int score){
+                initLabels(playerName, String.valueOf(score));
+                mountLabels();
+            }
+            private void initLabels(String playerName, double score){
+                initLabels(playerName, String.valueOf(score));
+                mountLabels();
+            }
+            private void initLabels(String playerName, String score){
+                playerName_l= new JLabel(playerName);
                 playerName_l.setOpaque(false);
 
-                playerScore_l= new JLabel(String.valueOf(0));
+                playerScore_l= new JLabel(score);
                 playerScore_l.setOpaque(false);
 
                 mountLabels();
             }
-            private void mountLabels(){
-                playerName_l.setHorizontalAlignment(JLabel.CENTER);
-                playerName.add(playerName_l);
+                private void mountLabels(){
+                    playerName_l.setHorizontalAlignment(JLabel.CENTER);
+                    playerName.add(playerName_l);
 
-                playerName_l.setHorizontalAlignment(JLabel.CENTER);
-                playerScore.add(playerScore_l);
-            }
+                    playerName_l.setHorizontalAlignment(JLabel.CENTER);
+                    playerScore.add(playerScore_l);
+                }
         private void mountSubComponents(){
             componentPanel.add(playerColor);
             componentPanel.add(playerName);
