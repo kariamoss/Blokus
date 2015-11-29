@@ -9,7 +9,7 @@ import java.awt.*;
  * Property of Mc-Tag's corporation, all rights reserved.
  */
 public class Grille_v {
-    JPanel grille;
+    private JPanel grille;
 
     public Grille_v(){
         initGrid(600/3, 20, true);
