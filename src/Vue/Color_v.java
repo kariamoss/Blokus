@@ -20,6 +20,30 @@ public class Color_v {
         color= new Color(redLevel, greenLevel, blueLevel);
     }
 
+    public Color_v(String color){
+        switch (color){
+
+
+            case "Bleu":
+                this.color= Color.BLUE;
+            break;
+
+            case "Rouge":
+                this.color= Color.RED;
+            break;
+
+            case "Jaune":
+                this.color= Color.YELLOW;
+            break;
+
+            case "Vert":
+                this.color= Color.GREEN;
+            break;
+
+
+        }
+    }
+
     public Color_v(Color colorToRecycle){
         color= colorToRecycle;
     }
