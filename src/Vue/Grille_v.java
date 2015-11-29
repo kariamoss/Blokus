@@ -27,7 +27,7 @@ public class Grille_v {
         grille.setPreferredSize(new Dimension(sizeInPixels, sizeInPixels));
         grille.setOpaque(false);
 
-        fillGrid(nbButtonsPerRow, borders);
+        mountGrid(nbButtonsPerRow, borders);
 
     }
 
@@ -36,7 +36,7 @@ public class Grille_v {
     public JPanel getGrille(){ return grille; }
 
 
-    private void fillGrid(int nbButtonsPerRow, boolean borders){
+    private void mountGrid(int nbButtonsPerRow, boolean borders){
         int nbButtons= nbButtonsPerRow*nbButtonsPerRow;
 
         for (int i= 0; i < nbButtons; i++){
