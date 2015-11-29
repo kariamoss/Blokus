@@ -1,14 +1,11 @@
-import Model.Case_m;
+import Controler.ControlPlateau;
 import Model.Joueur_m;
 import Model.Piece_m;
 import Model.Plateau_m;
-import Controler.ControlPlateau;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Created by Jehan on 26/11/2015.
- */
+
 public class ControlPlateauUnitTest {
 
     @Test
