@@ -51,10 +51,10 @@ public class PlayerCard_v {
             playerColor.setBackground(new Color_v().getColor());
 
             playerName= new JPanel();
-            playerName.setBackground(new Color_v(108,108,108).getColor());
+            playerName.setBackground(new Color_v(108, 108, 108).getColor());
 
             playerScore= new JPanel();
-            playerScore.setBackground(new Color_v(208,208,208).getColor());
+            playerScore.setBackground(new Color_v(208, 208, 208).getColor());
 
             initLabels();
         }
