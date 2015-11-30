@@ -61,24 +61,54 @@ public class ControlPlateau implements ActionListener {
         return false;
     }
 
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    //                    SUD
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+
     public void positionnementSud(int i, int j, Piece_m piece){
+        if (checkPositionnementSud(i, j, piece))
+        {
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On actualise la couleur de la case sur la grille
+                plateau.getCase(i+l,j-k).setCouleur("Red");
+            }
+        }
+        else
+        {
+            System.out.println("Placement impossible");
+        }
+
+    }
+
+    public boolean checkPositionnementSud(int i, int j, Piece_m piece){
+        boolean free = true;
         for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
 
             //On actualise la couleur de la case sur la grille
-            if (verifCase(i+l, j-k))
+            if (!verifCase(i+l, j-k))
             {
-                plateau.getCase(i+l,j-k).setCouleur("Red");
-            }
-            else
-            {
-                System.out.println("Erreur pour la case "+i+","+j);
-                break;
+                free = false;
             }
         }
+        return free;
     }
+
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    //                    OUEST
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 
     public void positionnementOuest(int i, int j, Piece_m piece){
 
@@ -89,15 +119,8 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                if (verifCase(i+k, j+l))
-                {
-                    plateau.getCase(i+k,j+l).setCouleur("Red");
-                }
-                else
-                {
-                    System.out.println("Erreur pour la case "+i+","+j);
-                    break;
-                }
+                 plateau.getCase(i+k,j+l).setCouleur("Red");
+
             }
         }
         else
@@ -121,42 +144,86 @@ public class ControlPlateau implements ActionListener {
             return free;
     }
 
-    public void positionnementEst(int i, int j, Piece_m piece){
-        for(Case_m caseIt : piece.getListeCase()) {
-            //Récupère la position de la case dans la pièce
-            int k = caseIt.getPosI();
-            int l = caseIt.getPosJ();
 
-            //On actualise la couleur de la case sur la grille
-            if (verifCase(i-k, j+l))
-            {
-                plateau.getCase(i-k,j+l).setCouleur("Red");
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    //                    EST
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+
+    public void positionnementEst(int i, int j, Piece_m piece){
+        if (checkPositionnementEst(i, j, piece)) {
+            for (Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On actualise la couleur de la case sur la grille
+                plateau.getCase(i - k, j + l).setCouleur("Red");
+
             }
-            else
-            {
-                System.out.println("Erreur pour la case "+i+","+j);
-                break;
-            }
+        }
+        else
+        {
+            System.out.println("Placement impossible");
         }
     }
 
-    public void positionnementNord(int i, int j, Piece_m piece){
+    public boolean checkPositionnementEst(int i, int j, Piece_m piece){
+        boolean free = true;
         for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
 
             //On actualise la couleur de la case sur la grille
-            if (verifCase(i-l, j+k))
+            if (!verifCase(i-k, j+l))
             {
-                plateau.getCase(i-l,j+k).setCouleur("Red");
-            }
-            else
-            {
-                System.out.println("Erreur pour la case "+i+","+j);
-                break;
+                free = false;
             }
         }
+        return free;
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    //                    NORD
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+
+    public void positionnementNord(int i, int j, Piece_m piece){
+        if (checkPositionnementNord(i, j, piece))
+        {
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On actualise la couleur de la case sur la grille
+                plateau.getCase(i-l,j+k).setCouleur("Red");
+            }
+        }
+        else
+        {
+            System.out.println("Placement impossible");
+        }
+    }
+
+    public boolean checkPositionnementNord(int i, int j, Piece_m piece){
+        boolean free = true;
+        for(Case_m caseIt : piece.getListeCase()) {
+            //Récupère la position de la case dans la pièce
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            //On actualise la couleur de la case sur la grille
+            if (!verifCase(i-l, j+k))
+            {
+                free = false;
+            }
+        }
+        return free;
     }
 
 }
