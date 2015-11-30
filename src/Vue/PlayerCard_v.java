@@ -2,6 +2,7 @@ package Vue;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.text.StringContent;
 
 /**
  * Created by Fox Mc-Tag on 29/11/2015.
@@ -9,7 +10,7 @@ import javax.swing.border.LineBorder;
  */
 public class PlayerCard_v {
     private JPanel componentPanel;
-    private JPanel playerColor;
+     private JPanel playerColor;
      private JPanel playerName;
       private JLabel playerName_l;
      private JPanel playerScore;
@@ -18,18 +19,24 @@ public class PlayerCard_v {
 
     public PlayerCard_v(){
         componentPanel= new JPanel();
+
+        componentPanel.setOpaque(false);
+
         initComponent();
     }
 
-    public PlayerCard_v(String playerName){
+    public PlayerCard_v(String color, String playerName){
         componentPanel= new JPanel();
-        initComponent();
+        initComponent(color, playerName, String.valueOf(0));
     }
 
 
 
     private void initComponent(){
-        initSubComponents();
+        initComponent("Bleu", "new_player", String.valueOf(0));
+    }
+    private void initComponent(String color, String playerName, String score){
+        initSubComponents(color, playerName, score);
 
         BoxLayout componentLayout= new BoxLayout(componentPanel, BoxLayout.X_AXIS);
         componentPanel.setLayout(componentLayout);
@@ -51,25 +58,36 @@ public class PlayerCard_v {
 
             initLabels();
         }
+        private void initSubComponents(String color, String name, String score){
+            playerColor= new JPanel();
+            playerColor.setOpaque(true);
+            playerColor.setBackground(new Color_v(color).getColor());
+
+            playerName= new JPanel();
+            playerScore= new JPanel();
+
+            initLabels(color, name, score);
+        }
+
             private void initLabels(){
-                initLabels("new_player", String.valueOf(0));
+                initLabels("Bleu", "new_player", String.valueOf(0));
                 mountLabels();
             }
             //initialise labels with "playerName", and a score of 0.
             private void initLabels(String playerName){
-                initLabels(playerName, String.valueOf(0));
+                initLabels("Bleu", playerName, String.valueOf(0));
                 mountLabels();
             }
             //initialise labels with "playerName", and "score"...no matter if it's an int, a double or a String.
             private void initLabels(String playerName, int score){
-                initLabels(playerName, String.valueOf(score));
+                initLabels( "Bleu", playerName, String.valueOf(score));
                 mountLabels();
             }
             private void initLabels(String playerName, double score){
-                initLabels(playerName, String.valueOf(score));
+                initLabels("Bleu", playerName, String.valueOf(score));
                 mountLabels();
             }
-            private void initLabels(String playerName, String score){
+            private void initLabels(String color, String playerName, String score){
                 playerName_l= new JLabel(playerName);
                 playerName_l.setOpaque(false);
 
@@ -78,13 +96,15 @@ public class PlayerCard_v {
 
                 mountLabels();
             }
+
                 private void mountLabels(){
                     playerName_l.setHorizontalAlignment(JLabel.CENTER);
                     playerName.add(playerName_l);
 
-                    playerName_l.setHorizontalAlignment(JLabel.CENTER);
+                    playerScore_l.setHorizontalAlignment(JLabel.CENTER);
                     playerScore.add(playerScore_l);
                 }
+
         private void mountSubComponents(){
             componentPanel.add(playerColor);
             componentPanel.add(playerName);
