@@ -64,7 +64,7 @@ public class General_v extends JFrame {
 
         //panel_droite.add(fenetreProgressBar.getProgressBar());
 
-        fenetre_Grille.add(new Grille_v(600, 20, true).getGrille());
+        fenetre_Grille.add(new Grille_v(600, 20).getGrille());
         panel_principal.add(fenetre_Grille);
         panel_principal.add(panel_droite);
     }
