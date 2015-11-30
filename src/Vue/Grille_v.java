@@ -1,5 +1,9 @@
 package Vue;
 
+import Controler.ControlPlateau;
+import Model.General_m;
+import Model.Plateau_m;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -10,13 +14,15 @@ import java.awt.*;
  */
 public class Grille_v {
     private JPanel grille;
+    General_m model;
 
     public Grille_v(){
         initGrid(600/3, 20);
     }
 
-    public Grille_v(int sizeInPixels, int nbButtonsPerRow){
+    public Grille_v(int sizeInPixels, int nbButtonsPerRow, General_m model){
         initGrid(sizeInPixels, nbButtonsPerRow);
+        this.model = model;
     }
 
 
@@ -52,15 +58,19 @@ public class Grille_v {
 
         }*/
 
-        JButton[][] tabButton = new JButton[nbButtonsPerRow][nbButtonsPerRow];
 
+        Plateau_m plateau = new Plateau_m();
+        plateau.tabButton = new JButton[nbButtonsPerRow][nbButtonsPerRow];
         for (int i=0;i<nbButtonsPerRow;i++){
             for (int j=0;j<nbButtonsPerRow;j++){
-                tabButton[i][j] = new JButton();
+                plateau.tabButton[i][j] = new JButton();
 
-                tabButton[i][j].setBorder(new LineBorder(Color.DARK_GRAY,1));
+                // Ajoute le controleur au bouton :
+                ControlPlateau controlButton = new ControlPlateau(plateau, i, j);
+                plateau.tabButton[i][j].addActionListener(controlButton);
+                plateau.tabButton[i][j].setBorder(new LineBorder(Color.DARK_GRAY,1));
 
-                grille.add(tabButton[i][j]);
+                grille.add(plateau.tabButton[i][j]);
             }
         }
 

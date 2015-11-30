@@ -1,5 +1,4 @@
 package Vue;
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -24,19 +23,19 @@ public class Color_v {
         switch (color){
 
 
-            case "Bleu":
+            case "Blue":
                 this.color= Color.BLUE;
             break;
 
-            case "Rouge":
+            case "Red":
                 this.color= Color.RED;
             break;
 
-            case "Jaune":
+            case "Yellow":
                 this.color= Color.YELLOW;
             break;
 
-            case "Vert":
+            case "Green":
                 this.color= Color.GREEN;
             break;
 

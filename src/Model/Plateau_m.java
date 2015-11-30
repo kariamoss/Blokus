@@ -1,12 +1,14 @@
 package Model;
 
+import javax.swing.*;
+
 /**
  * Created by Mathieu on 20/11/2015.
  */
 public class Plateau_m {
     private int taillePlateau = 20;
     private Case_m[][] plateau;
-
+    public JButton[][] tabButton;
 
 
     public Plateau_m(){
