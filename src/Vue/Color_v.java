@@ -27,18 +27,30 @@ public class Color_v {
             case "Bleu":
                 this.color= Color.BLUE;
             break;
+                case "Blue":
+                    this.color= Color.BLUE;
+                break;
 
             case "Rouge":
                 this.color= Color.RED;
             break;
+                case "Red":
+                    this.color= Color.RED;
+                break;
 
             case "Jaune":
                 this.color= Color.YELLOW;
             break;
+                case "Yellow":
+                    this.color= Color.YELLOW;
+                break;
 
             case "Vert":
                 this.color= Color.GREEN;
             break;
+                case "Green":
+                    this.color= Color.GREEN;
+                break;
 
 
         }
