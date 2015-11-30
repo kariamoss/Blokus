@@ -14,11 +14,13 @@ public class BoutonsControleJeu_v extends JFrame {
     protected JButton btAbandonner;
     protected JButton btPause;
     protected JButton btPlay;
-    protected JButton btRetourner;
+    protected JButton btRetournerGauche;
+    protected JButton btRetournerDroite;
     protected ImageIcon imgAbandonner;
     protected ImageIcon imgPause;
     protected ImageIcon imgPlay;
-    protected ImageIcon imgRetourner;
+    protected ImageIcon imgRetournerGauche;
+    protected  ImageIcon imgRetournerDroite;
     protected ControlButton controlePlay;
     protected ControlButton controlePause;
     protected ControlButton controleAbandonner;
@@ -33,13 +35,15 @@ public class BoutonsControleJeu_v extends JFrame {
         imgAbandonner = new ImageIcon(new ImageIcon("images/boutons_controle/giveup_PLS.jpg").getImage().getScaledInstance(48, 40, Image.SCALE_DEFAULT ));
         imgPause = new ImageIcon(new ImageIcon("images/boutons_controle/pause31.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
         imgPlay = new ImageIcon(new ImageIcon("images/boutons_controle/play.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        imgRetourner = new ImageIcon(new ImageIcon("images/boutons_controle/rotation.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        imgRetournerGauche = new ImageIcon(new ImageIcon("images/boutons_controle/rotationGauche.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        imgRetournerDroite = new ImageIcon(new ImageIcon("images/boutons_controle/rotationDroite.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 
 
         btAbandonner = new JButton(imgAbandonner);
         btPause = new JButton(imgPause);
         btPlay = new JButton(imgPlay);
-        btRetourner = new JButton(imgRetourner);
+        btRetournerGauche = new JButton(imgRetournerGauche);
+        btRetournerDroite = new JButton(imgRetournerDroite);
 
 
         btAbandonner.setOpaque(false);
@@ -56,9 +60,13 @@ public class BoutonsControleJeu_v extends JFrame {
         btPlay.setContentAreaFilled(false);
         btPlay.setBorderPainted(false);
 
-        btRetourner.setOpaque(false);
-        btRetourner.setContentAreaFilled(false);
-        btRetourner.setBorderPainted(false);
+        btRetournerGauche.setOpaque(false);
+        btRetournerGauche.setContentAreaFilled(false);
+        btRetournerGauche.setBorderPainted(false);
+
+        btRetournerDroite.setOpaque(false);
+        btRetournerDroite.setContentAreaFilled(false);
+        btRetournerDroite.setBorderPainted(false);
 
         controlePlay = new ControlButton();
         controleAbandonner = new ControlButton();
@@ -79,7 +87,9 @@ public class BoutonsControleJeu_v extends JFrame {
         panelDeControle.add(btPlay);
 
         panelRetourner = new JPanel();
-        panelRetourner.add(btRetourner);
+        panelRetourner.add(btRetournerDroite);
+        panelRetourner.add(btRetournerGauche);
+
 
 
        // btAbandonner.addActionListener(controleAbandonner);
