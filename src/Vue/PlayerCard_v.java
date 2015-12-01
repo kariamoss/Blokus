@@ -11,11 +11,11 @@ import javax.swing.border.LineBorder;
  */
 public class PlayerCard_v {
     private JPanel componentPanel;
-     private JPanel playerColor;
-     private JPanel playerName;
-      private JLabel playerName_l;
-     private JPanel playerScore;
-      private JLabel playerScore_l;
+    private JPanel playerColor;
+    private JPanel playerName;
+    private JLabel playerName_l;
+    private JPanel playerScore;
+    private JLabel playerScore_l;
 
 
     public PlayerCard_v(){
@@ -47,70 +47,70 @@ public class PlayerCard_v {
 
         mountSubComponents();
     }
-        private void initSubComponents(){
-            playerColor= new JPanel();
-            playerColor.setBackground(new Color_v().getColor());
+    private void initSubComponents(){
+        playerColor= new JPanel();
+        playerColor.setBackground(new Color_v().getColor());
 
-            playerName= new JPanel();
-            playerName.setBackground(new Color_v(108, 108, 108).getColor());
+        playerName= new JPanel();
+        playerName.setBackground(new Color_v(108, 108, 108).getColor());
 
-            playerScore= new JPanel();
-            playerScore.setBackground(new Color_v(208, 208, 208).getColor());
+        playerScore= new JPanel();
+        playerScore.setBackground(new Color_v(208, 208, 208).getColor());
 
-            initLabels();
-        }
-        private void initSubComponents(String color, String name, String score){
-            playerColor= new JPanel();
-            playerColor.setOpaque(true);
-            playerColor.setBackground(new Color_v(color).getColor());
+        initLabels();
+    }
+    private void initSubComponents(String color, String name, String score){
+        playerColor= new JPanel();
+        playerColor.setOpaque(true);
+        playerColor.setBackground(new Color_v(color).getColor());
 
-            playerName= new JPanel();
-            playerScore= new JPanel();
+        playerName= new JPanel();
+        playerScore= new JPanel();
 
-            initLabels(color, name, score);
-        }
+        initLabels(color, name, score);
+    }
 
-            private void initLabels(){
-                initLabels("Bleu", "new_player", String.valueOf(0));
-                mountLabels();
-            }
-            //initialise labels with "playerName", and a score of 0.
-            private void initLabels(String playerName){
-                initLabels("Bleu", playerName, String.valueOf(0));
-                mountLabels();
-            }
-            //initialise labels with "playerName", and "score"...no matter if it's an int, a double or a String.
-            private void initLabels(String playerName, int score){
-                initLabels( "Bleu", playerName, String.valueOf(score));
-                mountLabels();
-            }
-            private void initLabels(String playerName, double score){
-                initLabels("Bleu", playerName, String.valueOf(score));
-                mountLabels();
-            }
-            private void initLabels(String color, String playerName, String score){
-                playerName_l= new JLabel(playerName);
-                playerName_l.setOpaque(false);
+    private void initLabels(){
+        initLabels("Bleu", "new_player", String.valueOf(0));
+        mountLabels();
+    }
+    //initialise labels with "playerName", and a score of 0.
+    private void initLabels(String playerName){
+        initLabels("Bleu", playerName, String.valueOf(0));
+        mountLabels();
+    }
+    //initialise labels with "playerName", and "score"...no matter if it's an int, a double or a String.
+    private void initLabels(String playerName, int score){
+        initLabels( "Bleu", playerName, String.valueOf(score));
+        mountLabels();
+    }
+    private void initLabels(String playerName, double score){
+        initLabels("Bleu", playerName, String.valueOf(score));
+        mountLabels();
+    }
+    private void initLabels(String color, String playerName, String score){
+        playerName_l= new JLabel(playerName);
+        playerName_l.setOpaque(false);
 
-                playerScore_l= new JLabel(score);
-                playerScore_l.setOpaque(false);
+        playerScore_l= new JLabel(score);
+        playerScore_l.setOpaque(false);
 
-                mountLabels();
-            }
+        mountLabels();
+    }
 
-                private void mountLabels(){
-                    playerName_l.setHorizontalAlignment(JLabel.CENTER);
-                    playerName.add(playerName_l);
+    private void mountLabels(){
+        playerName_l.setHorizontalAlignment(JLabel.CENTER);
+        playerName.add(playerName_l);
 
-                    playerScore_l.setHorizontalAlignment(JLabel.CENTER);
-                    playerScore.add(playerScore_l);
-                }
+        playerScore_l.setHorizontalAlignment(JLabel.CENTER);
+        playerScore.add(playerScore_l);
+    }
 
-        private void mountSubComponents(){
-            componentPanel.add(playerColor);
-            componentPanel.add(playerName);
-            componentPanel.add(playerScore);
-        }
+    private void mountSubComponents(){
+        componentPanel.add(playerColor);
+        componentPanel.add(playerName);
+        componentPanel.add(playerScore);
+    }
 
 
 

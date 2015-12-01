@@ -10,6 +10,7 @@ public class Color_v {
 
 
 
+
     public Color_v(){
         color= new Color(58, 58, 58);
     }

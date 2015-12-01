@@ -2,6 +2,7 @@ package Vue;
 
 import Model.General_m;
 import Model.Inventaire_m;
+import Model.Joueur_m;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,8 +61,13 @@ public class General_v extends JFrame {
 
         //panel_droite.add(fenetreJoueur.getJoueur());
 
+        Joueur_m tabJoueur[] = new Joueur_m[4];
+        for (int i =0;i<4;i++)
+            tabJoueur[i] = modelGeneral.getJoueur(i);
+
+
         //panel_droite.add(new BoutonsControleJeu_v().getPanelDeControle());7
-        panel_droite.add(new GameStats_v().getGameStats());
+        panel_droite.add(new GameStats_v(tabJoueur).getGameStats());
         panel_droite.add(fenetreControle.getPanelDeControle());
 
         //fenetreControle.getPanelDeControle().setBorder(new LineBorder(Color.DARK_GRAY, 1));
