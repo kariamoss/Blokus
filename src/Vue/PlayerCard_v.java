@@ -1,8 +1,9 @@
 package Vue;
+import Helper.Color_v;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import javax.swing.text.StringContent;
 
 /**
  * Created by Fox Mc-Tag on 29/11/2015.

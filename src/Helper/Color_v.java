@@ -1,4 +1,4 @@
-package Vue;
+package Helper;
 import java.awt.*;
 
 /**
@@ -7,7 +7,6 @@ import java.awt.*;
  */
 public class Color_v {
     private Color color;
-
 
 
 

@@ -4,7 +4,7 @@ import Model.Case_m;
 import Model.General_m;
 import Model.Piece_m;
 import Model.Plateau_m;
-import Vue.Color_v;
+import Helper.Color_v;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
