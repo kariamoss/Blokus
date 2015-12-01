@@ -32,7 +32,7 @@ public class ControlButton implements ActionListener {
         Joueur_m joueur = modelGeneral.selectJoueurActif();
         String nomJoueur = joueur.getNom();
 
-        if ((joueur.getInventaire().getPiece(i))!=null)
+        if (!joueur.getInventaire().getPiece(i).isUsed())
         {
             System.out.println("Joueur : " + nomJoueur + " / Selection de la pièce : " + i);
 

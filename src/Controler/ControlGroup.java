@@ -18,7 +18,7 @@ public class ControlGroup {
         this.modelGeneral = modelGeneral;
         Inventaire_m modelInventaire = modelGeneral.selectJoueurActif().getInventaire();
         vue = new General_v(modelGeneral, modelInventaire);
-        //Controler.ControlButton controlButton = new Controler.ControlButton(generalm, vue);
+        //Controler.ControlButton controlButton = new Controler.ControlButton(modelGeneral, vue);
         //Controler.ControlMenu controlMenu = new Controler.ControlMenu(generalm, vue);
 
         vue.display();

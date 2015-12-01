@@ -11,6 +11,7 @@ public class Piece_m {
     boolean isSelected;
     String orientation;
     String image;
+    boolean used;
 
     public Piece_m(List<Case_m> liste, String orientation, String image){
         this.orientation = orientation;
@@ -23,6 +24,8 @@ public class Piece_m {
         listeOrientation.append("Nord");
         listeOrientation.append("Est");
         listeOrientation.append("Sud");
+
+        used = false;
     }
 
     public List<Case_m> getListeCase() {
@@ -66,4 +69,11 @@ public class Piece_m {
         this.image = image;
     }
 
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
 }

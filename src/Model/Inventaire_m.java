@@ -300,7 +300,8 @@ public class Inventaire_m {
 
     public void setPieceToNull(Piece_m piece)
     {
-        piece=null;
+        System.out.println("test");
+        listePiece.set(listePiece.indexOf(piece),null);
     }
 
     //Setters

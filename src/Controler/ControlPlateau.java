@@ -21,9 +21,6 @@ public class ControlPlateau implements ActionListener {
     int i;
     int j;
 
-    public ControlPlateau(Plateau_m plateau){
-        this.modelPlateau = plateau;
-    }
 
     public ControlPlateau(General_m modelGeneral, Plateau_m modelPlateau, int i, int j)
     {
@@ -34,31 +31,43 @@ public class ControlPlateau implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-
         boolean positionnementOk = false;
-        System.out.println("Clique en "+i+";"+j+".");
-
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
-        String orientation = piece.getOrientation();
+        if (piece!=null){
 
-        switch (orientation){
-            case "Ouest" :
-                positionnementOk = positionnementOuest(i, j, piece);
-                break;
-            case "Est" :
-                positionnementOk = positionnementEst(i, j, piece);
-                break;
-            case "Sud" :
-                positionnementOk = positionnementSud(i, j, piece);
-                break;
-            case "Nord" :
-                positionnementOk = positionnementNord(i, j, piece);
-                break;
+            System.out.println("Clique en "+i+";"+j+".");
+            int indexPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece().indexOf(piece);
+            String orientation = piece.getOrientation();
 
+
+            switch (orientation){
+                case "Ouest" :
+                    positionnementOk = positionnementOuest(i, j, piece);
+                    break;
+                case "Est" :
+                    positionnementOk = positionnementEst(i, j, piece);
+                    break;
+                case "Sud" :
+                    positionnementOk = positionnementSud(i, j, piece);
+                    break;
+                case "Nord" :
+                    positionnementOk = positionnementNord(i, j, piece);
+                    break;
+
+            }
+        }
+        else
+        {
+            System.out.println("Aucune pièce sélectionnée");
         }
 
+
+
+
+
         if (positionnementOk){
-            piece.setPieceSelection(false);
+
+            //Parcours de la grille pour reset les bonne couleur
             for (int k=0;k<20;k++) {
                 for (int l = 0; l < 20; l++) {
                     Color_v color = new Color_v(modelPlateau.getCase(k, l).getCouleur());
@@ -66,14 +75,16 @@ public class ControlPlateau implements ActionListener {
                 }
             }
 
-            for(Piece_m pieceC : modelGeneral.selectJoueurActif().getInventaire().getListPiece()){
-                if(pieceC == modelGeneral.selectJoueurActif().getInventaire().selectPieceActive()){
-                    modelGeneral.selectJoueurActif().getInventaire().setPieceToNull(piece);
-                }
-            }
+            piece.setUsed(true);
+            //Déselectionne la pièce
+            piece.setPieceSelection(false);
+
+            //modelGeneral.selectJoueurActif().getInventaire().tabButtonInventaire[indexPiece].setBackground(Color.black);
+
+
+            modelGeneral.joueurSuivant();
+
         }
-
-
     }
 
     public boolean verifCase(int i, int j){
@@ -104,7 +115,7 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i+l,j-k).setCouleur("Red");
+                modelPlateau.getCase(i+l,j-k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
             }
             return true;
         }
@@ -148,7 +159,7 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                 modelPlateau.getCase(i+k,j+l).setCouleur("Red");
+                 modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
 
             }
             return true;
@@ -190,7 +201,7 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i - k, j + l).setCouleur("Red");
+                modelPlateau.getCase(i - k, j + l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
 
             }
             return true;
@@ -234,7 +245,7 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i-l,j+k).setCouleur("Red");
+                modelPlateau.getCase(i-l,j+k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
             }
             return true;
         }

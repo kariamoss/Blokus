@@ -1,4 +1,5 @@
 import Controler.ControlPlateau;
+import Model.General_m;
 import Model.Joueur_m;
 import Model.Piece_m;
 import Model.Plateau_m;
@@ -10,8 +11,11 @@ public class ControlPlateauUnitTest {
 
     @Test
     public void verifCaseTest(){
+        General_m modelGeneral = new General_m();
+        modelGeneral.selectJoueur(1);
+        Joueur_m j1 = modelGeneral.selectJoueurActif();
         Plateau_m plateau = new Plateau_m();
-        ControlPlateau controlPlateau = new ControlPlateau(plateau);
+        ControlPlateau controlPlateau = new ControlPlateau(modelGeneral, plateau, 10,10);
         plateau.getCase(0,0).setCouleur("Red");
         Assert.assertFalse(controlPlateau.verifCase(0,0));
         Assert.assertFalse(controlPlateau.verifCase(-1,20));
@@ -47,9 +51,11 @@ public class ControlPlateauUnitTest {
 
     @Test
     public void positionnementTest(){
-        Joueur_m j1 = new Joueur_m("Red","j1");
+        General_m modelGeneral = new General_m();
+        modelGeneral.selectJoueur(1);
+        Joueur_m j1 = modelGeneral.selectJoueurActif();
         Plateau_m plateau = new Plateau_m();
-        ControlPlateau plateau_c = new ControlPlateau(plateau);
+        ControlPlateau plateau_c = new ControlPlateau(modelGeneral, plateau, 10,10);
         j1.getInventaire().selectPiece(18);
         Piece_m p1 = j1.getInventaire().selectPieceActive();
         Assert.assertEquals(p1.getOrientation(),"Ouest");
@@ -92,4 +98,33 @@ public class ControlPlateauUnitTest {
         Assert.assertEquals("Red",plateau.getCase(11,10).getCouleur());
         Assert.assertEquals("White",plateau.getCase(11,11).getCouleur());*/
     }
+
+    @Test
+    public void joueurSuivantTest()
+    {
+        General_m modelGeneral = new General_m();
+
+        modelGeneral.selectJoueur(0);
+
+
+
+        System.out.println("Joueur 0 : "+modelGeneral.selectJoueurActif().getNom());
+        Assert.assertEquals(modelGeneral.selectJoueurActif(), modelGeneral.getJoueur(0));
+
+        modelGeneral.joueurSuivant();
+        Assert.assertEquals(modelGeneral.selectJoueurActif(), modelGeneral.getJoueur(1));
+        System.out.println("Joueur 1 : "+modelGeneral.selectJoueurActif().getNom());
+
+        modelGeneral.joueurSuivant();
+        System.out.println("Joueur 2 : "+modelGeneral.selectJoueurActif().getNom());
+
+        modelGeneral.joueurSuivant();
+        System.out.println("Joueur 3 : "+modelGeneral.selectJoueurActif().getNom());
+
+        modelGeneral.joueurSuivant();
+        System.out.println("Joueur 0 : "+modelGeneral.selectJoueurActif().getNom());
+
+
+    }
+
 }
