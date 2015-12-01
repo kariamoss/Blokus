@@ -124,7 +124,21 @@ public class ControlPlateauUnitTest {
         modelGeneral.joueurSuivant();
         System.out.println("Joueur 0 : "+modelGeneral.selectJoueurActif().getNom());
 
-
     }
 
+    @Test
+    public void augmenteScoreJoueurTest()
+    {
+        General_m modelGeneral = new General_m();
+        modelGeneral.selectJoueur(0);
+
+        Joueur_m joueur = modelGeneral.selectJoueurActif();
+
+        Assert.assertEquals(joueur.getScore(), 0);
+        joueur.setScore(modelGeneral.selectJoueurActif().getScore()+joueur.getInventaire().getPiece(5).getListeCase().size());
+        Assert.assertEquals(joueur.getScore(), 4);
+        joueur.setScore(modelGeneral.selectJoueurActif().getScore()+joueur.getInventaire().getPiece(19).getListeCase().size());
+        Assert.assertEquals(joueur.getScore(), 9);
+
+    }
 }

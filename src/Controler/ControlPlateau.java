@@ -78,6 +78,10 @@ public class ControlPlateau implements ActionListener {
                 }
             }
 
+            //On augmente le score du joueur
+            modelGeneral.selectJoueurActif().setScore(modelGeneral.selectJoueurActif().getScore()+piece.getListeCase().size());
+            System.out.println(modelGeneral.selectJoueurActif().getNom() + " : "+ modelGeneral.selectJoueurActif().getScore() + "pts.\n\n");
+
             //On maarque la pièce comme selectionnée
             piece.setUsed(true);
 

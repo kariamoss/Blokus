@@ -30,7 +30,7 @@ public class General_m {
         listJoueur.append(joueur2);
         listJoueur.append(joueur3);
 
-        selectJoueur(2);
+        selectJoueur(0);
     }
 
     public void selectJoueur(int index){
