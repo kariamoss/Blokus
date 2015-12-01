@@ -3,7 +3,10 @@ package Controler;
 import Model.General_m;
 import Model.Inventaire_m;
 import Model.Joueur_m;
+import Model.Piece_m;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -37,6 +40,14 @@ public class ControlButton implements ActionListener {
             System.out.println("Joueur : " + nomJoueur + " / Selection de la pièce : " + i);
 
             joueur.getInventaire().selectPiece(i);
+
+            Piece_m pieceSelectionnee = joueur.getInventaire().selectPieceActive();
+            ImageIcon imageIcon = new ImageIcon(pieceSelectionnee.getImage());
+            Image image = imageIcon.getImage();
+            Image newImage = image.getScaledInstance(105, 105, java.awt.Image.SCALE_SMOOTH) ;
+            ImageIcon icon = new ImageIcon(newImage);
+
+            modelInventaire.overviewButton.setIcon(icon);
         }
         else
         {

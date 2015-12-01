@@ -4,27 +4,27 @@ package Model;
 import Helper.ListDoubleCircJoueur;
 
 public class General_m {
-    Joueur_m joueur0;
     Joueur_m joueur1;
     Joueur_m joueur2;
     Joueur_m joueur3;
+    Joueur_m joueur4;
 
 
     ListDoubleCircJoueur listJoueur = new ListDoubleCircJoueur();
 
     public General_m()
     {
-        joueur0 = new Joueur_m("Red", "Roger");
-        joueur1 = new Joueur_m("Blue", "Bernard");
-        joueur2 = new Joueur_m("Yellow", "Yvonne");
-        joueur3 = new Joueur_m("Green", "Gerard");
+        joueur1 = new Joueur_m("Red", "Roger");
+        joueur2 = new Joueur_m("Blue", "Bernard");
+        joueur3 = new Joueur_m("Yellow", "Yvonne");
+        joueur4 = new Joueur_m("Green", "Gerard");
 
-        listJoueur.append(joueur0);
         listJoueur.append(joueur1);
         listJoueur.append(joueur2);
         listJoueur.append(joueur3);
+        listJoueur.append(joueur4);
 
-        selectJoueur(2);
+        selectJoueur(3);
     }
 
     public void selectJoueur(int index){
@@ -42,16 +42,6 @@ public class General_m {
             }
         }
         return null;
-    }
-
-    public void joueurSuivant()
-    {
-        Joueur_m joueurActif = selectJoueurActif();
-        for(int i = 0; i< listJoueur.size; i++){
-            listJoueur.getJoueur(i).setTourDeJeu(false);
-        }
-        listJoueur.find(joueurActif).next.value.setTourDeJeu(true);
-
     }
 
     //Getters
