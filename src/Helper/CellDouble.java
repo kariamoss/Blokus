@@ -7,9 +7,12 @@ public class CellDouble {
     public CellDouble next;
 
 
+
     public CellDouble(String value) {
         this.value = value;
         next = null;
         prev = null;
     }
+
+
 }

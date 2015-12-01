@@ -1,7 +1,5 @@
 package Model;
 
-import sun.font.TrueTypeFont;
-
 /**
  * Created by Jehan on 26/11/2015.
  */
@@ -74,5 +72,8 @@ public class Joueur_m {
     public void setScore(int score) {
         this.score = score;
     }
+
+
+
 }
 

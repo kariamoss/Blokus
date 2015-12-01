@@ -1,20 +1,22 @@
 package Vue;
 
 import Model.General_m;
+import Model.Inventaire_m;
 
 import javax.swing.*;
 import java.awt.*;
 
 
 public class General_v extends JFrame {
-    protected General_m model;
+    protected General_m modelGeneral;
+    protected Inventaire_m modelInventaire;
     protected BoutonsControleJeu_v fenetreControle = new BoutonsControleJeu_v();
-    protected Inventaire_v fenetreInventaire = new Inventaire_v();
+    protected Inventaire_v fenetreInventaire;
     //protected Joueur_v fenetreJoueur = new Joueur_v();
     //protected VuePiece_v fenetreVuePiece = new VuePiece_v();
     //protected VueProgressBar_v fenetreProgressBar = new VueProgressBar();
 
-
+    protected Overview_v overview_v = new Overview_v();
     protected JPanel panel_principal;
     protected JPanel fenetre_Grille;
     protected JPanel panel_droite;
@@ -24,10 +26,23 @@ public class General_v extends JFrame {
 
 
 
-    public General_v(General_m model){
-        this.model = model;
+    public General_v(General_m modelGeneral, Inventaire_m modelInventaire){
+        this.modelInventaire = modelInventaire;
+        this.modelGeneral = modelGeneral;
         setTitle("Blokus");
-        initAttribute();
+        initAttribute(modelGeneral);
+        fenetreControle.init();
+        fenetreControle.dessinerBoutons();
+        setSize(900, 650);
+        setContentPane(panel_principal);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public General_v(General_m modelGeneral){
+        this.modelGeneral = modelGeneral;
+        setTitle("Blokus");
+        initAttribute(modelGeneral);
         fenetreControle.init();
         fenetreControle.dessinerBoutons();
         setSize(900, 650);
@@ -38,7 +53,7 @@ public class General_v extends JFrame {
 
 
 
-    public void initAttribute() {
+    public void initAttribute(General_m modelGeneral) {
         panel_principal = new JPanel();
         fenetre_Grille = new JPanel();
         panel_retourner= new JPanel();
@@ -56,15 +71,16 @@ public class General_v extends JFrame {
 
 
         //fenetreInventaire.getInventaire().setBorder(new LineBorder(Color.DARK_GRAY, 1));
+        fenetreInventaire = new Inventaire_v(modelGeneral, modelInventaire);
         panel_droite.add(fenetreInventaire.getInventaire());
         panel_droite.add(fenetreControle.getPanelRetourner());
-
+        panel_droite.add(overview_v.getOverview());
 
         //panel_droite.add(fenetreVuePiece.getVuePiece());
 
         //panel_droite.add(fenetreProgressBar.getProgressBar());
 
-        fenetre_Grille.add(new Grille_v(600, 20, model).getGrille());
+        fenetre_Grille.add(new Grille_v(600, 20, modelGeneral).getGrille());
         panel_principal.add(fenetre_Grille);
         panel_principal.add(panel_droite);
     }

@@ -1,5 +1,7 @@
 package Vue;
 
+import Controler.ControlButton;
+import Model.General_m;
 import Model.Inventaire_m;
 
 import javax.swing.*;
@@ -10,9 +12,12 @@ import java.awt.*;
 public class Inventaire_v {
 
     JPanel panelInventaire;
-    Inventaire_m inventaire_m = new Inventaire_m("blue");
+    Inventaire_m modelInventaire;
+    General_m modelGeneral;
 
-    public Inventaire_v(){
+    public Inventaire_v(General_m modelGeneral, Inventaire_m modelInventaire){
+        this.modelInventaire = modelInventaire;
+        this.modelGeneral = modelGeneral;
         initInventaire();
     }
 
@@ -25,21 +30,25 @@ public class Inventaire_v {
 
     private void fillInventaire(){
 
-        JButton[] inventaire;
-        inventaire = new JButton[20];
+
+        modelInventaire.tabButtonInventaire = new JButton[20];
 
         for (int i = 0; i < 20; i++){
-            inventaire[i] = new JButton();
-            inventaire[i].setBorder(new LineBorder(Color.DARK_GRAY, 2));
-            inventaire[i].setPreferredSize(new Dimension(45,45));
+            modelInventaire.tabButtonInventaire[i] = new JButton();
+            ControlButton controlInventaire = new ControlButton(modelGeneral,modelInventaire, i);
+            modelInventaire.tabButtonInventaire[i].addActionListener(controlInventaire);
 
-            ImageIcon imageIcon = new ImageIcon(inventaire_m.getPiece(i).getImage());
+
+            modelInventaire.tabButtonInventaire[i].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+            modelInventaire.tabButtonInventaire[i].setPreferredSize(new Dimension(45,45));
+
+            ImageIcon imageIcon = new ImageIcon(modelInventaire.getPiece(i).getImage());
             Image image = imageIcon.getImage();
             Image newImage = image.getScaledInstance(45, 45,  java.awt.Image.SCALE_SMOOTH ) ;
             ImageIcon icon = new ImageIcon(newImage);
 
-            inventaire[i].setIcon(icon);
-            panelInventaire.add(inventaire[i]);
+            modelInventaire.tabButtonInventaire[i].setIcon(icon);
+            panelInventaire.add(modelInventaire.tabButtonInventaire[i]);
 
 
             /**/

@@ -1,5 +1,6 @@
 package Model;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class Inventaire_m {
     Piece_m piece21;
 
     List<Piece_m> listePiece = new ArrayList<>();
+
+    public JButton[] tabButtonInventaire;
 
     public Inventaire_m(String couleur) {
         this.couleur = couleur;
@@ -285,9 +288,19 @@ public class Inventaire_m {
         return null;
     }
 
+
     //Getters
     public Piece_m getPiece(int index) {
         return listePiece.get(index);
+    }
+
+    public List<Piece_m> getListPiece() {
+        return listePiece;
+    }
+
+    public void setPieceToNull(Piece_m piece)
+    {
+        piece=null;
     }
 
     //Setters
