@@ -88,6 +88,9 @@ public class ControlPlateau implements ActionListener {
             //Déselectionne la pièce
             piece.setPieceSelection(false);
 
+            //On remet l'overview à null
+            modelGeneral.overviewButton.setIcon(null);
+
            //On passe au joueur suivant
             modelGeneral.joueurSuivant();
 

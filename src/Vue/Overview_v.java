@@ -5,6 +5,7 @@ import Model.General_m;
 import Model.Inventaire_m;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by remi on 01/12/15.
@@ -38,6 +39,8 @@ public class Overview_v {
         Image image = imageIcon.getImage();
         ImageIcon icon = new ImageIcon(image);*/
         model_General.overviewButton = new JButton();
+        Dimension d = new Dimension(110, 110);
+        model_General.overviewButton.setPreferredSize(d);
 
         model_General.overviewButton.setOpaque(false);
         panelOverview = new JPanel();
