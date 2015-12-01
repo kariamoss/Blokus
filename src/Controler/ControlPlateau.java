@@ -159,7 +159,7 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                 modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
 
             }
             return true;
@@ -183,7 +183,7 @@ public class ControlPlateau implements ActionListener {
                 free = false;
             }
         }
-            return free;
+        return free;
     }
 
 
