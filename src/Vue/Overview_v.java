@@ -2,7 +2,6 @@ package Vue;
 
 import Controler.ControlButton;
 import Model.General_m;
-import Model.Inventaire_m;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,14 +12,12 @@ import java.awt.*;
 public class Overview_v {
 
     JPanel panelOverview;
-    Inventaire_m model_Inventaire;
-    General_m model_General;
+    General_m modelGeneral;
     ControlButton controlOverview;
 
-    public Overview_v(General_m model_General, Inventaire_m model_Inventaire){
+    public Overview_v(General_m modelGeneral){
 
-        this.model_Inventaire = model_Inventaire;
-        this.model_General = model_General;
+        this.modelGeneral = modelGeneral;
         initOverview();
     }
 
@@ -38,13 +35,15 @@ public class Overview_v {
         ImageIcon imageIcon = new ImageIcon(pieceSelectionnee.getImage());
         Image image = imageIcon.getImage();
         ImageIcon icon = new ImageIcon(image);*/
-        model_General.overviewButton = new JButton();
+        modelGeneral.overviewButton = new JButton();
         Dimension d = new Dimension(110, 110);
-        model_General.overviewButton.setPreferredSize(d);
+        modelGeneral.overviewButton.setPreferredSize(d);
 
-        model_General.overviewButton.setOpaque(false);
+        modelGeneral.overviewButton.setOpaque(false);
+        modelGeneral.overviewButton.setContentAreaFilled(false);
+        modelGeneral.overviewButton.setBorderPainted(false);
         panelOverview = new JPanel();
-        panelOverview.add(model_General.overviewButton);
+        panelOverview.add(modelGeneral.overviewButton);
 
 
     }

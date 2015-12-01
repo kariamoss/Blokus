@@ -25,7 +25,7 @@ public class General_v extends JFrame {
     public General_v(General_m modelGeneral, Inventaire_m modelInventaire){
         this.modelInventaire = modelInventaire;
         this.modelGeneral = modelGeneral;
-        overview_v = new Overview_v(modelGeneral, modelInventaire);
+        overview_v = new Overview_v(modelGeneral);
         setTitle("Blokus");
         initAttribute(modelGeneral);
 

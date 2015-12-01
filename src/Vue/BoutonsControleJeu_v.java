@@ -3,7 +3,6 @@ import Controler.ControlButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 /**
  * Created by Mathieu on 20/11/2015.
@@ -25,7 +24,9 @@ public class BoutonsControleJeu_v extends JFrame {
     protected ControlButton controlePause;
     protected ControlButton controleAbandonner;
 
-    public BoutonsControleJeu_v(){
+
+    public BoutonsControleJeu_v()
+    {
         init();
         dessinerBoutons();
 

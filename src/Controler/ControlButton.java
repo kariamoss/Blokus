@@ -1,7 +1,6 @@
 package Controler;
 
 import Model.General_m;
-import Model.Inventaire_m;
 import Model.Joueur_m;
 import Model.Piece_m;
 
@@ -15,7 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class ControlButton implements ActionListener {
 
-    Inventaire_m modelInventaire;
+
     General_m modelGeneral;
 
     int i;
@@ -24,9 +23,8 @@ public class ControlButton implements ActionListener {
 
     }
 
-    public ControlButton(General_m modelGeneral, Inventaire_m modelInventaire, int i){
+    public ControlButton(General_m modelGeneral, int i){
         this.modelGeneral = modelGeneral;
-        this.modelInventaire = modelInventaire;
         this.i = i;
     }
 
@@ -53,6 +51,7 @@ public class ControlButton implements ActionListener {
         {
             System.out.println("La pièce "+ i + " a déjà été posée");
         }
+
 
         // RAJOUTER LES METHODE POUR LA ROTATION
     }

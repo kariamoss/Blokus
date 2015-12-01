@@ -44,7 +44,6 @@ public class GameStats_v {
     private String[] getPlayersColors(Joueur_m[] players){
         String[] playersColors= new String[players.length];
         for (int i= 0; i < playersColors.length; i++){
-            System.out.println(i);
             playersColors[i]= players[i].getCouleur();
         }
 

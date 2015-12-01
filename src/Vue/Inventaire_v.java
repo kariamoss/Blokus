@@ -35,7 +35,7 @@ public class Inventaire_v {
 
         for (int i = 0; i < 20; i++){
             modelGeneral.tabButtonInventaire[i] = new JButton();
-            ControlButton controlInventaire = new ControlButton(modelGeneral,modelInventaire, i);
+            ControlButton controlInventaire = new ControlButton(modelGeneral, i);
             modelGeneral.tabButtonInventaire[i].addActionListener(controlInventaire);
 
 
