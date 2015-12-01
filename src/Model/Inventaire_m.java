@@ -49,7 +49,7 @@ public class Inventaire_m {
         Case_m casem10 = new Case_m(couleur, -1, 0);
         Case_m casem20 = new Case_m(couleur, -2, 0);
         Case_m case0m1 = new Case_m(couleur, 0, -1);
-        Case_m case1m1 = new Case_m(couleur, 0, -1);
+        Case_m case1m1 = new Case_m(couleur, 1, -1);
         Case_m case0m2 = new Case_m(couleur, 0, -2);
         Case_m casem11 = new Case_m(couleur, -1, 1);
 

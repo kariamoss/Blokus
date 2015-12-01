@@ -43,7 +43,6 @@ public class ControlButton implements ActionListener {
             System.out.println("La pièce "+ i + " a déjà été posée");
         }
 
-
         // RAJOUTER LES METHODE POUR LA ROTATION
     }
 
