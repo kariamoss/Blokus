@@ -31,24 +31,24 @@ public class Inventaire_v {
     private void fillInventaire(){
 
 
-        modelInventaire.tabButtonInventaire = new JButton[20];
+        modelGeneral.tabButtonInventaire = new JButton[20];
 
         for (int i = 0; i < 20; i++){
-            modelInventaire.tabButtonInventaire[i] = new JButton();
+            modelGeneral.tabButtonInventaire[i] = new JButton();
             ControlButton controlInventaire = new ControlButton(modelGeneral,modelInventaire, i);
-            modelInventaire.tabButtonInventaire[i].addActionListener(controlInventaire);
+            modelGeneral.tabButtonInventaire[i].addActionListener(controlInventaire);
 
 
-            modelInventaire.tabButtonInventaire[i].setBorder(new LineBorder(Color.DARK_GRAY, 2));
-            modelInventaire.tabButtonInventaire[i].setPreferredSize(new Dimension(45,45));
+            modelGeneral.tabButtonInventaire[i].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+            modelGeneral.tabButtonInventaire[i].setPreferredSize(new Dimension(45,45));
 
             ImageIcon imageIcon = new ImageIcon(modelInventaire.getPiece(i).getImage());
             Image image = imageIcon.getImage();
             Image newImage = image.getScaledInstance(45, 45,  java.awt.Image.SCALE_SMOOTH ) ;
             ImageIcon icon = new ImageIcon(newImage);
 
-            modelInventaire.tabButtonInventaire[i].setIcon(icon);
-            panelInventaire.add(modelInventaire.tabButtonInventaire[i]);
+            modelGeneral.tabButtonInventaire[i].setIcon(icon);
+            panelInventaire.add(modelGeneral.tabButtonInventaire[i]);
 
 
             /**/

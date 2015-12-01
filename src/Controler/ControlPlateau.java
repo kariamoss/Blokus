@@ -1,13 +1,16 @@
 package Controler;
 
+import Helper.Color_v;
 import Model.Case_m;
 import Model.General_m;
 import Model.Piece_m;
 import Model.Plateau_m;
-import Helper.Color_v;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * Created by Jehan on 26/11/2015.
@@ -75,14 +78,28 @@ public class ControlPlateau implements ActionListener {
                 }
             }
 
+            //On maarque la pièce comme selectionnée
             piece.setUsed(true);
+
             //Déselectionne la pièce
             piece.setPieceSelection(false);
 
-            //modelGeneral.selectJoueurActif().getInventaire().tabButtonInventaire[indexPiece].setBackground(Color.black);
-
-
+           //On passe au joueur suivant
             modelGeneral.joueurSuivant();
+
+            //On change d'inventaire
+            List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
+
+            for (int i =0;i<listPiece.size();i++)
+            {
+                ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
+                Image image = imageIcon.getImage();
+                Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
+                ImageIcon icon = new ImageIcon(newImage);
+
+                modelGeneral.tabButtonInventaire[i].setIcon(icon);
+            }
+
 
         }
     }

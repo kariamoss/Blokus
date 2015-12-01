@@ -1,6 +1,5 @@
 package Model;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +31,7 @@ public class Inventaire_m {
 
     List<Piece_m> listePiece = new ArrayList<>();
 
-    public JButton[] tabButtonInventaire;
-    public JButton overviewButton;
+
 
     public Inventaire_m(String couleur) {
         this.couleur = couleur;

@@ -47,7 +47,7 @@ public class ControlButton implements ActionListener {
             Image newImage = image.getScaledInstance(105, 105, java.awt.Image.SCALE_SMOOTH) ;
             ImageIcon icon = new ImageIcon(newImage);
 
-            modelInventaire.overviewButton.setIcon(icon);
+            modelGeneral.overviewButton.setIcon(icon);
         }
         else
         {

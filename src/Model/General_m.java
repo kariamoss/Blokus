@@ -3,6 +3,8 @@ package Model;
 
 import Helper.ListDoubleCircJoueur;
 
+import javax.swing.*;
+
 public class General_m {
     Joueur_m joueur0;
     Joueur_m joueur1;
@@ -11,6 +13,10 @@ public class General_m {
 
 
     ListDoubleCircJoueur listJoueur = new ListDoubleCircJoueur();
+
+
+    public JButton[] tabButtonInventaire;
+    public JButton overviewButton;
 
     public General_m()
     {

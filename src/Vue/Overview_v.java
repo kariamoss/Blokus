@@ -3,10 +3,8 @@ package Vue;
 import Controler.ControlButton;
 import Model.General_m;
 import Model.Inventaire_m;
-import Model.Piece_m;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by remi on 01/12/15.
@@ -39,11 +37,11 @@ public class Overview_v {
         ImageIcon imageIcon = new ImageIcon(pieceSelectionnee.getImage());
         Image image = imageIcon.getImage();
         ImageIcon icon = new ImageIcon(image);*/
-        model_Inventaire.overviewButton = new JButton();
+        model_General.overviewButton = new JButton();
 
-        model_Inventaire.overviewButton.setOpaque(false);
+        model_General.overviewButton.setOpaque(false);
         panelOverview = new JPanel();
-        panelOverview.add(model_Inventaire.overviewButton);
+        panelOverview.add(model_General.overviewButton);
 
 
     }
