@@ -90,7 +90,7 @@ public class ControlPlateau implements ActionListener {
             //On change d'inventaire
             List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
 
-            for (int i =0;i<listPiece.size();i++)
+            for (int i =0;i<listPiece.size()-1;i++)
             {
                 modelGeneral.tabButtonInventaire[i].setEnabled(true);
                 if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
