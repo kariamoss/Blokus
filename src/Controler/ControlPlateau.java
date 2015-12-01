@@ -92,6 +92,11 @@ public class ControlPlateau implements ActionListener {
 
             for (int i =0;i<listPiece.size();i++)
             {
+                modelGeneral.tabButtonInventaire[i].setEnabled(true);
+                if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
+                {
+                    modelGeneral.tabButtonInventaire[i].setEnabled(false);
+                }
                 ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
                 Image image = imageIcon.getImage();
                 Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;

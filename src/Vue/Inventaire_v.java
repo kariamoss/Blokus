@@ -50,8 +50,6 @@ public class Inventaire_v {
             modelGeneral.tabButtonInventaire[i].setIcon(icon);
             panelInventaire.add(modelGeneral.tabButtonInventaire[i]);
 
-
-            /**/
         }
 
     }
