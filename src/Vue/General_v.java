@@ -16,27 +16,25 @@ public class General_v extends JFrame {
     //protected VuePiece_v fenetreVuePiece = new VuePiece_v();
     //protected VueProgressBar_v fenetreProgressBar = new VueProgressBar();
 
-    protected Overview_v overview_v = new Overview_v();
+    protected Overview_v overview_v;
     protected JPanel panel_principal;
     protected JPanel fenetre_Grille;
     protected JPanel panel_droite;
-    protected JPanel panel_retourner;
-
-
-
-
 
     public General_v(General_m modelGeneral, Inventaire_m modelInventaire){
         this.modelInventaire = modelInventaire;
         this.modelGeneral = modelGeneral;
+        overview_v = new Overview_v(modelGeneral, modelInventaire);
         setTitle("Blokus");
         initAttribute(modelGeneral);
+
         fenetreControle.init();
         fenetreControle.dessinerBoutons();
         setSize(900, 650);
         setContentPane(panel_principal);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     public General_v(General_m modelGeneral){
@@ -56,7 +54,6 @@ public class General_v extends JFrame {
     public void initAttribute(General_m modelGeneral) {
         panel_principal = new JPanel();
         fenetre_Grille = new JPanel();
-        panel_retourner= new JPanel();
         panel_droite = new JPanel(new GridLayout(5,1));
         fenetre_Grille.setPreferredSize(new Dimension(600, 600));
         panel_droite.setPreferredSize(new Dimension(265, 600));
@@ -75,6 +72,7 @@ public class General_v extends JFrame {
         panel_droite.add(fenetreInventaire.getInventaire());
         panel_droite.add(fenetreControle.getPanelRetourner());
         panel_droite.add(overview_v.getOverview());
+
 
         //panel_droite.add(fenetreVuePiece.getVuePiece());
 

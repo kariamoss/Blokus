@@ -14,10 +14,10 @@ public class General_m {
 
     public General_m()
     {
-        joueur1 = new Joueur_m("Red", "Roger");
-        joueur2 = new Joueur_m("Blue", "Bernard");
-        joueur3 = new Joueur_m("Yellow", "Yvonne");
-        joueur4 = new Joueur_m("Green", "Gerard");
+        joueur1 = new Joueur_m("red", "Roger");
+        joueur2 = new Joueur_m("blue", "Bernard");
+        joueur3 = new Joueur_m("yellow", "Yvonne");
+        joueur4 = new Joueur_m("green", "Gerard");
 
         listJoueur.append(joueur1);
         listJoueur.append(joueur2);

@@ -33,6 +33,7 @@ public class Inventaire_m {
     List<Piece_m> listePiece = new ArrayList<>();
 
     public JButton[] tabButtonInventaire;
+    public JButton overviewButton;
 
     public Inventaire_m(String couleur) {
         this.couleur = couleur;
@@ -270,6 +271,8 @@ public class Inventaire_m {
         piece21 = new Piece_m(caseL, "Ouest", image);
         listePiece.add(piece21);
         caseL.clear();
+
+        piece1.setPieceSelection(true);
 
     }
 
