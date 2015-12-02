@@ -91,6 +91,8 @@ public class ControlPlateau implements ActionListener {
             //On remet l'overview à null
             modelGeneral.overviewButton.setIcon(null);
 
+            modelGeneral.overviewButton.setBorderPainted(false);
+
            //On passe au joueur suivant
             modelGeneral.joueurSuivant();
 
@@ -145,6 +147,7 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i+l,j-k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                modelPlateau.tabButton[i][j].setContentAreaFilled(true);
             }
             return true;
         }
@@ -189,6 +192,7 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                modelPlateau.tabButton[i+k][j+l].setContentAreaFilled(true);
 
             }
             return true;

@@ -46,6 +46,8 @@ public class ControlButton implements ActionListener {
             ImageIcon icon = new ImageIcon(newImage);
 
             modelGeneral.overviewButton.setIcon(icon);
+
+            modelGeneral.overviewButton.setBorderPainted(true);
         }
         else
         {

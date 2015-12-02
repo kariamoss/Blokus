@@ -73,6 +73,8 @@ public class Grille_v {
                 modelPlateau.tabButton[i][j].addActionListener(controlButton);
                 modelPlateau.tabButton[i][j].setBorder(new LineBorder(Color.DARK_GRAY,1));
 
+                modelPlateau.tabButton[i][j].setContentAreaFilled(false);
+
                 grille.add(modelPlateau.tabButton[i][j]);
             }
         }
