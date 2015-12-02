@@ -172,6 +172,28 @@ public class ControlPlateau implements ActionListener {
                 free = false;
             }
         }
+        if(free){
+            //Si on a passé avec succès l'étape de vérification du positionnement,
+            //On peut passer à l'étape suivante : vérification des bords
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On vérifie les bords de la pièce
+                free = checkBordPiece(i +l, j -k, caseIt);
+            }
+            if (free){
+                for(Case_m caseIt : piece.getListeCase()) {
+                    //Récupère la position de la case dans la pièce
+                    int k = caseIt.getPosI();
+                    int l = caseIt.getPosJ();
+
+                    //On vérifie les coin de la pièce
+                    free = checkCoinPiece(i +l, j -k, caseIt);
+                }
+            }
+        }
         return free;
     }
 
@@ -184,7 +206,8 @@ public class ControlPlateau implements ActionListener {
 
     public boolean positionnementOuest(int i, int j, Piece_m piece){
 
-        if (checkPositionnementOuest(i, j, piece)){
+        if (checkPositionnementOuest(i, j, piece))
+        {
             for(Case_m caseIt : piece.getListeCase()) {
                 //Récupère la position de la case dans la pièce
                 int k = caseIt.getPosI();
@@ -214,6 +237,28 @@ public class ControlPlateau implements ActionListener {
             //On actualise la couleur de la case sur la grille
             if (!verifCase(i + k, j + l)) {
                 free = false;
+            }
+        }
+        if(free){
+            //Si on a passé avec succès l'étape de vérification du positionnement,
+            //On peut passer à l'étape suivante : vérification des bords
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On vérifie les bords de la pièce
+                free = checkBordPiece(i + k, j + l, caseIt);
+            }
+            if (free){
+                for(Case_m caseIt : piece.getListeCase()) {
+                    //Récupère la position de la case dans la pièce
+                    int k = caseIt.getPosI();
+                    int l = caseIt.getPosJ();
+
+                    //On vérifie les coin de la pièce
+                    free = checkCoinPiece(i + k, j + l, caseIt);
+                }
             }
         }
         return free;
@@ -259,6 +304,28 @@ public class ControlPlateau implements ActionListener {
                 free = false;
             }
         }
+        if(free){
+            //Si on a passé avec succès l'étape de vérification du positionnement,
+            //On peut passer à l'étape suivante : vérification des bords
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On vérifie les bords de la pièce
+                free = checkBordPiece(i - k, j + l, caseIt);
+            }
+            if (free){
+                for(Case_m caseIt : piece.getListeCase()) {
+                    //Récupère la position de la case dans la pièce
+                    int k = caseIt.getPosI();
+                    int l = caseIt.getPosJ();
+
+                    //On vérifie les coin de la pièce
+                    free = checkCoinPiece(i - k, j + l, caseIt);
+                }
+            }
+        }
         return free;
     }
 
@@ -302,7 +369,87 @@ public class ControlPlateau implements ActionListener {
                 free = false;
             }
         }
+        if(free){
+            //Si on a passé avec succès l'étape de vérification du positionnement,
+            //On peut passer à l'étape suivante : vérification des bords
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On vérifie les bords de la pièce
+                free = checkBordPiece(i - l, j + k, caseIt);
+            }
+            if (free){
+                for(Case_m caseIt : piece.getListeCase()) {
+                    //Récupère la position de la case dans la pièce
+                    int k = caseIt.getPosI();
+                    int l = caseIt.getPosJ();
+
+                    //On vérifie les coin de la pièce
+                    free = checkCoinPiece(i - l, j + k, caseIt);
+                }
+            }
+        }
         return free;
+    }
+
+
+    private boolean checkBordPiece(int i, int j, Case_m caseIt)
+    {
+        boolean touche = true;
+
+        if (verifInGrid(i, j - 1)) {
+            if (modelPlateau.getCase(i, j - 1).getCouleur() == caseIt.getCouleur())
+                touche = false;
+        }
+        if (verifInGrid(i - 1, j)) {
+            if (modelPlateau.getCase(i - 1, j).getCouleur() == caseIt.getCouleur())
+                touche = false;
+        }
+        if (verifInGrid(i, j + 1)) {
+            if (modelPlateau.getCase(i, j + 1).getCouleur() == caseIt.getCouleur())
+                touche = false;
+        }
+        if (verifInGrid(i + 1, j)) {
+            if (modelPlateau.getCase(i + 1, j).getCouleur() == caseIt.getCouleur())
+                touche = false;
+        }
+
+        //Touche doit être vrai
+        return touche;
+    }
+
+    private boolean checkCoinPiece(int i, int j, Case_m caseIt)
+    {
+        boolean touche = false;
+        if (verifInGrid(i-1, j-1)) {
+            if (modelPlateau.getCase(i-1,j-1).getCouleur()==caseIt.getCouleur())
+                touche = true;
+        }
+        if (verifInGrid(i - 1, j + 1)) {
+            if (modelPlateau.getCase(i - 1, j + 1).getCouleur() == caseIt.getCouleur())
+                touche = true;
+        }
+        if (verifInGrid(i + 1, j - 1)) {
+            if (modelPlateau.getCase(i + 1, j - 1).getCouleur() == caseIt.getCouleur())
+                touche = true;
+        }
+        if (verifInGrid(i + 1, j + 1)) {
+            if (modelPlateau.getCase(i + 1, j + 1).getCouleur() == caseIt.getCouleur())
+                touche = true;
+        }
+
+
+        //Touche doit être vrai
+        return touche;
+    }
+    private boolean verifInGrid(int i, int j)
+    {
+        if(i>=0 && i<20 && j>=0 && j<20){
+            return true ;
+        }
+        return false;
     }
 
 }

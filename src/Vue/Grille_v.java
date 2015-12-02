@@ -1,6 +1,7 @@
 package Vue;
 
 import Controler.ControlPlateau;
+import Helper.Color_v;
 import Model.General_m;
 import Model.Plateau_m;
 
@@ -24,7 +25,7 @@ public class Grille_v {
     public Grille_v(int sizeInPixels, int nbButtonsPerRow, General_m modelGeneral)
     {
         this.modelGeneral = modelGeneral;
-        modelPlateau = new Plateau_m();
+        modelPlateau = new Plateau_m(modelGeneral);
 
         initGrid(modelGeneral, sizeInPixels, nbButtonsPerRow);
     }
@@ -42,26 +43,13 @@ public class Grille_v {
     }
 
 
-
     public JPanel getGrille(){ return grille; }
 
 
     private void mountGrid(General_m modelGeneral, int nbButtonsPerRow){
-        /*int nbButtons= nbButtonsPerRow*nbButtonsPerRow;
 
-        for (int i= 0; i < nbButtons; i++){
-            JButton button= new JButton();
-
-            if (borders){
-                button.setBorder(new LineBorder(Color.DARK_GRAY,1));
-            }
-            else {
-                button.setBorder(new LineBorder(Color.DARK_GRAY,0));
-            }
-            grille.add(button);
-
-        }*/
-
+        modelPlateau.posePremieresPiece();
+        modelGeneral.selectJoueur(0);
 
         modelPlateau.tabButton = new JButton[nbButtonsPerRow][nbButtonsPerRow];
         for (int i=0;i<nbButtonsPerRow;i++){
@@ -73,15 +61,17 @@ public class Grille_v {
                 modelPlateau.tabButton[i][j].addActionListener(controlButton);
                 modelPlateau.tabButton[i][j].setBorder(new LineBorder(Color.DARK_GRAY,1));
 
-                modelPlateau.tabButton[i][j].setContentAreaFilled(false);
+                if (modelPlateau.getCase(i, j).getCouleur()!="White"){
+                    modelPlateau.tabButton[i][j].setContentAreaFilled(true);
+                    Color_v color = new Color_v(modelPlateau.getCase(i, j).getCouleur());
+                    modelPlateau.tabButton[i][j].setBackground(color.getColor());
+                }
+                else {
+                    modelPlateau.tabButton[i][j].setContentAreaFilled(false);
+                }
 
                 grille.add(modelPlateau.tabButton[i][j]);
             }
         }
-
     }
-
-
-
-
 }

@@ -14,7 +14,7 @@ public class ControlPlateauUnitTest {
         General_m modelGeneral = new General_m();
         modelGeneral.selectJoueur(1);
         Joueur_m j1 = modelGeneral.selectJoueurActif();
-        Plateau_m plateau = new Plateau_m();
+        Plateau_m plateau = new Plateau_m(modelGeneral);
         ControlPlateau controlPlateau = new ControlPlateau(modelGeneral, plateau, 10,10);
         plateau.getCase(0,0).setCouleur("Red");
         Assert.assertFalse(controlPlateau.verifCase(0,0));
@@ -54,7 +54,7 @@ public class ControlPlateauUnitTest {
         General_m modelGeneral = new General_m();
         modelGeneral.selectJoueur(1);
         Joueur_m j1 = modelGeneral.selectJoueurActif();
-        Plateau_m plateau = new Plateau_m();
+        Plateau_m plateau = new Plateau_m(modelGeneral);
         ControlPlateau plateau_c = new ControlPlateau(modelGeneral, plateau, 10,10);
         j1.getInventaire().selectPiece(18);
         Piece_m p1 = j1.getInventaire().selectPieceActive();
