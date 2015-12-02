@@ -228,39 +228,73 @@ public class ControlPlateau implements ActionListener {
     }
 
     public boolean checkPositionnementOuest(int i, int j, Piece_m piece){
+
+        int c=0;
         boolean free = true;
-        for(Case_m caseIt : piece.getListeCase()) {
-            //Récupère la position de la case dans la pièce
-            int k = caseIt.getPosI();
-            int l = caseIt.getPosJ();
+        int k, l;
 
-            //On actualise la couleur de la case sur la grille
-            if (!verifCase(i + k, j + l)) {
-                free = false;
+        //Tant qu'on a pas parcouru toute les cases et que le positionnement est libre
+        while (c<piece.getListeCase().size() && free)
+        {
+            Case_m caseIt = piece.getListeCase().get(c);
+            k = caseIt.getPosI();
+            l = caseIt.getPosJ();
+
+            //Vérifie si la case est sur le plateau et vide
+            free = verifCase(i+k, j+l);
+
+            //Vérifie si les 4 bords de la case caseIt sont ide
+            if (verifInGrid(i+k, j+l - 1)) {
+                if (modelPlateau.getCase(i+k, j+l - 1).getCouleur() == caseIt.getCouleur())
+                    free = false;
             }
+            if (verifInGrid(i+k - 1, j+l)) {
+                if (modelPlateau.getCase(i+k- 1, j+l).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            if (verifInGrid(i+k, j+l + 1)) {
+                if (modelPlateau.getCase(i+k, j+l + 1).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            if (verifInGrid(i+k + 1, j+k)) {
+                if (modelPlateau.getCase(i+k + 1, j+l).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            c++;
         }
-        if(free){
-            //Si on a passé avec succès l'étape de vérification du positionnement,
-            //On peut passer à l'étape suivante : vérification des bords
-            for(Case_m caseIt : piece.getListeCase()) {
-                //Récupère la position de la case dans la pièce
-                int k = caseIt.getPosI();
-                int l = caseIt.getPosJ();
 
-                //On vérifie les bords de la pièce
-                free = checkBordPiece(i + k, j + l, caseIt);
-            }
-            if (free){
-                for(Case_m caseIt : piece.getListeCase()) {
-                    //Récupère la position de la case dans la pièce
-                    int k = caseIt.getPosI();
-                    int l = caseIt.getPosJ();
+        if (!free)
+            return free;
 
-                    //On vérifie les coin de la pièce
-                    free = checkCoinPiece(i + k, j + l, caseIt);
-                }
+
+        // On parcours toute les cases à nouveau pour checker si on trouve au moins un coin de couleur piece
+        c=0;
+        free = false;
+        while (c<piece.getListeCase().size() && !free)
+        {
+            Case_m caseIt = piece.getListeCase().get(c);
+            k = caseIt.getPosI();
+            l = caseIt.getPosJ();
+
+            if (verifInGrid(i+k-1, j+l-1)) {
+                if (modelPlateau.getCase(i+k-1,j+l-1).getCouleur()==caseIt.getCouleur())
+                    free = true;
             }
+            if (verifInGrid(i+k - 1, j+l + 1)) {
+                if (modelPlateau.getCase(i+k - 1, j+l + 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            if (verifInGrid(i+k + 1, j+l - 1)) {
+                if (modelPlateau.getCase(i+k + 1, j+l - 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            if (verifInGrid(i+k + 1, j+l + 1)) {
+                if (modelPlateau.getCase(i+k + 1, j+l + 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            c++;
         }
+
         return free;
     }
 
@@ -379,6 +413,8 @@ public class ControlPlateau implements ActionListener {
 
                 //On vérifie les bords de la pièce
                 free = checkBordPiece(i - l, j + k, caseIt);
+                if (!free)
+                    return free;
             }
             if (free){
                 for(Case_m caseIt : piece.getListeCase()) {
@@ -388,6 +424,8 @@ public class ControlPlateau implements ActionListener {
 
                     //On vérifie les coin de la pièce
                     free = checkCoinPiece(i - l, j + k, caseIt);
+                    if (!free)
+                        return free;
                 }
             }
         }
@@ -398,7 +436,7 @@ public class ControlPlateau implements ActionListener {
     private boolean checkBordPiece(int i, int j, Case_m caseIt)
     {
         boolean touche = true;
-
+        //Si on trouve une case plateau qui à la même couleur qu'une case pièce, on passe à faux
         if (verifInGrid(i, j - 1)) {
             if (modelPlateau.getCase(i, j - 1).getCouleur() == caseIt.getCouleur())
                 touche = false;

@@ -73,5 +73,6 @@ public class Grille_v {
                 grille.add(modelPlateau.tabButton[i][j]);
             }
         }
+
     }
 }

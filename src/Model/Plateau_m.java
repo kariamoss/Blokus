@@ -63,9 +63,16 @@ public class Plateau_m {
             //On actualise la couleur de la case sur la grille
             getCase(i+l,j-k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
         }
+
         pieceJ0.setUsed(true);
 
+        for (int c =0;c<joueur0.getInventaire().listePiece.size()-1;c++) {
+            modelGeneral.tabButtonInventaire[c].setEnabled(true);
+            if (modelGeneral.selectJoueurActif().getInventaire().getPiece(c).isUsed()) {
+                modelGeneral.tabButtonInventaire[c].setEnabled(false);
+            }
 
+        }
 
         //Joueur 1
         modelGeneral.selectJoueur(1);
@@ -84,6 +91,14 @@ public class Plateau_m {
             getCase(i - k, j - l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
         }
         pieceJ1.setUsed(true);
+
+        for (int c =0;c<joueur1.getInventaire().listePiece.size()-1;c++) {
+            modelGeneral.tabButtonInventaire[c].setEnabled(true);
+            if (modelGeneral.selectJoueurActif().getInventaire().getPiece(c).isUsed()) {
+                modelGeneral.tabButtonInventaire[c].setEnabled(false);
+            }
+
+        }
 
 
 
@@ -105,6 +120,14 @@ public class Plateau_m {
         }
         pieceJ2.setUsed(true);
 
+        for (int c =0;c<joueur2.getInventaire().listePiece.size()-1;c++) {
+            modelGeneral.tabButtonInventaire[c].setEnabled(true);
+            if (modelGeneral.selectJoueurActif().getInventaire().getPiece(c).isUsed()) {
+                modelGeneral.tabButtonInventaire[c].setEnabled(false);
+            }
+
+        }
+
 
 
         //Joueur 3
@@ -124,5 +147,13 @@ public class Plateau_m {
             getCase(i - l, j + k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
         }
         pieceJ3.setUsed(true);
+
+        for (int c =0;c<joueur3.getInventaire().listePiece.size()-1;c++) {
+            modelGeneral.tabButtonInventaire[c].setEnabled(true);
+            if (modelGeneral.selectJoueurActif().getInventaire().getPiece(c).isUsed()) {
+                modelGeneral.tabButtonInventaire[c].setEnabled(false);
+            }
+
+        }
     }
 }
