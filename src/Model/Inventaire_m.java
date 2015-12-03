@@ -6,7 +6,7 @@ import java.util.List;
 public class Inventaire_m {
     String couleur;
     String image;
-    String orientation = "Nord";
+    String orientation = "Ouest";
 
     Piece_m piece1;
     Piece_m piece2;
@@ -271,7 +271,7 @@ public class Inventaire_m {
         listePiece.add(piece21);
         caseL.clear();
 
-        piece1.setPieceSelection(true);
+        //piece1.setPieceSelection(true);
 
     }
 

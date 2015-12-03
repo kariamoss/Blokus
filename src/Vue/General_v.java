@@ -11,7 +11,7 @@ import java.awt.*;
 public class General_v extends JFrame {
     protected General_m modelGeneral;
     protected Inventaire_m modelInventaire;
-    protected BoutonsControleJeu_v fenetreControle = new BoutonsControleJeu_v();
+    protected BoutonsControleJeu_v fenetreControle;
     protected Inventaire_v fenetreInventaire;
     //protected Joueur_v fenetreJoueur = new Joueur_v();
     //protected VuePiece_v fenetreVuePiece = new VuePiece_v();
@@ -25,6 +25,7 @@ public class General_v extends JFrame {
     public General_v(General_m modelGeneral, Inventaire_m modelInventaire){
         this.modelInventaire = modelInventaire;
         this.modelGeneral = modelGeneral;
+        fenetreControle = new BoutonsControleJeu_v(modelGeneral);
         overview_v = new Overview_v(modelGeneral);
         setTitle("Blokus");
         initAttribute(modelGeneral);
@@ -66,7 +67,7 @@ public class General_v extends JFrame {
             tabJoueur[i] = modelGeneral.getJoueur(i);
 
 
-        //panel_droite.add(new BoutonsControleJeu_v().getPanelDeControle());7
+        //panel_droite.add(new BoutonsControleJeu_v().getPanelDeControle());
         panel_droite.add(new GameStats_v(tabJoueur).getGameStats());
         panel_droite.add(fenetreControle.getPanelDeControle());
 
