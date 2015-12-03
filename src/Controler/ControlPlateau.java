@@ -37,27 +37,41 @@ public class ControlPlateau implements ActionListener {
         boolean positionnementOk = false;
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
         if (piece!=null){
+            if (modelPlateau.getCase(i, j).isClicked())
+            {
+                modelPlateau.getCase(i, j).setClicked(false);
+                modelPlateau.tabButton[i][j].setBackground(null);
+                modelPlateau.tabButton[i][j].setContentAreaFilled(false);
+                System.out.println("Clique en "+i+";"+j+".");
+                int indexPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece().indexOf(piece);
+                String orientation = piece.getOrientation();
 
-            System.out.println("Clique en "+i+";"+j+".");
-            int indexPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece().indexOf(piece);
-            String orientation = piece.getOrientation();
 
+                switch (orientation){
+                    case "Ouest" :
+                        positionnementOk = positionnementOuest(i, j, piece);
+                        break;
+                    case "Est" :
+                        positionnementOk = positionnementEst(i, j, piece);
+                        break;
+                    case "Sud" :
+                        positionnementOk = positionnementSud(i, j, piece);
+                        break;
+                    case "Nord" :
+                        positionnementOk = positionnementNord(i, j, piece);
+                        break;
 
-            switch (orientation){
-                case "Ouest" :
-                    positionnementOk = positionnementOuest(i, j, piece);
-                    break;
-                case "Est" :
-                    positionnementOk = positionnementEst(i, j, piece);
-                    break;
-                case "Sud" :
-                    positionnementOk = positionnementSud(i, j, piece);
-                    break;
-                case "Nord" :
-                    positionnementOk = positionnementNord(i, j, piece);
-                    break;
-
+                }
             }
+            else
+            {
+                System.out.println("Cliquez une seconde fois pour confirmer !");
+                modelPlateau.getCase(i, j).setClicked(true);
+                Color_v color = new Color_v(modelGeneral.selectJoueurActif().getCouleur());
+                modelPlateau.tabButton[i][j].setContentAreaFilled(true);
+                modelPlateau.tabButton[i][j].setBackground(color.getColor());
+            }
+
         }
         else
         {

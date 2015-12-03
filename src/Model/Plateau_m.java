@@ -20,10 +20,11 @@ public class Plateau_m {
     }
 
     public Case_m[][] genererPlateau(int taillePlateau){
+
         plateau = new Case_m[taillePlateau][taillePlateau];
         for(int i=0; i<taillePlateau;i++){
             for(int j=0; j<taillePlateau;j++){
-                plateau[i][j]= new Case_m("White",i,j);
+                plateau[i][j]= new Case_m("White",i,j, false);
             }
         }
         return plateau;

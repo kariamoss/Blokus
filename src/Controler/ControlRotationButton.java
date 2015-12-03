@@ -23,7 +23,6 @@ public class ControlRotationButton implements ActionListener
     }
 
     public void actionPerformed(ActionEvent f) {
-        System.out.println("rbyj(nhtrbgfvedcsx");
 
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
         if (piece!=null)
