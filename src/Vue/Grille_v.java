@@ -50,11 +50,9 @@ public class Grille_v {
 
         modelPlateau.posePremieresPiece();
         modelGeneral.selectJoueur(0);
-        System.out.println("\n\n");
         modelPlateau.tabButton = new JButton[nbButtonsPerRow][nbButtonsPerRow];
         for (int i=0;i<nbButtonsPerRow;i++){
             for (int j=0;j<nbButtonsPerRow;j++){
-                System.out.print(modelPlateau.getCase(i, j).getCouleur()+"\t");
                 modelPlateau.tabButton[i][j] = new JButton();
 
                 // Ajoute le controleur au bouton :
@@ -73,7 +71,6 @@ public class Grille_v {
 
                 grille.add(modelPlateau.tabButton[i][j]);
             }
-            System.out.println("");
         }
 
     }
