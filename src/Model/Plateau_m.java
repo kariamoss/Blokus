@@ -24,7 +24,9 @@ public class Plateau_m {
         for(int i=0; i<taillePlateau;i++){
             for(int j=0; j<taillePlateau;j++){
                 plateau[i][j]= new Case_m("White",i,j);
+                System.out.print(plateau[i][j].getCouleur() + "\t");
             }
+            System.out.println("");
         }
         return plateau;
 

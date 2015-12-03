@@ -69,20 +69,20 @@ public class ControlPlateau implements ActionListener {
 
 
         if (positionnementOk){
+            System.out.println("Positionnement OK\n\n");
 
-            //Parcours de la grille pour reset les bonne couleur
-            for (int k=0;k<20;k++) {
-                for (int l = 0; l < 20; l++) {
-                    Color_v color = new Color_v(modelPlateau.getCase(k, l).getCouleur());
-                    modelPlateau.tabButton[k][l].setBackground(color.getColor());
-                }
-            }
+            /*for (int k=0;k<20;k++) {
+                    for (int l = 0; l < 20; l++) {
+                        System.out.print(modelPlateau.getCase(k, l).getCouleur() + "\t");
+                    }
+                System.out.println("");
+            }*/
 
             //On augmente le score du joueur
             modelGeneral.selectJoueurActif().setScore(modelGeneral.selectJoueurActif().getScore()+piece.getListeCase().size());
             System.out.println(modelGeneral.selectJoueurActif().getNom() + " : "+ modelGeneral.selectJoueurActif().getScore() + "pts.\n\n");
 
-            //On maarque la pièce comme selectionnée
+            //On marque la pièce comme selectionnée
             piece.setUsed(true);
 
             //Déselectionne la pièce
@@ -147,7 +147,9 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i+l,j-k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                modelPlateau.tabButton[i][j].setContentAreaFilled(true);
+                modelPlateau.tabButton[i+l][j-k].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i+l,j-k).getCouleur());
+                modelPlateau.tabButton[i+l][j-k].setBackground(color.getColor());
             }
             return true;
         }
@@ -160,40 +162,72 @@ public class ControlPlateau implements ActionListener {
     }
 
     public boolean checkPositionnementSud(int i, int j, Piece_m piece){
+        int c=0;
         boolean free = true;
-        for(Case_m caseIt : piece.getListeCase()) {
-            //Récupère la position de la case dans la pièce
-            int k = caseIt.getPosI();
-            int l = caseIt.getPosJ();
+        int k, l;
 
-            //On actualise la couleur de la case sur la grille
-            if (!verifCase(i+l, j-k))
-            {
-                free = false;
+        //Tant qu'on a pas parcouru toute les cases et que le positionnement est libre
+        while (c<piece.getListeCase().size() && free)
+        {
+            Case_m caseIt = piece.getListeCase().get(c);
+            k = caseIt.getPosI();
+            l = caseIt.getPosJ();
+
+            //Vérifie si la case est sur le plateau et vide
+            free = verifCase(i+l, j-k);
+
+            //Vérifie si les 4 bords de la case caseIt sont ide
+            if (verifInGrid(i+l, j-k - 1)) {
+                if (modelPlateau.getCase(i+l, j-k - 1).getCouleur() == caseIt.getCouleur())
+                    free = false;
             }
+            if (verifInGrid(i+l - 1, j-k)) {
+                if (modelPlateau.getCase(i+l- 1, j-k).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            if (verifInGrid(i+l, j-k + 1)) {
+                if (modelPlateau.getCase(i+l, j-k + 1).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            if (verifInGrid(i+l + 1, j-k)) {
+                if (modelPlateau.getCase(i+l + 1, j-k).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            c++;
         }
-        if(free){
-            //Si on a passé avec succès l'étape de vérification du positionnement,
-            //On peut passer à l'étape suivante : vérification des bords
-            for(Case_m caseIt : piece.getListeCase()) {
-                //Récupère la position de la case dans la pièce
-                int k = caseIt.getPosI();
-                int l = caseIt.getPosJ();
 
-                //On vérifie les bords de la pièce
-                free = checkBordPiece(i +l, j -k, caseIt);
-            }
-            if (free){
-                for(Case_m caseIt : piece.getListeCase()) {
-                    //Récupère la position de la case dans la pièce
-                    int k = caseIt.getPosI();
-                    int l = caseIt.getPosJ();
+        if (!free)
+            return free;
 
-                    //On vérifie les coin de la pièce
-                    free = checkCoinPiece(i +l, j -k, caseIt);
-                }
+
+        // On parcours toute les cases à nouveau pour checker si on trouve au moins un coin de couleur piece
+        c=0;
+        free = false;
+        while (c<piece.getListeCase().size() && !free)
+        {
+            Case_m caseIt = piece.getListeCase().get(c);
+            k = caseIt.getPosI();
+            l = caseIt.getPosJ();
+
+            if (verifInGrid(i+l-1, j-k-1)) {
+                if (modelPlateau.getCase(i+l-1,j+l-1).getCouleur()==caseIt.getCouleur())
+                    free = true;
             }
+            if (verifInGrid(i+l - 1, j-k + 1)) {
+                if (modelPlateau.getCase(i+l - 1, j-k + 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            if (verifInGrid(i+l + 1, j-k - 1)) {
+                if (modelPlateau.getCase(i+l + 1, j-k - 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            if (verifInGrid(i+l + 1, j-k + 1)) {
+                if (modelPlateau.getCase(i+l + 1, j-k + 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            c++;
         }
+
         return free;
     }
 
@@ -216,6 +250,8 @@ public class ControlPlateau implements ActionListener {
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
                 modelPlateau.tabButton[i+k][j+l].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i+k, j+l).getCouleur());
+                modelPlateau.tabButton[i+k][j+l].setBackground(color.getColor());
 
             }
             return true;
@@ -314,6 +350,9 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i - k, j + l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                modelPlateau.tabButton[i-k][j+l].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i-k, j+l).getCouleur());
+                modelPlateau.tabButton[i-k][j+l].setBackground(color.getColor());
 
             }
             return true;
@@ -326,40 +365,72 @@ public class ControlPlateau implements ActionListener {
     }
 
     public boolean checkPositionnementEst(int i, int j, Piece_m piece){
+        int c=0;
         boolean free = true;
-        for(Case_m caseIt : piece.getListeCase()) {
-            //Récupère la position de la case dans la pièce
-            int k = caseIt.getPosI();
-            int l = caseIt.getPosJ();
+        int k, l;
 
-            //On actualise la couleur de la case sur la grille
-            if (!verifCase(i-k, j+l))
-            {
-                free = false;
+        //Tant qu'on a pas parcouru toute les cases et que le positionnement est libre
+        while (c<piece.getListeCase().size() && free)
+        {
+            Case_m caseIt = piece.getListeCase().get(c);
+            k = caseIt.getPosI();
+            l = caseIt.getPosJ();
+
+            //Vérifie si la case est sur le plateau et vide
+            free = verifCase(i - k, j+l);
+
+            //Vérifie si les 4 bords de la case caseIt sont ide
+            if (verifInGrid(i - k, j+l - 1)) {
+                if (modelPlateau.getCase(i - k, j+l - 1).getCouleur() == caseIt.getCouleur())
+                    free = false;
             }
+            if (verifInGrid(i - k - 1, j+l)) {
+                if (modelPlateau.getCase(i - k- 1, j+l).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            if (verifInGrid(i - k, j+l + 1)) {
+                if (modelPlateau.getCase(i - k, j+l + 1).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            if (verifInGrid(i - k + 1, j+k)) {
+                if (modelPlateau.getCase(i - k + 1, j+l).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            c++;
         }
-        if(free){
-            //Si on a passé avec succès l'étape de vérification du positionnement,
-            //On peut passer à l'étape suivante : vérification des bords
-            for(Case_m caseIt : piece.getListeCase()) {
-                //Récupère la position de la case dans la pièce
-                int k = caseIt.getPosI();
-                int l = caseIt.getPosJ();
 
-                //On vérifie les bords de la pièce
-                free = checkBordPiece(i - k, j + l, caseIt);
-            }
-            if (free){
-                for(Case_m caseIt : piece.getListeCase()) {
-                    //Récupère la position de la case dans la pièce
-                    int k = caseIt.getPosI();
-                    int l = caseIt.getPosJ();
+        if (!free)
+            return free;
 
-                    //On vérifie les coin de la pièce
-                    free = checkCoinPiece(i - k, j + l, caseIt);
-                }
+
+        // On parcours toute les cases à nouveau pour checker si on trouve au moins un coin de couleur piece
+        c=0;
+        free = false;
+        while (c<piece.getListeCase().size() && !free)
+        {
+            Case_m caseIt = piece.getListeCase().get(c);
+            k = caseIt.getPosI();
+            l = caseIt.getPosJ();
+
+            if (verifInGrid(i - k-1, j+l-1)) {
+                if (modelPlateau.getCase(i - k-1,j+l-1).getCouleur()==caseIt.getCouleur())
+                    free = true;
             }
+            if (verifInGrid(i - k - 1, j+l + 1)) {
+                if (modelPlateau.getCase(i - k - 1, j+l + 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            if (verifInGrid(i - k + 1, j+l - 1)) {
+                if (modelPlateau.getCase(i - k + 1, j+l - 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            if (verifInGrid(i - k + 1, j+l + 1)) {
+                if (modelPlateau.getCase(i - k + 1, j+l + 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            c++;
         }
+
         return free;
     }
 
@@ -380,6 +451,9 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i-l,j+k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                modelPlateau.tabButton[i-l][j+k].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i-l,j+k).getCouleur());
+                modelPlateau.tabButton[i-l][j+k].setBackground(color.getColor());
             }
             return true;
         }
@@ -391,44 +465,72 @@ public class ControlPlateau implements ActionListener {
     }
 
     public boolean checkPositionnementNord(int i, int j, Piece_m piece){
+        int c=0;
         boolean free = true;
-        for(Case_m caseIt : piece.getListeCase()) {
-            //Récupère la position de la case dans la pièce
-            int k = caseIt.getPosI();
-            int l = caseIt.getPosJ();
+        int k, l;
 
-            //On actualise la couleur de la case sur la grille
-            if (!verifCase(i-l, j+k))
-            {
-                free = false;
+        //Tant qu'on a pas parcouru toute les cases et que le positionnement est libre
+        while (c<piece.getListeCase().size() && free)
+        {
+            Case_m caseIt = piece.getListeCase().get(c);
+            k = caseIt.getPosI();
+            l = caseIt.getPosJ();
+
+            //Vérifie si la case est sur le plateau et vide
+            free = verifCase(i-l, j+k);
+
+            //Vérifie si les 4 bords de la case caseIt sont ide
+            if (verifInGrid(i-l, j+k - 1)) {
+                if (modelPlateau.getCase(i-l, j+k - 1).getCouleur() == caseIt.getCouleur())
+                    free = false;
             }
+            if (verifInGrid(i-l - 1, j+k)) {
+                if (modelPlateau.getCase(i-l- 1, j+k).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            if (verifInGrid(i-l, j+k + 1)) {
+                if (modelPlateau.getCase(i-l, j+k + 1).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            if (verifInGrid(i-l + 1, j+k)) {
+                if (modelPlateau.getCase(i-l + 1, j+k).getCouleur() == caseIt.getCouleur())
+                    free = false;
+            }
+            c++;
         }
-        if(free){
-            //Si on a passé avec succès l'étape de vérification du positionnement,
-            //On peut passer à l'étape suivante : vérification des bords
-            for(Case_m caseIt : piece.getListeCase()) {
-                //Récupère la position de la case dans la pièce
-                int k = caseIt.getPosI();
-                int l = caseIt.getPosJ();
 
-                //On vérifie les bords de la pièce
-                free = checkBordPiece(i - l, j + k, caseIt);
-                if (!free)
-                    return free;
-            }
-            if (free){
-                for(Case_m caseIt : piece.getListeCase()) {
-                    //Récupère la position de la case dans la pièce
-                    int k = caseIt.getPosI();
-                    int l = caseIt.getPosJ();
+        if (!free)
+            return free;
 
-                    //On vérifie les coin de la pièce
-                    free = checkCoinPiece(i - l, j + k, caseIt);
-                    if (!free)
-                        return free;
-                }
+
+        // On parcours toute les cases à nouveau pour checker si on trouve au moins un coin de couleur piece
+        c=0;
+        free = false;
+        while (c<piece.getListeCase().size() && !free)
+        {
+            Case_m caseIt = piece.getListeCase().get(c);
+            k = caseIt.getPosI();
+            l = caseIt.getPosJ();
+
+            if (verifInGrid(i-l-1, j+k-1)) {
+                if (modelPlateau.getCase(i-l-1,j+k-1).getCouleur()==caseIt.getCouleur())
+                    free = true;
             }
+            if (verifInGrid(i-l - 1, j+k + 1)) {
+                if (modelPlateau.getCase(i-l - 1, j+k + 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            if (verifInGrid(i-l + 1, j+k - 1)) {
+                if (modelPlateau.getCase(i-l + 1, j+k - 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            if (verifInGrid(i-l + 1, j+k + 1)) {
+                if (modelPlateau.getCase(i-l + 1, j+k + 1).getCouleur() == caseIt.getCouleur())
+                    free = true;
+            }
+            c++;
         }
+
         return free;
     }
 
