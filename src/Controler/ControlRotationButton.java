@@ -36,13 +36,15 @@ public class ControlRotationButton implements ActionListener
             }*/
 
             if (i==1) {
-                System.out.println("Rotation vers la gauche");
+                System.out.print("Rotation vers la gauche / Orientation : ");
                 piece.rotateLeft();
             }
             if (i==2) {
-                System.out.println("Rotation vers la droite");
+                System.out.print("Rotation vers la droite / Orientation : ");
                 piece.rotateRight();
             }
+            System.out.println(piece.getOrientation());
+
         }
         else
         {
