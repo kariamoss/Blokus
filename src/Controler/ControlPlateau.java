@@ -41,10 +41,17 @@ public class ControlPlateau implements ActionListener {
         boolean positionnementOk = false;
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
 
+        //On clique une premièer fois sur la case
         if (!modelPlateau.getCase(i, j).isClicked()){
             if (piece!=null){
+
+                // on passe indique que cette case est cliqué
                 modelPlateau.setClickToTrue(i, j);
+
+                //on colorie la prévisualisation
                 colorPreview(i, j, piece, previousPiece);
+
+                //On enregistre la pièce cliqué pour le futur clique
                 previousPiece=piece;
                 previousCoord[0]=i;
                 previousCoord[1]=j;
@@ -57,11 +64,17 @@ public class ControlPlateau implements ActionListener {
         }
         else
         {
+            //On clique une seconde fois
             if (piece!=null){
 
                 System.out.println("Clique en "+i+";"+j+".");
-                String orientation = piece.getOrientation();
+
+                //On repasse la case cliqué à faux
                 modelPlateau.setClickToFalse(i, j);
+
+                //On récupère l'orientation de la pièce précédente pour pouvoir enelver la prévisualisation
+                String orientation = previousPiece.getOrientation();
+
                 switch (orientation){
                     case "Ouest" :
                         decolorPreviewOuest(previousCoord[0], previousCoord[1], previousPiece);
@@ -69,13 +82,16 @@ public class ControlPlateau implements ActionListener {
                     case "Est" :
                         decolorPreviewEst(previousCoord[0], previousCoord[1], previousPiece);
                         break;
-                    /*case "Sud" :
+                    case "Sud" :
                         decolorPreviewSud(previousCoord[0], previousCoord[1], previousPiece);
                         break;
                     case "Nord" :
                         decolorPreviewNord(previousCoord[0], previousCoord[1], previousPiece);
-                        break;*/
+                        break;
                 }
+
+                //On récupère l'orientation de la pièce active pour la positioner sur le plateau (ou pas)
+                orientation = piece.getOrientation();
 
                 switch (orientation){
                     case "Ouest" :
@@ -164,7 +180,6 @@ public class ControlPlateau implements ActionListener {
 
             String orientation = piece.getOrientation();
 
-
             switch (orientation){
                 case "Ouest" :
                     colorPreviewOuest(i, j, piece);
@@ -172,12 +187,12 @@ public class ControlPlateau implements ActionListener {
                 case "Est" :
                     colorPreviewEst(i, j, piece);
                     break;
-                /*case "Sud" :
+                case "Sud" :
                     colorPreviewSud(i, j, piece);
                     break;
                 case "Nord" :
                     colorPreviewNord(i, j, piece);
-                    break;*/
+                    break;
             }
 
         }
@@ -189,6 +204,7 @@ public class ControlPlateau implements ActionListener {
             //Enlever le background et l'icon de la pièce précédente en fonction de l'orientation et de previousCoord
 
             String orientation = previousPiece.getOrientation();
+            System.out.println("Orientation de la pièce précédente :"+orientation);
             int a = previousCoord[0];
             int b = previousCoord[1];
             System.out.println("Coordonnées précédente : a="+a+" / b="+b);
@@ -198,14 +214,14 @@ public class ControlPlateau implements ActionListener {
                     decolorPreviewOuest(a, b, previousPiece);
                     break;
                 case "Est" :
-                    decolorPreviewEst(i, j, piece);
+                    decolorPreviewEst(a, b, previousPiece);
                     break;
-                /*case "Sud" :
-                    decolorPreviewSud(i, j, piece);
+                case "Sud" :
+                    decolorPreviewSud(a, b, previousPiece);
                     break;
                 case "Nord" :
-                    decolorPreviewNord(i, j, piece);
-                    break;*/
+                    decolorPreviewNord(a, b, previousPiece);
+                    break;
             }
 
 
@@ -215,7 +231,6 @@ public class ControlPlateau implements ActionListener {
 
             orientation = piece.getOrientation();
 
-
             switch (orientation){
                 case "Ouest" :
                     colorPreviewOuest(i, j, piece);
@@ -223,12 +238,12 @@ public class ControlPlateau implements ActionListener {
                 case "Est" :
                     colorPreviewEst(i, j, piece);
                     break;
-                /*case "Sud" :
+                case "Sud" :
                     colorPreviewSud(i, j, piece);
                     break;
                 case "Nord" :
                     colorPreviewNord(i, j, piece);
-                    break;*/
+                    break;
             }
 
         }
@@ -248,23 +263,6 @@ public class ControlPlateau implements ActionListener {
                 modelPlateau.tabButton[i+k][j+l].setContentAreaFilled(true);
                 //On set l'image de prévisualisation sur le bouton
                 modelPlateau.tabButton[i+k][j+l].setIcon(previewImage);
-            }
-        }
-    }
-
-    public void colorPreviewEst(int i, int j, Piece_m piece){
-
-        for(Case_m caseIt : piece.getListeCase()) {
-            //Récupère la position de la case dans la pièce
-            int k = caseIt.getPosI();
-            int l = caseIt.getPosJ();
-
-            //On vérifie si la case est sur le plateau
-            if (verifInGrid(i - k, j + l)) {
-                //On passe le contenu du bouton à vrai
-                modelPlateau.tabButton[i - k][j + l].setContentAreaFilled(true);
-                //On set l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[i - k][j + l].setIcon(previewImage);
             }
         }
     }
@@ -290,6 +288,23 @@ public class ControlPlateau implements ActionListener {
         }
     }
 
+    public void colorPreviewEst(int i, int j, Piece_m piece){
+
+        for(Case_m caseIt : piece.getListeCase()) {
+            //Récupère la position de la case dans la pièce
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            //On vérifie si la case est sur le plateau
+            if (verifInGrid(i - k, j + l)) {
+                //On passe le contenu du bouton à vrai
+                modelPlateau.tabButton[i - k][j + l].setContentAreaFilled(true);
+                //On set l'image de prévisualisation sur le bouton
+                modelPlateau.tabButton[i - k][j + l].setIcon(previewImage);
+            }
+        }
+    }
+
     public void decolorPreviewEst(int i, int j, Piece_m piece)
     {
         for(Case_m caseIt : piece.getListeCase()) {
@@ -306,6 +321,82 @@ public class ControlPlateau implements ActionListener {
                 if (modelPlateau.getCase(i - k, j + l).getCouleur()=="White")
                 {
                     modelPlateau.tabButton[i - k][j + l].setContentAreaFilled(false);
+                }
+            }
+        }
+    }
+
+    public void colorPreviewSud(int i, int j, Piece_m piece){
+
+        for(Case_m caseIt : piece.getListeCase()) {
+            //Récupère la position de la case dans la pièce
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            //On vérifie si la case est sur le plateau
+            if (verifInGrid(i+l,j-k)) {
+                //On passe le contenu du bouton à vrai
+                modelPlateau.tabButton[i+l][j-k].setContentAreaFilled(true);
+                //On set l'image de prévisualisation sur le bouton
+                modelPlateau.tabButton[i+l][j-k].setIcon(previewImage);
+            }
+        }
+    }
+
+    public void decolorPreviewSud(int i, int j, Piece_m piece)
+    {
+        for(Case_m caseIt : piece.getListeCase()) {
+            //Récupère la position de la case dans la pièce
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            //On vérifie si la case est sur le plateau
+            if (verifInGrid(i+l,j-k)) {
+
+                //On enlève l'image de prévisualisation sur le bouton
+                modelPlateau.tabButton[i+l][j-k].setIcon(null);
+                //On passe le contenu du bouton à faux si il n'y a pas de case posée
+                if (modelPlateau.getCase(i+l,j-k).getCouleur()=="White")
+                {
+                    modelPlateau.tabButton[i+l][j-k].setContentAreaFilled(false);
+                }
+            }
+        }
+    }
+
+    public void colorPreviewNord(int i, int j, Piece_m piece){
+
+        for(Case_m caseIt : piece.getListeCase()) {
+            //Récupère la position de la case dans la pièce
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            //On vérifie si la case est sur le plateau
+            if (verifInGrid(i-l,j+k)) {
+                //On passe le contenu du bouton à vrai
+                modelPlateau.tabButton[i-l][j+k].setContentAreaFilled(true);
+                //On set l'image de prévisualisation sur le bouton
+                modelPlateau.tabButton[i-l][j+k].setIcon(previewImage);
+            }
+        }
+    }
+
+    public void decolorPreviewNord(int i, int j, Piece_m piece)
+    {
+        for(Case_m caseIt : piece.getListeCase()) {
+            //Récupère la position de la case dans la pièce
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            //On vérifie si la case est sur le plateau
+            if (verifInGrid(i-l,j+k)) {
+
+                //On enlève l'image de prévisualisation sur le bouton
+                modelPlateau.tabButton[i-l][j+k].setIcon(null);
+                //On passe le contenu du bouton à faux si il n'y a pas de case posée
+                if (modelPlateau.getCase(i-l,j+k).getCouleur()=="White")
+                {
+                    modelPlateau.tabButton[i-l][j+k].setContentAreaFilled(false);
                 }
             }
         }
