@@ -51,8 +51,8 @@ public class BoutonsControleJeu_v extends JFrame {
         btPause = new JButton(imgPause);
         btPlay = new JButton(imgPlay);
         btRetournerGauche = new JButton(imgRetournerGauche);
-        btRetournerDroite = new JButton(imgRetournerDroite);
 
+        btRetournerDroite = new JButton(imgRetournerDroite);
 
         btAbandonner.setOpaque(false);
         btAbandonner.setContentAreaFilled(false);

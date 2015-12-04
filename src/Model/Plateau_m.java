@@ -157,4 +157,25 @@ public class Plateau_m {
 
         }
     }
+
+    public void setClickToFalse(int i, int j)
+    {
+        getCase(i, j).setClicked(false);
+    }
+
+    public void setClickToTrue(int i, int j)
+    {
+        for (int k=0;k<20;k++){
+            for (int l=0;l<20;l++){
+                getCase(k, l).setClicked(false);
+                if (k==i && l==j) {
+                    getCase(k, l).setClicked(true);
+                }
+            }
+        }
+    }
+
+
+
+
 }
