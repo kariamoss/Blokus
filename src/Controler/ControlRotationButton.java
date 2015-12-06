@@ -68,59 +68,60 @@ public class ControlRotationButton implements ActionListener
             h = image.getHeight();
             w = image.getWidth();
             System.out.println("Dimension de l'image redimensionnée : " + h +" / " + w);
+
             String orientation = piece.getOrientation();
 
             if (i==1) {
-                System.out.print("Rotation vers la gauche / Orientation : ");
 
+                System.out.println("Rotation vers la gauche / Orientation avant : " + orientation);
 
+                //Rotation de la modélisation
                 piece.rotateLeft();
 
+                //Rotation de l'image
                 switch (orientation){
                     case "Ouest" :
-                        //Nord - 270
-                        image = rotate(h, w, image, 270);
-                        break;
-                    case "Est" :
-                        //Sud - 90
-                        image = rotate(h, w, image, 90);
-                        break;
-                    case "Nord" :
-                        //Est - 180
-                        image = rotate(h, w, image, 180);
-                        break;
-                }
-
-
-
-            }
-            if (i==2) {
-                System.out.print("Rotation vers la droite / Orientation : ");
-                piece.rotateRight();
-
-                switch (orientation){
-                    case "Ouest" :
-                        //sud - 90
-                        image = rotate(h, w, image, 90);
-                        break;
-                    case "Est" :
-                        //Nord - 270
+                        //Sud - 270
                         image = rotate(h, w, image, 270);
                         break;
                     case "Sud" :
                         //Est - 180
                         image = rotate(h, w, image, 180);
                         break;
+                    case "Est" :
+                        //Nord - 90
+                        image = rotate(h, w, image, 90);
+                        break;
                 }
 
+            }
 
+            if (i==2) {
+
+                System.out.println("Rotation vers la droite / Orientation avant : " + orientation);
+                piece.rotateRight();
+
+                switch (orientation){
+                    case "Ouest" :
+                        //Nord - 90
+                        image = rotate(h, w, image, 90);
+                        break;
+                    case "Nord" :
+                        //Est - 180
+                        image = rotate(h, w, image, 180);
+                        break;
+                    case "Est" :
+                        //Sud - 270
+                        image = rotate(h, w, image, 270);
+                        break;
+                }
 
             }
 
             ImageIcon icon = new ImageIcon(image);
             modelGeneral.overviewButton.setIcon(icon);
 
-            System.out.println(piece.getOrientation());
+            System.out.println("Orientation après : " + piece.getOrientation());
 
         }
         else
