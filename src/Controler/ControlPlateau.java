@@ -41,7 +41,7 @@ public class ControlPlateau implements ActionListener {
         boolean positionnementOk = false;
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
 
-        //On clique une premièer fois sur la case
+        //On clique une première fois sur la case
         if (!modelPlateau.getCase(i, j).isClicked()){
             if (piece!=null){
 
@@ -55,6 +55,7 @@ public class ControlPlateau implements ActionListener {
                 previousPiece=piece;
                 previousCoord[0]=i;
                 previousCoord[1]=j;
+
                 System.out.println("Cliquez une seconde fois pour confirmer");
             }
             else{
