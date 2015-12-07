@@ -192,8 +192,8 @@ public class ControlRotationButton implements ActionListener
     public BufferedImage rotate(int h, int w, BufferedImage imageOrigine, int angle) {
         BufferedImage rotateImage = null;
         try {
-            rotateImage = new BufferedImage(h, w, BufferedImage.TYPE_INT_RGB);
-            AffineTransform a90 = AffineTransform.getRotateInstance(Math.toRadians(angle), h / 2, w / 2);
+            rotateImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            AffineTransform a90 = AffineTransform.getRotateInstance(Math.toRadians(angle), w / 2 , h / 2);
             AffineTransformOp op90 = new AffineTransformOp(a90, AffineTransformOp.TYPE_BILINEAR);
             op90.filter(imageOrigine, rotateImage);
         }
