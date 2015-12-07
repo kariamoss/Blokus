@@ -10,13 +10,12 @@ import java.awt.event.ActionListener;
 /**
  * Created by Mathieu on 20/11/2015.
  */
-public class Abandonner_c implements ActionListener {
-    private General_m general_m;
-    protected Joueur_m joueur_m;
-    protected General_v vue = new General_v(general_m);
+public class ControlAbandonner implements ActionListener {
+    private General_m modelGeneral;
+    protected Joueur_m joueur;
 
-    public Abandonner_c(General_v vue) {
-
+    public ControlAbandonner(General_m modelGeneral) {
+        this.modelGeneral = modelGeneral;
 
     }
 
@@ -24,7 +23,9 @@ public class Abandonner_c implements ActionListener {
        /* if(e.getSource()==vue.getBtAbandonner()){
             joueur_m.setTourDeJeu(false);
             joueur_m.setEnJeu(false);
-            System.out.print("coucou");
         }*/
+        System.out.print("coucou");
+        joueur = modelGeneral.selectJoueurActif();
+        joueur.setEnJeu(false);
     }
 }

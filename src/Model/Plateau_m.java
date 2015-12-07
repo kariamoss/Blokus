@@ -1,6 +1,8 @@
 package Model;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
 /**
  * Created by Mathieu on 20/11/2015.
@@ -155,6 +157,25 @@ public class Plateau_m {
                 modelGeneral.tabButtonInventaire[c].setEnabled(false);
             }
 
+        }
+
+        //On affiche l'inventaire du premier joueur
+        modelGeneral.selectJoueur(0);
+        List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
+
+        for (i =0;i<listPiece.size()-1;i++)
+        {
+            modelGeneral.tabButtonInventaire[i].setEnabled(true);
+            if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
+            {
+                modelGeneral.tabButtonInventaire[i].setEnabled(false);
+            }
+            ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
+            Image image = imageIcon.getImage();
+            Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
+            ImageIcon icon = new ImageIcon(newImage);
+
+            modelGeneral.tabButtonInventaire[i].setIcon(icon);
         }
     }
 

@@ -1,4 +1,5 @@
 package Vue;
+import Controler.ControlAbandonner;
 import Controler.ControlButton;
 import Controler.ControlRotationButton;
 import Model.General_m;
@@ -22,9 +23,7 @@ public class BoutonsControleJeu_v extends JFrame {
     protected ImageIcon imgPlay;
     protected ImageIcon imgRetournerGauche;
     protected  ImageIcon imgRetournerDroite;
-    protected ControlButton controlePlay;
-    protected ControlButton controlePause;
-    public ControlButton controleAbandonner;
+    ControlAbandonner controlAbandonner;
 
     ControlRotationButton controlRotationButton;
 
@@ -37,6 +36,11 @@ public class BoutonsControleJeu_v extends JFrame {
         init();
         dessinerBoutons();
 
+    }
+    public void btInvisible(JButton button){
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
     }
 
     public void init(){
@@ -51,47 +55,20 @@ public class BoutonsControleJeu_v extends JFrame {
         btPause = new JButton(imgPause);
         btPlay = new JButton(imgPlay);
         btRetournerGauche = new JButton(imgRetournerGauche);
-
         btRetournerDroite = new JButton(imgRetournerDroite);
 
-        btAbandonner.setOpaque(false);
-        btAbandonner.setContentAreaFilled(false);
-        btAbandonner.setBorderPainted(false);
+        btInvisible(btAbandonner);
+        btInvisible(btPause);
+        btInvisible(btPlay);
 
-
-        btPause.setOpaque(false);
-        btPause.setContentAreaFilled(false);
-        btPause.setBorderPainted(false);
-
-
-        btPlay.setOpaque(false);
-        btPlay.setContentAreaFilled(false);
-        btPlay.setBorderPainted(false);
-
-
-
-       /* btRetournerGauche.setOpaque(false);
-        btRetournerGauche.setContentAreaFilled(false);
-        btRetournerGauche.setBorderPainted(false);*/
         controlRotationButton = new ControlRotationButton(modelGeneral, this, 1);
         btRetournerGauche.addActionListener(controlRotationButton);
 
-        /*btRetournerDroite.setOpaque(false);
-        btRetournerDroite.setContentAreaFilled(false);
-        btRetournerDroite.setBorderPainted(false);*/
         controlRotationButton = new ControlRotationButton(modelGeneral, this, 2);
         btRetournerDroite.addActionListener(controlRotationButton);
 
-        controlePlay = new ControlButton();
-        controleAbandonner = new ControlButton();
-        controlePause = new ControlButton();
-
-
-
-
-
-
-
+        controlAbandonner = new ControlAbandonner(modelGeneral);
+        btAbandonner.addActionListener(controlAbandonner);
     }
 
     public void dessinerBoutons(){
