@@ -20,6 +20,7 @@ public class ControlRotationButton implements ActionListener
 {
     General_m modelGeneral;
     BoutonsControleJeu_v vue;
+    ControlPlateau controlPlateau;
     int i;
 
     public ControlRotationButton(General_m modelGeneral, BoutonsControleJeu_v vue, int i){
@@ -144,4 +145,14 @@ public class ControlRotationButton implements ActionListener
         }
         return rotateImage;
     }
+
+
+
+    public void setControlPlateau(ControlPlateau controlPlateauToSet){
+        controlPlateau= controlPlateauToSet;
+    }
+
+
+
+
 }
