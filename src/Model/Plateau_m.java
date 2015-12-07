@@ -179,6 +179,10 @@ public class Plateau_m {
         }
     }
 
+
+
+    public Plateau_m getPlateau_m(){ return this; }
+
     public void setClickToFalse(int i, int j)
     {
         getCase(i, j).setClicked(false);
