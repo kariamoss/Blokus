@@ -65,9 +65,8 @@ public class General_m {
         //On met le bon joueur à vrai (regarde si le joueur suivant n'est pas éliminé
         do {
             joueurActif = listJoueur.find(joueurActif).next.value;
-            joueurActif.setTourDeJeu(true);
         }while(!joueurActif.isEnJeu());
-
+        joueurActif.setTourDeJeu(true);
     }
 
     //Getters

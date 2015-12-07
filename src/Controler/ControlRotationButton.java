@@ -135,41 +135,45 @@ public class ControlRotationButton implements ActionListener
 
             System.out.println("Coordonnées de la pièce : " + i + ";" + j);
 
-            //Enlever la prévisualisation
-            switch (orientation){
-                case "Ouest" :
-                    decolorPreviewOuest(i, j, piece);
-                    break;
-                case "Est" :
-                    decolorPreviewEst(i, j, piece);
-                    break;
-                case "Sud" :
-                    decolorPreviewSud(i, j, piece);
-                    break;
-                case "Nord" :
-                    decolorPreviewNord(i, j, piece);
-                    break;
+            if (i!=-1 && j!=-1)
+            {
+                //Enlever la prévisualisation
+                switch (orientation){
+                    case "Ouest" :
+                        decolorPreviewOuest(i, j, piece);
+                        break;
+                    case "Est" :
+                        decolorPreviewEst(i, j, piece);
+                        break;
+                    case "Sud" :
+                        decolorPreviewSud(i, j, piece);
+                        break;
+                    case "Nord" :
+                        decolorPreviewNord(i, j, piece);
+                        break;
+                }
+
+
+                //Récupérer la nouvelle orientation
+                orientation = piece.getOrientation();
+
+                //Mettre la prévisualisation
+                switch (orientation){
+                    case "Ouest" :
+                        colorPreviewOuest(i, j, piece);
+                        break;
+                    case "Est" :
+                        colorPreviewEst(i, j, piece);
+                        break;
+                    case "Sud" :
+                        colorPreviewSud(i, j, piece);
+                        break;
+                    case "Nord" :
+                        colorPreviewNord(i, j, piece);
+                        break;
+                }
             }
 
-
-            //Récupérer la nouvelle orientation
-            orientation = piece.getOrientation();
-
-            //Mettre la prévisualisation
-            switch (orientation){
-                case "Ouest" :
-                    colorPreviewOuest(i, j, piece);
-                    break;
-                case "Est" :
-                    colorPreviewEst(i, j, piece);
-                    break;
-                case "Sud" :
-                    colorPreviewSud(i, j, piece);
-                    break;
-                case "Nord" :
-                    colorPreviewNord(i, j, piece);
-                    break;
-            }
 
 
             ImageIcon icon = new ImageIcon(image);

@@ -12,8 +12,8 @@ public class Piece_m {
     String orientation;
     String image;
     boolean used;
-    int positionI;
-    int positionJ;
+    int positionI = -1;
+    int positionJ = -1;
 
     public Piece_m(List<Case_m> liste, String orientation, String image){
         this.orientation = orientation;
