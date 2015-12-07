@@ -298,11 +298,11 @@ public class ControlPlateau implements ActionListener {
             int l = caseIt.getPosJ();
 
             //On vérifie si la case est sur le plateau
-            if (verifInGrid(a - k, b + l)) {
+            if (verifInGrid(a + k, b - l)) {
                 //On passe le contenu du bouton à vrai
-                modelPlateau.tabButton[a - k][b + l].setContentAreaFilled(true);
+                modelPlateau.tabButton[a + k][b - l].setContentAreaFilled(true);
                 //On set l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a - k][b + l].setIcon(previewImage);
+                modelPlateau.tabButton[a + k][b - l].setIcon(previewImage);
             }
         }
     }
@@ -315,14 +315,14 @@ public class ControlPlateau implements ActionListener {
             int l = caseIt.getPosJ();
 
             //On vérifie si la case est sur le plateau
-            if (verifInGrid(a - k, b + l)) {
+            if (verifInGrid(a + k, b - l)) {
 
                 //On enlève l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a- k][b + l].setIcon(null);
+                modelPlateau.tabButton[a+ k][b - l].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
-                if (modelPlateau.getCase(a - k, b + l).getCouleur()=="White")
+                if (modelPlateau.getCase(a + k, b - l).getCouleur()=="White")
                 {
-                    modelPlateau.tabButton[a - k][b + l].setContentAreaFilled(false);
+                    modelPlateau.tabButton[a + k][b - l].setContentAreaFilled(false);
                 }
             }
         }
@@ -635,10 +635,10 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i - k, j + l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                modelPlateau.tabButton[i-k][j+l].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i-k, j+l).getCouleur());
-                modelPlateau.tabButton[i-k][j+l].setBackground(color.getColor());
+                modelPlateau.getCase(i + k, j - l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                modelPlateau.tabButton[i+k][j-l].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i+k, j-l).getCouleur());
+                modelPlateau.tabButton[i+k][j-l].setBackground(color.getColor());
 
             }
             return true;
@@ -663,10 +663,10 @@ public class ControlPlateau implements ActionListener {
             l = caseIt.getPosJ();
 
             //Vérifie si la case est sur le plateau et vide
-            free = verifCase(i - k, j+l);
+            free = verifCase(i + k, j-l);
 
             //Vérifie si les 4 bords de la case caseIt sont ide
-            free = checkBordCase(i-k, j+l, caseIt);
+            free = checkBordCase(i+k, j-l, caseIt);
 
             c++;
         }
@@ -684,7 +684,7 @@ public class ControlPlateau implements ActionListener {
             k = caseIt.getPosI();
             l = caseIt.getPosJ();
 
-            free = checkCoinCase(i-k, j+l, caseIt);
+            free = checkCoinCase(i+k, j-l, caseIt);
 
             c++;
         }
