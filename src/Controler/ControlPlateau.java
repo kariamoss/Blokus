@@ -71,6 +71,9 @@ public class ControlPlateau implements ActionListener {
                 previousCoord[0]=i;
                 previousCoord[1]=j;
 
+                piece.setPositionI(i);
+                piece.setPositionJ(j);
+
                 System.out.println("Cliquez une seconde fois pour confirmer");
             }
             else{
@@ -164,6 +167,9 @@ public class ControlPlateau implements ActionListener {
                 //On set la position de la pièce
                 piece.setPositionI(i);
                 piece.setPositionJ(j);
+
+                System.out.println("Coordonnées de la pièce : " + piece.getPositionI() + ";" + piece.getPositionJ());
+
 
                 //On change d'inventaire
                 List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();

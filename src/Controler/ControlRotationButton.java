@@ -1,7 +1,9 @@
 package Controler;
 
+import Model.Case_m;
 import Model.General_m;
 import Model.Piece_m;
+import Model.Plateau_m;
 import Vue.BoutonsControleJeu_v;
 
 import javax.imageio.ImageIO;
@@ -25,8 +27,11 @@ public class ControlRotationButton implements ActionListener
     BoutonsControleJeu_v vue;
     int i;
 
+    Plateau_m modelPlateau;
+
     public ControlRotationButton(General_m modelGeneral, BoutonsControleJeu_v vue, int i){
         this.modelGeneral = modelGeneral;
+        this.modelPlateau = modelGeneral.getModelPlateau();
         this.vue = vue;
         this.i=i;
     }
@@ -125,31 +130,33 @@ public class ControlRotationButton implements ActionListener
             //récupérer l'orientation d'origine ->
 
             //Récupérer la position de la pièce
-            /*int i = piece.getPositionI();
-            int j = piece.getPositionJ();*/
+            int i = piece.getPositionI();
+            int j = piece.getPositionJ();
+
+            System.out.println("Coordonnées de la pièce : " + i + ";" + j);
 
             //Enlever la prévisualisation
-            /*switch (orientation){
+            switch (orientation){
                 case "Ouest" :
-                    decolorPreviewOuest(i, j);
+                    decolorPreviewOuest(i, j, piece);
                     break;
                 case "Est" :
-                    decolorPreviewEst(i, j);
+                    decolorPreviewEst(i, j, piece);
                     break;
                 case "Sud" :
-                    decolorPreviewSud(i, j);
+                    decolorPreviewSud(i, j, piece);
                     break;
                 case "Nord" :
-                    decolorPreviewNord(i, j);
+                    decolorPreviewNord(i, j, piece);
                     break;
-            }*/
+            }
 
 
             //Récupérer la nouvelle orientation
             orientation = piece.getOrientation();
 
             //Mettre la prévisualisation
-            /*switch (orientation){
+            switch (orientation){
                 case "Ouest" :
                     colorPreviewOuest(i, j, piece);
                     break;
@@ -162,7 +169,7 @@ public class ControlRotationButton implements ActionListener
                 case "Nord" :
                     colorPreviewNord(i, j, piece);
                     break;
-            }*/
+            }
 
 
             ImageIcon icon = new ImageIcon(image);
@@ -193,7 +200,7 @@ public class ControlRotationButton implements ActionListener
     }
 
 
-    /*public void colorPreviewOuest(int a, int b, Piece_m piece){
+    public void colorPreviewOuest(int a, int b, Piece_m piece){
 
         for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce
@@ -210,9 +217,9 @@ public class ControlRotationButton implements ActionListener
         }
     }
 
-    public void decolorPreviewOuest(int a, int b)
+    public void decolorPreviewOuest(int a, int b, Piece_m piece)
     {
-        for(Case_m caseIt : previousPiece.getListeCase()) {
+        for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
@@ -248,9 +255,9 @@ public class ControlRotationButton implements ActionListener
         }
     }
 
-    public void decolorPreviewEst(int a, int b)
+    public void decolorPreviewEst(int a, int b, Piece_m piece)
     {
-        for(Case_m caseIt : previousPiece.getListeCase()) {
+        for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
@@ -286,9 +293,9 @@ public class ControlRotationButton implements ActionListener
         }
     }
 
-    public void decolorPreviewSud(int a, int b)
+    public void decolorPreviewSud(int a, int b, Piece_m piece)
     {
-        for(Case_m caseIt : previousPiece.getListeCase()) {
+        for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
@@ -324,9 +331,9 @@ public class ControlRotationButton implements ActionListener
         }
     }
 
-    public void decolorPreviewNord(int a, int b)
+    public void decolorPreviewNord(int a, int b, Piece_m piece)
     {
-        for(Case_m caseIt : previousPiece.getListeCase()) {
+        for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
@@ -351,5 +358,5 @@ public class ControlRotationButton implements ActionListener
             return true ;
         }
         return false;
-    }*/
+    }
 }

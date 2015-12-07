@@ -25,8 +25,7 @@ public class Grille_v {
     public Grille_v(int sizeInPixels, int nbButtonsPerRow, General_m modelGeneral)
     {
         this.modelGeneral = modelGeneral;
-        modelPlateau = new Plateau_m(modelGeneral);
-
+        this.modelPlateau = modelGeneral.getModelPlateau();
         initGrid(modelGeneral, sizeInPixels, nbButtonsPerRow);
     }
 
@@ -74,4 +73,6 @@ public class Grille_v {
         }
 
     }
+
+
 }

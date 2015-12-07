@@ -18,6 +18,8 @@ public class General_m {
     public JButton[] tabButtonInventaire;
     public JButton overviewButton;
 
+    public Plateau_m modelPlateau;
+
     public General_m()
     {
         joueur0 = new Joueur_m("Red", "Roger");
@@ -31,6 +33,8 @@ public class General_m {
         listJoueur.append(joueur3);
 
         selectJoueur(0);
+
+        modelPlateau = new Plateau_m(this);
     }
 
     public void selectJoueur(int index){
@@ -69,6 +73,10 @@ public class General_m {
     //Getters
     public Joueur_m getJoueur(int index) {
         return listJoueur.getJoueur(index);
+    }
+
+    public Plateau_m getModelPlateau() {
+        return modelPlateau;
     }
 }
 
