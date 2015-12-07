@@ -22,7 +22,14 @@ public class ControlAbandonner implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-               //On indique le joueur comme hors jeu
+
+        joueur = modelGeneral.selectJoueurActif();
+
+        //Message de dialogue
+        JOptionPane help = new JOptionPane();
+        help.showMessageDialog(null, "Le joueur " + joueur.getCouleur() + " abandonne", "Abandon", JOptionPane.INFORMATION_MESSAGE);
+
+        //On indique le joueur comme hors jeu
         joueur.setEnJeu(false);
 
         //On remet l'overview à null
