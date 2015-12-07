@@ -41,17 +41,19 @@ public class ControlPlateau implements ActionListener {
         boolean positionnementOk = false;
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
 
-        //Si la pièce actuelle est différente de la pièce précédente
-        if (piece!=previousPiece)
-        {
-            //On passe le clique à faux
-            modelPlateau.setClickToFalse(i, j);
-        }
-        //Sinon si l'orientation actuelle est différente de la pièce précédente
-        else if (piece.getOrientation()!=previousPiece.getOrientation())
-        {
-            //On passe le clique à faux
-            modelPlateau.setClickToFalse(i, j);
+        if(piece!=null){
+            //Si la pièce actuelle est différente de la pièce précédente
+            if (piece!=previousPiece)
+            {
+                //On passe le clique à faux
+                modelPlateau.setClickToFalse(i, j);
+            }
+            //Sinon si l'orientation actuelle est différente de la pièce précédente
+            else if (piece.getOrientation()!=previousPiece.getOrientation())
+            {
+                //On passe le clique à faux
+                modelPlateau.setClickToFalse(i, j);
+            }
         }
 
         //On clique une première fois sur la case
@@ -62,7 +64,7 @@ public class ControlPlateau implements ActionListener {
                 modelPlateau.setClickToTrue(i, j);
 
                 //on colorie la prévisualisation
-                colorPreview(i, j, piece, previousPiece);
+                colorPreview(i, j, piece);
 
                 //On enregistre la pièce cliqué pour le futur clique
                 previousPiece=piece;
@@ -92,16 +94,16 @@ public class ControlPlateau implements ActionListener {
                 int b = previousCoord[1];
                 switch (orientation){
                     case "Ouest" :
-                        decolorPreviewOuest(a, b, previousPiece);
+                        decolorPreviewOuest(a, b);
                         break;
                     case "Est" :
-                        decolorPreviewEst(a, b, previousPiece);
+                        decolorPreviewEst(a, b);
                         break;
                     case "Sud" :
-                        decolorPreviewSud(a, b, previousPiece);
+                        decolorPreviewSud(a, b);
                         break;
                     case "Nord" :
-                        decolorPreviewNord(a, b, previousPiece);
+                        decolorPreviewNord(a, b);
                         break;
                 }
 
@@ -159,6 +161,10 @@ public class ControlPlateau implements ActionListener {
                 //On remet la pièce précédente à null
                 previousPiece=null;
 
+                //On set la position de la pièce
+                piece.setPositionI(i);
+                piece.setPositionJ(j);
+
                 //On change d'inventaire
                 List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
 
@@ -184,7 +190,7 @@ public class ControlPlateau implements ActionListener {
     }
 
 
-    public void colorPreview(int i, int j, Piece_m piece, Piece_m previousPiece)
+    public void colorPreview(int i, int j, Piece_m piece)
     {
         if (previousPiece==null)
         {
@@ -226,16 +232,16 @@ public class ControlPlateau implements ActionListener {
 
             switch (previousOrientation){
                 case "Ouest" :
-                    decolorPreviewOuest(a, b, previousPiece);
+                    decolorPreviewOuest(a, b);
                     break;
                 case "Est" :
-                    decolorPreviewEst(a, b, previousPiece);
+                    decolorPreviewEst(a, b);
                     break;
                 case "Sud" :
-                    decolorPreviewSud(a, b, previousPiece);
+                    decolorPreviewSud(a, b);
                     break;
                 case "Nord" :
-                    decolorPreviewNord(a, b, previousPiece);
+                    decolorPreviewNord(a, b);
                     break;
             }
 
@@ -282,9 +288,9 @@ public class ControlPlateau implements ActionListener {
         }
     }
 
-    public void decolorPreviewOuest(int a, int b, Piece_m piece)
+    public void decolorPreviewOuest(int a, int b)
     {
-        for(Case_m caseIt : piece.getListeCase()) {
+        for(Case_m caseIt : previousPiece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
@@ -320,9 +326,9 @@ public class ControlPlateau implements ActionListener {
         }
     }
 
-    public void decolorPreviewEst(int a, int b, Piece_m piece)
+    public void decolorPreviewEst(int a, int b)
     {
-        for(Case_m caseIt : piece.getListeCase()) {
+        for(Case_m caseIt : previousPiece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
@@ -358,9 +364,9 @@ public class ControlPlateau implements ActionListener {
         }
     }
 
-    public void decolorPreviewSud(int a, int b, Piece_m piece)
+    public void decolorPreviewSud(int a, int b)
     {
-        for(Case_m caseIt : piece.getListeCase()) {
+        for(Case_m caseIt : previousPiece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
@@ -396,9 +402,9 @@ public class ControlPlateau implements ActionListener {
         }
     }
 
-    public void decolorPreviewNord(int a, int b, Piece_m piece)
+    public void decolorPreviewNord(int a, int b)
     {
-        for(Case_m caseIt : piece.getListeCase()) {
+        for(Case_m caseIt : previousPiece.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();

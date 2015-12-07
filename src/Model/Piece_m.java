@@ -12,6 +12,8 @@ public class Piece_m {
     String orientation;
     String image;
     boolean used;
+    int positionI;
+    int positionJ;
 
     public Piece_m(List<Case_m> liste, String orientation, String image){
         this.orientation = orientation;
@@ -75,5 +77,21 @@ public class Piece_m {
 
     public void setUsed(boolean used) {
         this.used = used;
+    }
+
+    public int getPositionI() {
+        return positionI;
+    }
+
+    public void setPositionI(int positionI) {
+        this.positionI = positionI;
+    }
+
+    public int getPositionJ() {
+        return positionJ;
+    }
+
+    public void setPositionJ(int positionJ) {
+        this.positionJ = positionJ;
     }
 }
