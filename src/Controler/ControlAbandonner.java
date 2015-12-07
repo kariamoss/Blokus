@@ -26,11 +26,13 @@ public class ControlAbandonner implements ActionListener {
         joueur = modelGeneral.selectJoueurActif();
 
         //Message de dialogue
-        JOptionPane help = new JOptionPane();
-        help.showMessageDialog(null, "Le joueur " + joueur.getCouleur() + " abandonne", "Abandon", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane abandon = new JOptionPane();
+        abandon.showMessageDialog(null, joueur.getNom() + " abandonne", "Abandon", JOptionPane.INFORMATION_MESSAGE);
 
         //On indique le joueur comme hors jeu
         joueur.setEnJeu(false);
+        modelGeneral.setNbJoueuEnJeu();
+
 
         //On remet l'overview à null
         modelGeneral.overviewButton.setIcon(null);
@@ -38,6 +40,13 @@ public class ControlAbandonner implements ActionListener {
 
         //On passe au joueur suivant
         modelGeneral.joueurSuivant();
+
+        Joueur_m vainqueur = modelGeneral.selectJoueurActif();
+
+        if(modelGeneral.getNbJoueuEnJeu()==1){
+            JOptionPane victoire = new JOptionPane();
+            victoire.showMessageDialog(null, vainqueur.getNom() + " a gagné !", "Fin de la partie", JOptionPane.INFORMATION_MESSAGE);
+        }
 
         //On change d'inventaire
         List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
