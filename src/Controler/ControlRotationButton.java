@@ -41,13 +41,6 @@ public class ControlRotationButton implements ActionListener
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
         if (piece!=null)
         {
-            //System.out.println("caca");
-            /*if (f.getSource() == vue.btRetournerGauche) {
-                System.out.println("Rotation vers la gauche");
-            }
-            if (f.getSource() == vue.btRetournerDroite) {
-                System.out.println("Rotation vers la droite");
-            }*/
 
             //Chargement de l'image
             String urlImage = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive().getImage();
@@ -63,8 +56,6 @@ public class ControlRotationButton implements ActionListener
             int h = image.getHeight();
             int w = image.getWidth();
 
-            System.out.println("Dimension de l'image d'origine : " + h +" / " + w);
-
             //Redimensionnement à 110*110 (coéficient de 0.85 par rapport à l'image d'origine
             double scale = 0.85;
             AffineTransform tx = new AffineTransform();
@@ -72,10 +63,6 @@ public class ControlRotationButton implements ActionListener
             AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
             BufferedImage biNew = new BufferedImage((int)(w*scale), (int)(h*scale), image.getType());
             image = op.filter(image, biNew);
-
-            h = image.getHeight();
-            w = image.getWidth();
-            System.out.println("Dimension de l'image redimensionnée : " + h +" / " + w);
 
             String orientation = piece.getOrientation();
 
