@@ -41,6 +41,19 @@ public class ControlPlateau implements ActionListener {
         boolean positionnementOk = false;
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
 
+        //Si la pièce actuelle est différente de la pièce précédente
+        if (piece!=previousPiece)
+        {
+            //On passe le clique à faux
+            modelPlateau.setClickToFalse(i, j);
+        }
+        //Sinon si l'orientation actuelle est différente de la pièce précédente
+        else if (piece.getOrientation()!=previousPiece.getOrientation())
+        {
+            //On passe le clique à faux
+            modelPlateau.setClickToFalse(i, j);
+        }
+
         //On clique une première fois sur la case
         if (!modelPlateau.getCase(i, j).isClicked()){
             if (piece!=null){
