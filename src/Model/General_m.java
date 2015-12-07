@@ -14,6 +14,7 @@ public class General_m {
 
     ListDoubleCircJoueur listJoueur = new ListDoubleCircJoueur();
 
+    int nbJoueuEnJeu;
 
     public JButton[] tabButtonInventaire;
     public JButton overviewButton;
@@ -26,6 +27,8 @@ public class General_m {
         joueur1 = new Joueur_m("Blue", "Bernard");
         joueur2 = new Joueur_m("Yellow", "Yvonne");
         joueur3 = new Joueur_m("Green", "Gerard");
+
+        nbJoueuEnJeu = 4;
 
         listJoueur.append(joueur0);
         listJoueur.append(joueur1);
@@ -76,6 +79,14 @@ public class General_m {
 
     public Plateau_m getModelPlateau() {
         return modelPlateau;
+    }
+
+    public int getNbJoueuEnJeu() {
+        return nbJoueuEnJeu;
+    }
+
+    public void setNbJoueuEnJeu() {
+        nbJoueuEnJeu--;
     }
 }
 
