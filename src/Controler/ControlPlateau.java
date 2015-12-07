@@ -434,9 +434,11 @@ public class ControlPlateau implements ActionListener {
         //Vérifie si grille[i][j] est dans le tableau
         //Si oui, vérifie que la case n'est pas déjà occupé
         if(i>=0 && i<20 && j>=0 && j<20){
-            if (modelPlateau.getCase(i,j).getCouleur().equals("White")){
+            if (modelPlateau.getCase(i,j).getCouleur()=="White"){
+                System.out.println("Couleur case : " +modelPlateau.getCase(i, j).getCouleur());
                 return true ;
             }
+            System.out.println("Couleur case : " +modelPlateau.getCase(i, j).getCouleur());
         }
         return false;
     }
@@ -543,6 +545,9 @@ public class ControlPlateau implements ActionListener {
             //Vérifie si la case est sur le plateau et vide
             free = verifCase(i-l, j+k);
 
+            if (!free)
+                return free;
+
             //Vérifie si les 4 bords de la case caseIt sont ide
             free = checkBordCase(i-l, j+k, caseIt);
 
@@ -588,6 +593,7 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                System.out.print("Couleur piece : " + modelPlateau.getCase(i+k, j+l).getCouleur() + "   ");
                 modelPlateau.tabButton[i+k][j+l].setContentAreaFilled(true);
                 Color_v color = new Color_v(modelPlateau.getCase(i+k, j+l).getCouleur());
                 modelPlateau.tabButton[i+k][j+l].setBackground(color.getColor());
@@ -617,6 +623,9 @@ public class ControlPlateau implements ActionListener {
 
             //Vérifie si la case est sur le plateau et vide
             free = verifCase(i+k, j+l);
+
+            if (!free)
+                return free;
 
             //Vérifie si les 4 bords de la case caseIt sont ide
             free = checkBordCase(i+k, j+l, caseIt);
@@ -690,6 +699,9 @@ public class ControlPlateau implements ActionListener {
             //Vérifie si la case est sur le plateau et vide
             free = verifCase(i -k, j-l);
 
+            if (!free)
+                return free;
+
             //Vérifie si les 4 bords de la case caseIt sont ide
             free = checkBordCase(i-k, j-l, caseIt);
 
@@ -761,6 +773,10 @@ public class ControlPlateau implements ActionListener {
 
             //Vérifie si la case est sur le plateau et vide
             free = verifCase(i+l, j-k);
+
+            if (!free)
+                return free;
+
             //Vérifie si les 4 bords de la case caseIt sont ide
             free = checkBordCase(i+l, j-k, caseIt);
 

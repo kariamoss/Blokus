@@ -22,15 +22,7 @@ public class ControlAbandonner implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-       /* if(e.getSource()==vue.getBtAbandonner()){
-            joueur_m.setTourDeJeu(false);
-            joueur_m.setEnJeu(false);
-        }*/
-        // System.out.print("coucou");
-        joueur = modelGeneral.selectJoueurActif();
-        System.out.println("Couleur du joueur actif : " + joueur.getCouleur());
-
-        //On indique le joueur comme hors jeu
+               //On indique le joueur comme hors jeu
         joueur.setEnJeu(false);
 
         //On remet l'overview à null
@@ -57,9 +49,5 @@ public class ControlAbandonner implements ActionListener {
 
             modelGeneral.tabButtonInventaire[i].setIcon(icon);
         }
-
-
-        joueur = modelGeneral.selectJoueurActif();
-        System.out.println("Couleur du joueur suivant : " + joueur.getCouleur());
     }
 }
