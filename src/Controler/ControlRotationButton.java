@@ -90,15 +90,15 @@ public class ControlRotationButton implements ActionListener
                 switch (orientation){
                     case "Ouest" :
                         //Sud - 270
-                        image = rotate(h, w, image, 270);
+                        image = rotate(image, 270);
                         break;
                     case "Sud" :
                         //Est - 180
-                        image = rotate(h, w, image, 180);
+                        image = rotate(image, 180);
                         break;
                     case "Est" :
                         //Nord - 90
-                        image = rotate(h, w, image, 90);
+                        image = rotate(image, 90);
                         break;
                 }
 
@@ -112,15 +112,15 @@ public class ControlRotationButton implements ActionListener
                 switch (orientation){
                     case "Ouest" :
                         //Nord - 90
-                        image = rotate(h, w, image, 90);
+                        image = rotate(image, 90);
                         break;
                     case "Nord" :
                         //Est - 180
-                        image = rotate(h, w, image, 180);
+                        image = rotate(image, 180);
                         break;
                     case "Est" :
                         //Sud - 270
-                        image = rotate(h, w, image, 270);
+                        image = rotate(image, 270);
                         break;
                 }
 
@@ -189,13 +189,14 @@ public class ControlRotationButton implements ActionListener
 
     }
 
-    public BufferedImage rotate(int h, int w, BufferedImage imageOrigine, int angle) {
+    public BufferedImage rotate(BufferedImage originalImg, int angle) {
         BufferedImage rotateImage = null;
         try {
-            rotateImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-            AffineTransform a90 = AffineTransform.getRotateInstance(Math.toRadians(angle), w / 2 , h / 2);
+            rotateImage = new BufferedImage(originalImg.getWidth(), originalImg.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            AffineTransform a90 = AffineTransform.getRotateInstance(Math.toRadians(angle),originalImg.getWidth() / 2
+                    , originalImg.getHeight() / 2);
             AffineTransformOp op90 = new AffineTransformOp(a90, AffineTransformOp.TYPE_BILINEAR);
-            op90.filter(imageOrigine, rotateImage);
+            op90.filter(originalImg, rotateImage);
         }
         catch (Exception e) {
             System.err.println(e);
