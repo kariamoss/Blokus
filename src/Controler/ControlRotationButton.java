@@ -6,6 +6,7 @@ import Vue.BoutonsControleJeu_v;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
@@ -18,6 +19,8 @@ import java.io.File;
  */
 public class ControlRotationButton implements ActionListener
 {
+    ImageIcon previewImage = new ImageIcon(new ImageIcon("images/preview.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT ));
+
     General_m modelGeneral;
     BoutonsControleJeu_v vue;
     int i;
@@ -119,11 +122,14 @@ public class ControlRotationButton implements ActionListener
             }
 
             //Rotation de la pièce
-            //récupérer l'orientation d'origine
-            /*int i = piece.getPositionI();
-            int j = piece.getPositionJ();
+            //récupérer l'orientation d'origine ->
 
-            switch (orientation){
+            //Récupérer la position de la pièce
+            /*int i = piece.getPositionI();
+            int j = piece.getPositionJ();*/
+
+            //Enlever la prévisualisation
+            /*switch (orientation){
                 case "Ouest" :
                     decolorPreviewOuest(i, j);
                     break;
@@ -137,17 +143,32 @@ public class ControlRotationButton implements ActionListener
                     decolorPreviewNord(i, j);
                     break;
             }*/
-            //Récupérer la position de la pièce
-            //Enlever la prévisualisation
-            //Récupérer la nouvelle orientation
-            //Mettre la prévisualisation
 
+
+            //Récupérer la nouvelle orientation
+            orientation = piece.getOrientation();
+
+            //Mettre la prévisualisation
+            /*switch (orientation){
+                case "Ouest" :
+                    colorPreviewOuest(i, j, piece);
+                    break;
+                case "Est" :
+                    colorPreviewEst(i, j, piece);
+                    break;
+                case "Sud" :
+                    colorPreviewSud(i, j, piece);
+                    break;
+                case "Nord" :
+                    colorPreviewNord(i, j, piece);
+                    break;
+            }*/
 
 
             ImageIcon icon = new ImageIcon(image);
             modelGeneral.overviewButton.setIcon(icon);
 
-            System.out.println("Orientation après : " + piece.getOrientation());
+            System.out.println("Orientation après : " + orientation);
 
         }
         else
@@ -172,7 +193,7 @@ public class ControlRotationButton implements ActionListener
     }
 
 
-   /* public void colorPreviewOuest(int a, int b, Piece_m piece){
+    /*public void colorPreviewOuest(int a, int b, Piece_m piece){
 
         for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce
