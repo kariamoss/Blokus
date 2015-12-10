@@ -39,18 +39,6 @@ public class General_v extends JFrame {
 
     }
 
-    public General_v(General_m modelGeneral){
-        this.modelGeneral = modelGeneral;
-        setTitle("Blokus");
-        initAttribute(modelGeneral);
-        fenetreControle.init();
-        fenetreControle.dessinerBoutons();
-        setSize(900, 650);
-        setContentPane(panel_principal);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
 
 
     public void initAttribute(General_m modelGeneral) {
@@ -96,8 +84,7 @@ public class General_v extends JFrame {
         setVisible(true);
     }
 
-
-
-
-
+    public BoutonsControleJeu_v getFenetreControle() {
+        return fenetreControle;
+    }
 }

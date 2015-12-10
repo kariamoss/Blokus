@@ -10,6 +10,7 @@ import Vue.General_v;
 public class ControlGroup {
     private General_m modelGeneral;
     private Inventaire_m modelInventaire;
+
     private General_v vue;
     public ControlButton controlButton;
     public ControlMenu controlMenu;
@@ -18,6 +19,8 @@ public class ControlGroup {
         this.modelGeneral = modelGeneral;
         Inventaire_m modelInventaire = modelGeneral.selectJoueurActif().getInventaire();
         vue = new General_v(modelGeneral, modelInventaire);
+
+
         //Controler.ControlButton controlButton = new Controler.ControlButton(modelGeneral, vue);
         //Controler.ControlMenu controlMenu = new Controler.ControlMenu(generalm, vue);
 

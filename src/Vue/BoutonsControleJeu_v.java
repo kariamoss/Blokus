@@ -1,10 +1,13 @@
 package Vue;
 import Controler.ControlAbandonner;
+import Controler.ControlMusique;
 import Controler.ControlRotationButton;
 import Model.General_m;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Mathieu on 20/11/2015.
@@ -13,8 +16,8 @@ public class BoutonsControleJeu_v extends JFrame {
     protected JPanel panelDeControle;
     protected JPanel panelRetourner;
     protected JButton btAbandonner;
-    protected JButton btPause;
-    protected JButton btPlay;
+    public JButton btPause;
+    public JButton btPlay;
     public JButton btRetournerGauche;
     public JButton btRetournerDroite;
     protected ImageIcon imgAbandonner;
@@ -25,6 +28,7 @@ public class BoutonsControleJeu_v extends JFrame {
     ControlAbandonner controlAbandonner;
 
     ControlRotationButton controlRotationButton;
+    ControlMusique controlMusique;
 
     General_m modelGeneral;
 
@@ -33,6 +37,7 @@ public class BoutonsControleJeu_v extends JFrame {
     {
         this.modelGeneral = modelGeneral;
         init();
+        initSound();
         dessinerBoutons();
 
     }
@@ -70,6 +75,22 @@ public class BoutonsControleJeu_v extends JFrame {
         btAbandonner.addActionListener(controlAbandonner);
     }
 
+    public void initSound() {
+        controlMusique = new ControlMusique(modelGeneral, this);
+        btPlay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controlMusique.play();
+            }
+        });
+        btPause.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controlMusique.pause();
+            }
+        });
+    }
+
     public void dessinerBoutons(){
         panelDeControle=new JPanel();
         panelDeControle.setLayout(new BoxLayout(panelDeControle, BoxLayout.X_AXIS));
@@ -95,5 +116,7 @@ public class BoutonsControleJeu_v extends JFrame {
     }
     public JButton getBtAbandonner(){return btAbandonner;}
     public JPanel getPanelRetourner(){return panelRetourner;}
+
+
 
 }

@@ -11,6 +11,9 @@ public class General_m {
     Joueur_m joueur2;
     Joueur_m joueur3;
 
+    private String musiquePath = "/musique";
+    private boolean musiqueEtat;
+
 
     ListDoubleCircJoueur listJoueur = new ListDoubleCircJoueur();
 
@@ -29,6 +32,7 @@ public class General_m {
         joueur3 = new Joueur_m("Green", "Gerard");
 
         nbJoueuEnJeu = 4;
+        musiqueEtat = true;
 
         listJoueur.append(joueur0);
         listJoueur.append(joueur1);
@@ -72,10 +76,17 @@ public class General_m {
         joueurActif.setTourDeJeu(true);
     }
 
+    public boolean isMusiquePlayed() { return musiqueEtat; }
+
+    public void setMusiqueEtat(boolean state) { musiqueEtat = state; }
+
     //Getters
     public Joueur_m getJoueur(int index) {
         return listJoueur.getJoueur(index);
     }
+
+    public String getMusiquePath() { return musiquePath; }
+
 
     public Plateau_m getModelPlateau() {
         return modelPlateau;
