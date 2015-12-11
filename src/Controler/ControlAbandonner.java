@@ -1,4 +1,5 @@
 package Controler;
+
 import Model.General_m;
 import Model.Joueur_m;
 import Model.Piece_m;
@@ -7,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,11 +43,8 @@ public class ControlAbandonner implements ActionListener {
         //On passe au joueur suivant
         modelGeneral.joueurSuivant();
 
-        Joueur_m vainqueur = modelGeneral.selectJoueurActif();
-
         if(modelGeneral.getNbJoueuEnJeu()==1){
-            JOptionPane victoire = new JOptionPane();
-            victoire.showMessageDialog(null, vainqueur.getNom() + " a gagné !", "Fin de la partie", JOptionPane.INFORMATION_MESSAGE);
+            finDePartie();
         }
 
         //On change d'inventaire
@@ -65,5 +64,35 @@ public class ControlAbandonner implements ActionListener {
 
             modelGeneral.tabButtonInventaire[i].setIcon(icon);
         }
+    }
+
+    private void finDePartie(){
+
+        //Joueur_m vainqueur = modelGeneral.selectJoueurActif();
+        String tabNom[] = new String[4];
+        int tabScore[] = new int[4];
+
+        //Tri des joueur :
+        for (int i = 0;i<4;i++)
+        {
+            Joueur_m joueur = modelGeneral.getJoueur(i);
+            tabScore[i] = joueur.getScore();
+            tabNom[i] = joueur.getNom();
+        }
+
+        Arrays.sort(tabScore);
+
+        String result = "Fin de partie\n\n";
+        for (int i=3;i>=0;i--){
+            result+=modelGeneral.getJoueurByScore(tabScore[i]).getNom() +  " : " + tabScore[i] + "pts\n";
+            System.out.println(modelGeneral.getJoueurByScore(tabScore[i]).getNom() +  " : " + tabScore[i] + "pts");
+        }
+
+        JOptionPane victoire = new JOptionPane();
+        victoire.showMessageDialog(null, result, "Fin de la partie", JOptionPane.INFORMATION_MESSAGE);
+
+
+
+        System.exit(0);
     }
 }

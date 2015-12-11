@@ -99,6 +99,16 @@ public class General_m {
     public void setNbJoueuEnJeu() {
         nbJoueuEnJeu--;
     }
+
+    public Joueur_m getJoueurByScore(int score){
+        for(int i=0;i<4;i++)
+        {
+            Joueur_m joueur = getJoueur(i);
+            if (joueur.getScore()==score)
+                return joueur;
+        }
+        return null;
+    }
 }
 
 
