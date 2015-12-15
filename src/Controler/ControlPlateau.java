@@ -41,24 +41,21 @@ public class ControlPlateau implements ActionListener {
         boolean positionnementOk = false;
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
 
-        if(piece!=null){
+
+        if (piece!=null) {
             //Si la pièce actuelle est différente de la pièce précédente
-            if (piece!=previousPiece)
-            {
+            if (piece != previousPiece) {
                 //On passe le clique à faux
                 modelPlateau.setClickToFalse(i, j);
             }
             //Sinon si l'orientation actuelle est différente de la pièce précédente
-            else if (piece.getOrientation()!=previousPiece.getOrientation())
-            {
+            else if (piece.getOrientation() != previousPiece.getOrientation()) {
                 //On passe le clique à faux
                 modelPlateau.setClickToFalse(i, j);
             }
-        }
 
-        //On clique une première fois sur la case
-        if (!modelPlateau.getCase(i, j).isClicked()){
-            if (piece!=null){
+            //On clique une première fois sur la case
+            if (!modelPlateau.getCase(i, j).isClicked()) {
 
                 // on passe indique que cette case est cliqué
                 modelPlateau.setClickToTrue(i, j);
@@ -67,26 +64,19 @@ public class ControlPlateau implements ActionListener {
                 colorPreview(i, j, piece);
 
                 //On enregistre la pièce cliqué pour le futur clique
-                previousPiece=piece;
-                previousCoord[0]=i;
-                previousCoord[1]=j;
+                previousPiece = piece;
+                previousCoord[0] = i;
+                previousCoord[1] = j;
 
                 piece.setPositionI(i);
                 piece.setPositionJ(j);
 
                 System.out.println("Cliquez une seconde fois pour confirmer");
-            }
-            else{
-                System.out.println("Aucune pièce sélectionnée");
-            }
 
-        }
-        else
-        {
-            //On clique une seconde fois
-            if (piece!=null){
+            } else {
 
-                System.out.println("Clique en "+i+";"+j+".");
+
+                System.out.println("Clique en " + i + ";" + j + ".");
 
                 //On repasse la case cliqué à faux
                 modelPlateau.setClickToFalse(i, j);
@@ -95,17 +85,17 @@ public class ControlPlateau implements ActionListener {
                 String orientation = previousPiece.getOrientation();
                 int a = previousCoord[0];
                 int b = previousCoord[1];
-                switch (orientation){
-                    case "Ouest" :
+                switch (orientation) {
+                    case "Ouest":
                         decolorPreviewOuest(a, b);
                         break;
-                    case "Est" :
+                    case "Est":
                         decolorPreviewEst(a, b);
                         break;
-                    case "Sud" :
+                    case "Sud":
                         decolorPreviewSud(a, b);
                         break;
-                    case "Nord" :
+                    case "Nord":
                         decolorPreviewNord(a, b);
                         break;
                 }
@@ -113,87 +103,81 @@ public class ControlPlateau implements ActionListener {
                 //On récupère l'orientation de la pièce active pour la positioner sur le plateau (ou pas)
                 orientation = piece.getOrientation();
 
-                switch (orientation){
-                    case "Ouest" :
+                switch (orientation) {
+                    case "Ouest":
                         positionnementOk = positionnementOuest(i, j, piece);
                         break;
-                    case "Est" :
+                    case "Est":
                         positionnementOk = positionnementEst(i, j, piece);
                         break;
-                    case "Sud" :
+                    case "Sud":
                         positionnementOk = positionnementSud(i, j, piece);
                         break;
-                    case "Nord" :
+                    case "Nord":
                         positionnementOk = positionnementNord(i, j, piece);
                         break;
                 }
-
-            }
-            else {
-                System.out.println("Aucune pièce sélectionnée");
-            }
-
-
-            if (positionnementOk){
-                System.out.println("Positionnement OK\n\n");
-
-            /*for (int k=0;k<20;k++) {
-                    for (int l = 0; l < 20; l++) {
-                        System.out.print(modelPlateau.getCase(k, l).getCouleur() + "\t");
-                    }
-                System.out.println("");
-            }*/
-
-                //On augmente le score du joueur
-                modelGeneral.selectJoueurActif().setScore(modelGeneral.selectJoueurActif().getScore()+piece.getListeCase().size());
-                System.out.println(modelGeneral.selectJoueurActif().getNom() + " : "+ modelGeneral.selectJoueurActif().getScore() + "pts.\n\n");
-
-                //On marque la pièce comme selectionnée
-                piece.setUsed(true);
-
-                //Déselectionne la pièce
-                piece.setPieceSelection(false);
-
-                //On remet l'overview à null
-                modelGeneral.overviewButton.setIcon(null);
-                modelGeneral.overviewButton.setBorderPainted(false);
-
-                //On passe au joueur suivant
-                modelGeneral.joueurSuivant();
-
-                //On remet la pièce précédente à null
-                previousPiece=null;
-
-                //On set la position de la pièce
-                piece.setPositionI(i);
-                piece.setPositionJ(j);
-
-                System.out.println("Coordonnées de la pièce : " + piece.getPositionI() + ";" + piece.getPositionJ());
-
-
-                //On change d'inventaire
-                List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
-
-                for (int i =0;i<listPiece.size()-1;i++)
-                {
-                    modelGeneral.tabButtonInventaire[i].setEnabled(true);
-                    if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
-                    {
-                        modelGeneral.tabButtonInventaire[i].setEnabled(false);
-                    }
-                    ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
-                    Image image = imageIcon.getImage();
-                    Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
-                    ImageIcon icon = new ImageIcon(newImage);
-
-                    modelGeneral.tabButtonInventaire[i].setIcon(icon);
-                }
-
-
             }
         }
+        else {
+            System.out.println("Aucune pièce sélectionnée");
+        }
 
+
+
+        if (positionnementOk){
+            System.out.println("Positionnement OK\n\n");
+
+            //On augmente le score du joueur
+            modelGeneral.selectJoueurActif().setScore(modelGeneral.selectJoueurActif().getScore()+piece.getListeCase().size());
+            System.out.println(modelGeneral.selectJoueurActif().getNom() + " : "+ modelGeneral.selectJoueurActif().getScore() + "pts.\n\n");
+
+            //On marque la pièce comme selectionnée
+            piece.setUsed(true);
+
+            //Déselectionne la pièce
+            piece.setPieceSelection(false);
+
+            //On remet l'overview à null
+            modelGeneral.overviewButton.setIcon(null);
+            modelGeneral.overviewButton.setBorderPainted(false);
+
+            //On passe au joueur suivant
+            modelGeneral.joueurSuivant();
+
+            //On remet la pièce précédente à null
+            previousPiece=null;
+
+            //On set la position de la pièce
+            piece.setPositionI(i);
+            piece.setPositionJ(j);
+
+            System.out.println("Coordonnées de la pièce : " + piece.getPositionI() + ";" + piece.getPositionJ());
+
+
+            //On change d'inventaire
+            List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
+
+            for (int i =0;i<listPiece.size()-1;i++)
+            {
+                modelGeneral.tabButtonInventaire[i].setEnabled(true);
+                if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
+                {
+                    modelGeneral.tabButtonInventaire[i].setEnabled(false);
+                }
+                ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
+                Image image = imageIcon.getImage();
+                Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
+                ImageIcon icon = new ImageIcon(newImage);
+
+                modelGeneral.tabButtonInventaire[i].setIcon(icon);
+            }
+
+
+        }
     }
+
+
 
 
     public void colorPreview(int i, int j, Piece_m piece)
@@ -250,7 +234,6 @@ public class ControlPlateau implements ActionListener {
                     decolorPreviewNord(a, b);
                     break;
             }
-
 
             //Récupérer l'orientation de la pièce
             //Colorier le plateau en fonction de l'orientation de la pièce : couleur : orange
