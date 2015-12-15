@@ -40,29 +40,33 @@ public class ControlAbandonner implements ActionListener {
         modelGeneral.overviewButton.setIcon(null);
         modelGeneral.overviewButton.setBorderPainted(false);
 
-        //On passe au joueur suivant
-        modelGeneral.joueurSuivant();
 
-        if(modelGeneral.getNbJoueuEnJeu()==1){
+        if(modelGeneral.getNbJoueuEnJeu()==0){
             finDePartie();
         }
 
-        //On change d'inventaire
-        List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
 
-        for (int i =0;i<listPiece.size()-1;i++)
-        {
-            modelGeneral.tabButtonInventaire[i].setEnabled(true);
-            if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
+        if (modelGeneral.getNbJoueuEnJeu()>0){
+            //On passe au joueur suivant
+            modelGeneral.joueurSuivant();
+
+            //On change d'inventaire
+            List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
+
+            for (int i =0;i<listPiece.size()-1;i++)
             {
-                modelGeneral.tabButtonInventaire[i].setEnabled(false);
-            }
-            ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
-            Image image = imageIcon.getImage();
-            Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
-            ImageIcon icon = new ImageIcon(newImage);
+                modelGeneral.tabButtonInventaire[i].setEnabled(true);
+                if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
+                {
+                    modelGeneral.tabButtonInventaire[i].setEnabled(false);
+                }
+                ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
+                Image image = imageIcon.getImage();
+                Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
+                ImageIcon icon = new ImageIcon(newImage);
 
-            modelGeneral.tabButtonInventaire[i].setIcon(icon);
+                modelGeneral.tabButtonInventaire[i].setIcon(icon);
+            }
         }
     }
 
@@ -90,8 +94,6 @@ public class ControlAbandonner implements ActionListener {
 
         JOptionPane victoire = new JOptionPane();
         victoire.showMessageDialog(null, result, "Fin de la partie", JOptionPane.INFORMATION_MESSAGE);
-
-
 
         System.exit(0);
     }
