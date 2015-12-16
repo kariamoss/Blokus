@@ -41,9 +41,7 @@ public class ControlAbandonner implements ActionListener {
         modelGeneral.overviewButton.setBorderPainted(false);
 
 
-        if(modelGeneral.getNbJoueuEnJeu()==0){
-            finDePartie();
-        }
+
 
 
         if (modelGeneral.getNbJoueuEnJeu()>0){
@@ -67,6 +65,10 @@ public class ControlAbandonner implements ActionListener {
 
                 modelGeneral.tabButtonInventaire[i].setIcon(icon);
             }
+        }
+        else
+        {
+            finDePartie();
         }
     }
 

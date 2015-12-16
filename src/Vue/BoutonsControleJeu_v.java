@@ -65,10 +65,10 @@ public class BoutonsControleJeu_v extends JFrame {
         btInvisible(btPause);
         btInvisible(btPlay);
 
-        controlRotationButton = new ControlRotationButton(modelGeneral, this, 1);
+        controlRotationButton = new ControlRotationButton(modelGeneral, 1);
         btRetournerGauche.addActionListener(controlRotationButton);
 
-        controlRotationButton = new ControlRotationButton(modelGeneral, this, 2);
+        controlRotationButton = new ControlRotationButton(modelGeneral, 2);
         btRetournerDroite.addActionListener(controlRotationButton);
 
         controlAbandonner = new ControlAbandonner(modelGeneral);
