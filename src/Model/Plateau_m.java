@@ -48,15 +48,14 @@ public class Plateau_m {
         int i;
         int j;
 
-        //getCase(5, 7).setCouleur("Red");
         //Joueur 0
         modelGeneral.selectJoueur(0);
         Joueur_m joueur0 = modelGeneral.selectJoueurActif();
 
-        //Piece 19 orientation Sud en haut à gauche
+        //Piece 14 orientation Nord en haut à gauche
         i=1;
         j=1;
-        Piece_m pieceJ0 = joueur0.getInventaire().getPiece(18);
+        Piece_m pieceJ0 = joueur0.getInventaire().getPiece(13);
 
         for(Case_m caseIt : pieceJ0.getListeCase()) {
             //Récupère la position de la case dans la pièce
