@@ -65,6 +65,7 @@ public class PlayerCard_v {
         playerColor.setBackground(new Color_v(color).getColor());
 
         playerName= new JPanel();
+        playerName.setBackground(new Color_v(color).getColor());
         playerScore= new JPanel();
 
         initLabels(color, name, score);
@@ -107,9 +108,9 @@ public class PlayerCard_v {
     }
 
     private void mountSubComponents(){
-        componentPanel.add(playerColor);
+        //componentPanel.add(playerColor);
         componentPanel.add(playerName);
-        componentPanel.add(playerScore);
+        //componentPanel.add(playerScore);
     }
 
 
