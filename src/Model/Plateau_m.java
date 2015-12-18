@@ -52,10 +52,10 @@ public class Plateau_m {
         modelGeneral.selectJoueur(0);
         Joueur_m joueur0 = modelGeneral.selectJoueurActif();
 
-        //Piece 14 orientation Nord en haut à gauche
-        i=1;
-        j=1;
-        Piece_m pieceJ0 = joueur0.getInventaire().getPiece(13);
+        //Piece 12 orientation Nord en haut à gauche
+        i=0;
+        j=0;
+        Piece_m pieceJ0 = joueur0.getInventaire().getPiece(11);
 
         for(Case_m caseIt : pieceJ0.getListeCase()) {
             //Récupère la position de la case dans la pièce
@@ -136,10 +136,10 @@ public class Plateau_m {
         modelGeneral.selectJoueur(3);
         Joueur_m joueur3 = modelGeneral.selectJoueurActif();
 
-        //Piece 17 orientation Nord en bas à droite
-        i=18;
-        j=18;
-        Piece_m pieceJ3 = joueur3.getInventaire().getPiece(16);
+        //Piece 17 orientation Sud en bas à droite
+        i=19;
+        j=19;
+        Piece_m pieceJ3 = joueur3.getInventaire().getPiece(11);
         for(Case_m caseIt : pieceJ3.getListeCase()) {
             //Récupère la position de la case dans la pièce
             int k = caseIt.getPosI();
