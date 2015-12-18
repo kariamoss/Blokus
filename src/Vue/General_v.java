@@ -32,7 +32,7 @@ public class General_v extends JFrame {
 
         fenetreControle.init();
         fenetreControle.dessinerBoutons();
-        setSize(900, 650);
+        setSize(900, 660);
         setContentPane(panel_principal);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +45,7 @@ public class General_v extends JFrame {
         panel_principal = new JPanel();
         fenetre_Grille = new JPanel();
         panel_droite = new JPanel(new GridLayout(5,1));
-        fenetre_Grille.setPreferredSize(new Dimension(600, 600));
+        fenetre_Grille.setPreferredSize(new Dimension(610, 610));
         panel_droite.setPreferredSize(new Dimension(265, 600));
 
         //panel_droite.add(fenetreJoueur.getJoueur());
@@ -73,7 +73,7 @@ public class General_v extends JFrame {
 
         //panel_droite.add(fenetreProgressBar.getProgressBar());
 
-        fenetre_Grille.add(new Grille_v(600, 20, modelGeneral).getGrille());
+        fenetre_Grille.add(new Grille_v(610, 20, modelGeneral).getGrille());
         panel_principal.add(fenetre_Grille);
         panel_principal.add(panel_droite);
     }
