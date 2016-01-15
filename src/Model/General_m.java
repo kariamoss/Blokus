@@ -2,8 +2,7 @@ package Model;
 
 
 import Helper.ListDoubleCircJoueur;
-
-import javax.swing.*;
+import Vue.GameStats_v;
 
 public class General_m {
     Joueur_m joueur0;
@@ -11,7 +10,6 @@ public class General_m {
     Joueur_m joueur2;
     Joueur_m joueur3;
 
-    private String musiquePath = "/musique";
     private boolean musiqueEtat;
 
 
@@ -19,8 +17,8 @@ public class General_m {
 
     int nbJoueuEnJeu;
 
-    public JButton[] tabButtonInventaire;
-    public JButton overviewButton;
+
+    public GameStats_v gameStats;
 
     public Plateau_m modelPlateau;
 
@@ -85,7 +83,8 @@ public class General_m {
         return listJoueur.getJoueur(index);
     }
 
-    public String getMusiquePath() { return musiquePath; }
+    public String getMusiquePath() {
+        return "/musique"; }
 
 
     public Plateau_m getModelPlateau() {
@@ -108,6 +107,16 @@ public class General_m {
                 return joueur;
         }
         return null;
+    }
+
+    public void setGameStats(){
+        Joueur_m tab[] = new Joueur_m[4];
+        tab[0] = joueur0;
+        tab[1] = joueur1;
+        tab[2] = joueur2;
+        tab[3] = joueur3;
+
+        this.gameStats = new GameStats_v(tab);
     }
 }
 

@@ -12,32 +12,26 @@ import java.util.ArrayList;
 public class GameStats_v {
     private JPanel gameStats;
 
-
-
-    public GameStats_v(){
-        initGameStats();
-    }
-
     //Builds a game stats board using "nbPlayers" and names provided in the "playersNames" buffer.
     //Whatever the type of "playersNames"...
-    public GameStats_v(String[] playersColors, String[] playersNames){
+    /*public GameStats_v(String[] playersColors, String[] playersNames){
         initGameStats(playersColors, playersNames);
     }
 
     public GameStats_v(ArrayList<String>playersColors, ArrayList<String> playersNames){
         initGameStats( playersColors.toArray(new String[playersColors.size()]),
                 playersNames.toArray(new String[playersNames.size()]) );
-    }
+    }*/
 
     //Builds a game stats board using instances of "Joueur_m"...wrapped into whatever...
     //Whatever the type of "playersNames"...
     public GameStats_v(Joueur_m[] players){
-        initGameStats(getPlayersColors(players), getPlayersNames(players));
+        initGameStats(getPlayersColors(players), getPlayersNames(players), getPlayersScore(players));
     }
 
     public GameStats_v(ArrayList<Joueur_m> players){
         Joueur_m[] playersIntoTab= players.toArray(new Joueur_m[players.size()]);
-        initGameStats(getPlayersColors(playersIntoTab), getPlayersNames(playersIntoTab));
+        initGameStats(getPlayersColors(playersIntoTab), getPlayersNames(playersIntoTab), getPlayersScore(playersIntoTab));
 
     }
 
@@ -48,6 +42,13 @@ public class GameStats_v {
         }
 
         return playersColors;
+    }
+    private int[] getPlayersScore(Joueur_m[] players){
+        int[] playersScore= new int[players.length];
+        for (int i= 0; i < playersScore.length; i++){
+            playersScore[i]= players[i].getScore();
+        }
+        return playersScore;
     }
 
     private String[] getPlayersNames(Joueur_m[] players){
@@ -69,19 +70,19 @@ public class GameStats_v {
 
         mountGameStats(4);
     }
-    private void initGameStats(String[] playersColors,String[] playersNames){
+    private void initGameStats(String[] playersColors,String[] playersNames, int[] playersScore){
         gameStats= new JPanel();
         gameStats.setLayout(new BoxLayout(gameStats, BoxLayout.Y_AXIS));
-        mountGameStats(playersNames.length, playersColors, playersNames);
+        mountGameStats(playersNames.length, playersColors, playersNames, playersScore);
     }
     private void mountGameStats(int nbPlayers){
         for (int i= 0; i < nbPlayers; i++){
             gameStats.add(new PlayerCard_v().getPlayerCard());
         }
     }
-    private void mountGameStats(int nbPlayers, String[] playersColors, String[] playersNames){
+    private void mountGameStats(int nbPlayers, String[] playersColors, String[] playersNames, int[] playersScore){
         for (int i= 0; i < nbPlayers; i++){
-            gameStats.add(new PlayerCard_v(playersColors[i], playersNames[i]).getPlayerCard());
+            gameStats.add(new PlayerCard_v(playersColors[i], playersNames[i], playersScore[i]).getPlayerCard());
         }
     }
 

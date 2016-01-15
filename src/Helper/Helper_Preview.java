@@ -4,6 +4,8 @@ import Model.Case_m;
 import Model.General_m;
 import Model.Piece_m;
 import Model.Plateau_m;
+import Vue.General_v;
+import Vue.Plateau_v;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +15,14 @@ import java.awt.*;
  */
 public class Helper_Preview {
 
+    Plateau_v vuePlateau; //TODO Changer model en vue pour les tabButton : OK
     Plateau_m modelPlateau;
     ImageIcon previewImage = new ImageIcon(new ImageIcon("images/preview.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT ));
 
-    public Helper_Preview(General_m modelGeneral)
+    public Helper_Preview(General_v vueGeneral, General_m modelGeneral)
     {
-        modelPlateau = modelGeneral.getModelPlateau();
+        modelPlateau = modelGeneral.modelPlateau;
+        vuePlateau = vueGeneral.plateau;
     }
 
     public void colorPreviewOuest(int a, int b, Piece_m piece){
@@ -31,9 +35,9 @@ public class Helper_Preview {
             //On vérifie si la case est sur le plateau
             if (verifInGrid(a+k, b+l)) {
                 //On passe le contenu du bouton à vrai
-                modelPlateau.tabButton[a+k][b+l].setContentAreaFilled(true);
+                vuePlateau.tabButton[a+k][b+l].setContentAreaFilled(true);
                 //On set l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a+k][b+l].setIcon(previewImage);
+                vuePlateau.tabButton[a+k][b+l].setIcon(previewImage);
             }
         }
     }
@@ -49,11 +53,11 @@ public class Helper_Preview {
             if (verifInGrid(a+k, b+l)) {
 
                 //On enlève l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a+k][b+l].setIcon(null);
+                vuePlateau.tabButton[a+k][b+l].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
                 if (modelPlateau.getCase(a+k, b+l).getCouleur()=="White")
                 {
-                    modelPlateau.tabButton[a+k][b+l].setContentAreaFilled(false);
+                    vuePlateau.tabButton[a+k][b+l].setContentAreaFilled(false);
                 }
             }
         }
@@ -69,9 +73,9 @@ public class Helper_Preview {
             //On vérifie si la case est sur le plateau
             if (verifInGrid(a - k, b - l)) {
                 //On passe le contenu du bouton à vrai
-                modelPlateau.tabButton[a - k][b - l].setContentAreaFilled(true);
+                vuePlateau.tabButton[a - k][b - l].setContentAreaFilled(true);
                 //On set l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a - k][b - l].setIcon(previewImage);
+                vuePlateau.tabButton[a - k][b - l].setIcon(previewImage);
             }
         }
     }
@@ -87,11 +91,11 @@ public class Helper_Preview {
             if (verifInGrid(a - k, b - l)) {
 
                 //On enlève l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a- k][b - l].setIcon(null);
+                vuePlateau.tabButton[a- k][b - l].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
                 if (modelPlateau.getCase(a - k, b - l).getCouleur()=="White")
                 {
-                    modelPlateau.tabButton[a - k][b - l].setContentAreaFilled(false);
+                    vuePlateau.tabButton[a - k][b - l].setContentAreaFilled(false);
                 }
             }
         }
@@ -107,9 +111,9 @@ public class Helper_Preview {
             //On vérifie si la case est sur le plateau
             if (verifInGrid(a-l,b+k)) {
                 //On passe le contenu du bouton à vrai
-                modelPlateau.tabButton[a-l][b+k].setContentAreaFilled(true);
+                vuePlateau.tabButton[a-l][b+k].setContentAreaFilled(true);
                 //On set l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a-l][b+k].setIcon(previewImage);
+                vuePlateau.tabButton[a-l][b+k].setIcon(previewImage);
             }
         }
     }
@@ -125,11 +129,11 @@ public class Helper_Preview {
             if (verifInGrid(a-l,b+k)) {
 
                 //On enlève l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a-l][b+k].setIcon(null);
+                vuePlateau.tabButton[a-l][b+k].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
                 if (modelPlateau.getCase(a-l,b+k).getCouleur()=="White")
                 {
-                    modelPlateau.tabButton[a-l][b+k].setContentAreaFilled(false);
+                    vuePlateau.tabButton[a-l][b+k].setContentAreaFilled(false);
                 }
             }
         }
@@ -145,9 +149,9 @@ public class Helper_Preview {
             //On vérifie si la case est sur le plateau
             if (verifInGrid(a+l,b-k)) {
                 //On passe le contenu du bouton à vrai
-                modelPlateau.tabButton[a+l][b-k].setContentAreaFilled(true);
+                vuePlateau.tabButton[a+l][b-k].setContentAreaFilled(true);
                 //On set l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a+l][b-k].setIcon(previewImage);
+                vuePlateau.tabButton[a+l][b-k].setIcon(previewImage);
             }
         }
     }
@@ -163,11 +167,11 @@ public class Helper_Preview {
             if (verifInGrid(a+l,b-k)) {
 
                 //On enlève l'image de prévisualisation sur le bouton
-                modelPlateau.tabButton[a+l][b-k].setIcon(null);
+                vuePlateau.tabButton[a+l][b-k].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
                 if (modelPlateau.getCase(a+l,b-k).getCouleur()=="White")
                 {
-                    modelPlateau.tabButton[a+l][b-k].setContentAreaFilled(false);
+                    vuePlateau.tabButton[a+l][b-k].setContentAreaFilled(false);
                 }
             }
         }

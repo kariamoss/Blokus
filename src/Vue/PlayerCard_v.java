@@ -20,22 +20,15 @@ public class PlayerCard_v {
 
     public PlayerCard_v(){
         componentPanel= new JPanel();
-
         componentPanel.setOpaque(false);
-
-        initComponent();
     }
 
-    public PlayerCard_v(String color, String playerName){
+    public PlayerCard_v(String color, String playerName, int score){
         componentPanel= new JPanel();
-        initComponent(color, playerName, String.valueOf(0));
+        initComponent(color, playerName, String.valueOf(score));
     }
 
 
-
-    private void initComponent(){
-        initComponent("Bleu", "new_player", String.valueOf(0));
-    }
     private void initComponent(String color, String playerName, String score){
         initSubComponents(color, playerName, score);
 
@@ -47,18 +40,7 @@ public class PlayerCard_v {
 
         mountSubComponents();
     }
-    private void initSubComponents(){
-        playerColor= new JPanel();
-        playerColor.setBackground(new Color_v().getColor());
 
-        playerName= new JPanel();
-        playerName.setBackground(new Color_v(108, 108, 108).getColor());
-
-        playerScore= new JPanel();
-        playerScore.setBackground(new Color_v(208, 208, 208).getColor());
-
-        initLabels();
-    }
     private void initSubComponents(String color, String name, String score){
         playerColor= new JPanel();
         playerColor.setOpaque(true);
@@ -71,24 +53,6 @@ public class PlayerCard_v {
         initLabels(color, name, score);
     }
 
-    private void initLabels(){
-        initLabels("Bleu", "new_player", String.valueOf(0));
-        mountLabels();
-    }
-    //initialise labels with "playerName", and a score of 0.
-    private void initLabels(String playerName){
-        initLabels("Bleu", playerName, String.valueOf(0));
-        mountLabels();
-    }
-    //initialise labels with "playerName", and "score"...no matter if it's an int, a double or a String.
-    private void initLabels(String playerName, int score){
-        initLabels( "Bleu", playerName, String.valueOf(score));
-        mountLabels();
-    }
-    private void initLabels(String playerName, double score){
-        initLabels("Bleu", playerName, String.valueOf(score));
-        mountLabels();
-    }
     private void initLabels(String color, String playerName, String score){
         playerName_l= new JLabel(playerName);
         playerName_l.setOpaque(false);

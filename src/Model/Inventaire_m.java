@@ -30,7 +30,7 @@ public class Inventaire_m {
     Piece_m piece20;
     Piece_m piece21;
 
-    List<Piece_m> listePiece = new ArrayList<>();
+    public List<Piece_m> listePiece = new ArrayList<>();
 
 
 

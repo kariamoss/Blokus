@@ -1,12 +1,12 @@
 package Vue;
 
-import Controler.ControlButton;
 import Model.General_m;
 import Model.Inventaire_m;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 
 public class Inventaire_v {
@@ -15,8 +15,9 @@ public class Inventaire_v {
     Inventaire_m modelInventaire;
     General_m modelGeneral;
 
-    public Inventaire_v(General_m modelGeneral, Inventaire_m modelInventaire){
-        this.modelInventaire = modelInventaire;
+    public JButton[] tabButtonInventaire;
+
+    public Inventaire_v(General_m modelGeneral){
         this.modelGeneral = modelGeneral;
         initInventaire();
     }
@@ -31,24 +32,24 @@ public class Inventaire_v {
     private void fillInventaire(){
 
 
-        modelGeneral.tabButtonInventaire = new JButton[20];
+        tabButtonInventaire = new JButton[20];
 
         for (int i = 0; i < 20; i++){
-            modelGeneral.tabButtonInventaire[i] = new JButton();
-            ControlButton controlInventaire = new ControlButton(modelGeneral, i);
-            modelGeneral.tabButtonInventaire[i].addActionListener(controlInventaire);
+            tabButtonInventaire[i] = new JButton();
+
+           // TODO Set ActionListener dans une fonction : OK
 
 
-            modelGeneral.tabButtonInventaire[i].setBorder(new LineBorder(Color.DARK_GRAY, 2));
-            modelGeneral.tabButtonInventaire[i].setPreferredSize(new Dimension(45,45));
+            tabButtonInventaire[i].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+            tabButtonInventaire[i].setPreferredSize(new Dimension(45,45));
 
-            ImageIcon imageIcon = new ImageIcon(modelInventaire.getPiece(i).getImage());
+            ImageIcon imageIcon = new ImageIcon(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).getImage());
             Image image = imageIcon.getImage();
             Image newImage = image.getScaledInstance(45, 45,  java.awt.Image.SCALE_SMOOTH ) ;
             ImageIcon icon = new ImageIcon(newImage);
 
-            modelGeneral.tabButtonInventaire[i].setIcon(icon);
-            panelInventaire.add(modelGeneral.tabButtonInventaire[i]);
+            tabButtonInventaire[i].setIcon(icon);
+            panelInventaire.add(tabButtonInventaire[i]);
 
         }
 
@@ -56,6 +57,12 @@ public class Inventaire_v {
 
     public JPanel getInventaire(){
         return panelInventaire;
+    }
+
+    public void setInventaireButtonControler(ActionListener actionListener){
+        for (int i = 0; i < 20; i++) {
+            tabButtonInventaire[i].addActionListener(actionListener);
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package Controler;
 
 import Helper.Helper_Preview;
 import Model.*;
+import Vue.General_v;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,24 +16,30 @@ public class ControlButton implements ActionListener {
 
 
     General_m modelGeneral;
-    Plateau_m modelPlateau;
+    General_v vueGeneral;
     Helper_Preview helper_preview;
 
     int i;
 
-    public ControlButton(){
-
-    }
-
-    public ControlButton(General_m modelGeneral, int i){
+    public ControlButton(General_v vueGeneral, General_m modelGeneral){
         this.modelGeneral = modelGeneral;
-        this.modelPlateau = modelGeneral.getModelPlateau();
-        this.i = i;
-        helper_preview = new Helper_Preview(modelGeneral);
+        this.vueGeneral = vueGeneral;
+        helper_preview = vueGeneral.helper_preview;
+
+        vueGeneral.inventaire.setInventaireButtonControler(this);
     }
 
     public void actionPerformed(ActionEvent e)
     {
+
+        //TODO Chercher i avec un e.getSource()
+
+        for (int i = 0; i < 20; i++) {
+            if (e.getSource() == vueGeneral.inventaire.tabButtonInventaire[i]){
+                this.i = i;
+            }
+        }
+
         Joueur_m joueur = modelGeneral.selectJoueurActif();
         String nomJoueur = joueur.getNom();
 
@@ -68,8 +75,6 @@ public class ControlButton implements ActionListener {
             }
         }
 
-
-
         joueur.getInventaire().selectPiece(i);
 
         Piece_m pieceSelectionnee = joueur.getInventaire().selectPieceActive();
@@ -78,9 +83,9 @@ public class ControlButton implements ActionListener {
         Image newImage = image.getScaledInstance(105, 105, java.awt.Image.SCALE_SMOOTH) ;
         ImageIcon icon = new ImageIcon(newImage);
 
-        modelGeneral.overviewButton.setIcon(icon);
+        vueGeneral.overview.overviewButton.setIcon(icon);
 
-        modelGeneral.overviewButton.setBorderPainted(true);
+        vueGeneral.overview.overviewButton.setBorderPainted(true);
     }
     
 }

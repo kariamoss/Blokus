@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 public class BoutonsControleJeu_v extends JFrame {
     protected JPanel panelDeControle;
     protected JPanel panelRetourner;
-    protected JButton btAbandonner;
+    public JButton btAbandonner;
     public JButton btPause;
     public JButton btPlay;
     public JButton btRetournerGauche;
@@ -25,19 +25,23 @@ public class BoutonsControleJeu_v extends JFrame {
     protected ImageIcon imgPlay;
     protected ImageIcon imgRetournerGauche;
     protected  ImageIcon imgRetournerDroite;
-    ControlAbandonner controlAbandonner;
 
+    ControlAbandonner controlAbandonner;
     ControlRotationButton controlRotationButton;
     ControlMusique controlMusique;
 
     General_m modelGeneral;
+    General_v vueGeneral;
 
 
-    public BoutonsControleJeu_v(General_m modelGeneral)
+    public BoutonsControleJeu_v(General_m modelGeneral, General_v vueGeneral)
     {
         this.modelGeneral = modelGeneral;
+        this.vueGeneral = vueGeneral;
         init();
         initSound();
+        initRotation();
+        initAbandon();
         dessinerBoutons();
 
     }
@@ -65,23 +69,23 @@ public class BoutonsControleJeu_v extends JFrame {
         btInvisible(btPause);
         btInvisible(btPlay);
 
-        controlRotationButton = new ControlRotationButton(modelGeneral, 1);
-        btRetournerGauche.addActionListener(controlRotationButton);
+        //controlRotationButton = new ControlRotationButton(modelGeneral, 1); //TODO Faire les actionsListeners : OK
+        /*btRetournerGauche.addActionListener(controlRotationButton);
 
-        controlRotationButton = new ControlRotationButton(modelGeneral, 2);
+        //controlRotationButton = new ControlRotationButton(modelGeneral, 2);
         btRetournerDroite.addActionListener(controlRotationButton);
 
-        controlAbandonner = new ControlAbandonner(modelGeneral);
-        btAbandonner.addActionListener(controlAbandonner);
+        //controlAbandonner = new ControlAbandonner(modelGeneral);
+        btAbandonner.addActionListener(controlAbandonner);*/
     }
 
     public void initSound() {
-        controlMusique = new ControlMusique(modelGeneral, this);
+        controlMusique = new ControlMusique(modelGeneral, vueGeneral); //TODO Regarder ça : OK
         btPlay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controlMusique.play();
-            }
+            } //TODO Faire les actionsListeners : OK
         });
         btPause.addActionListener(new ActionListener() {
             @Override
@@ -90,6 +94,33 @@ public class BoutonsControleJeu_v extends JFrame {
             }
         });
     }
+
+    public void initRotation() {
+        controlRotationButton = new ControlRotationButton(modelGeneral, vueGeneral);
+        btRetournerGauche.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controlRotationButton.gauche();
+            }
+        });
+        btRetournerDroite.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controlRotationButton.droite();
+            }
+        });
+    }
+
+    public void initAbandon() {
+        controlAbandonner = new ControlAbandonner(modelGeneral, vueGeneral);
+        btAbandonner.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controlAbandonner.abandon();
+            }
+        });
+    }
+
 
     public void dessinerBoutons(){
         panelDeControle=new JPanel();
@@ -116,7 +147,5 @@ public class BoutonsControleJeu_v extends JFrame {
     }
     public JButton getBtAbandonner(){return btAbandonner;}
     public JPanel getPanelRetourner(){return panelRetourner;}
-
-
 
 }

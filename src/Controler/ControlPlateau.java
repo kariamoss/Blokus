@@ -6,6 +6,7 @@ import Model.Case_m;
 import Model.General_m;
 import Model.Piece_m;
 import Model.Plateau_m;
+import Vue.General_v;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,29 +22,44 @@ public class ControlPlateau implements ActionListener {
     ImageIcon previewImage = new ImageIcon(new ImageIcon("images/preview.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT ));
     private Plateau_m modelPlateau;
     private General_m modelGeneral;
+    private General_v vueGeneral;
+    int i;
+    int j;
 
     Helper_Preview helper_preview;
 
-    int i;
-    int j;
 
     static Piece_m previousPiece = null;
     static int previousCoord[] = {-1, -1};
 
 
-    public ControlPlateau(General_m modelGeneral, Plateau_m modelPlateau, int i, int j)
+    public ControlPlateau(General_m modelGeneral, General_v vueGeneral)
     {
         this.modelGeneral = modelGeneral;
-        this.modelPlateau = modelPlateau;
-        helper_preview = new Helper_Preview(modelGeneral);
-        this.i = i;
-        this.j = j;
+        this.vueGeneral = vueGeneral;
+
+        helper_preview = vueGeneral.helper_preview;
+
+        this.modelPlateau = modelGeneral.modelPlateau;
+
+        vueGeneral.plateau.setButtonControler(this);
+
     }
 
     public void actionPerformed(ActionEvent e) {
 
         boolean positionnementOk = false;
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
+
+        //TODO Chercher i et j (utiliser e.getSource() : OK
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                if (e.getSource() == vueGeneral.plateau.tabButton[i][j]) {
+                    this.i = i;
+                    this.j = j;
+                }
+            }
+        }
 
 
         if (piece!=null) {
@@ -135,6 +151,7 @@ public class ControlPlateau implements ActionListener {
             //On augmente le score du joueur
             modelGeneral.selectJoueurActif().setScore(modelGeneral.selectJoueurActif().getScore()+piece.getListeCase().size());
             System.out.println(modelGeneral.selectJoueurActif().getNom() + " : "+ modelGeneral.selectJoueurActif().getScore() + "pts.\n\n");
+            modelGeneral.setGameStats();
 
             //On marque la pièce comme selectionnée
             piece.setUsed(true);
@@ -143,8 +160,8 @@ public class ControlPlateau implements ActionListener {
             piece.setPieceSelection(false);
 
             //On remet l'overview à null
-            modelGeneral.overviewButton.setIcon(null);
-            modelGeneral.overviewButton.setBorderPainted(false);
+            vueGeneral.overview.overviewButton.setIcon(null);
+            vueGeneral.overview.overviewButton.setBorderPainted(false);
 
             //On passe au joueur suivant
             modelGeneral.joueurSuivant();
@@ -164,17 +181,17 @@ public class ControlPlateau implements ActionListener {
 
             for (int i =0;i<listPiece.size()-1;i++)
             {
-                modelGeneral.tabButtonInventaire[i].setEnabled(true);
+                vueGeneral.inventaire.tabButtonInventaire[i].setEnabled(true);
                 if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
                 {
-                    modelGeneral.tabButtonInventaire[i].setEnabled(false);
+                    vueGeneral.inventaire.tabButtonInventaire[i].setEnabled(false);
                 }
                 ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
                 Image image = imageIcon.getImage();
                 Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
                 ImageIcon icon = new ImageIcon(newImage);
 
-                modelGeneral.tabButtonInventaire[i].setIcon(icon);
+                vueGeneral.inventaire.tabButtonInventaire[i].setIcon(icon);
             }
 
 
@@ -294,9 +311,9 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i-l,j+k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                modelPlateau.tabButton[i-l][j+k].setContentAreaFilled(true);
+                vueGeneral.plateau.tabButton[i-l][j+k].setContentAreaFilled(true);
                 Color_v color = new Color_v(modelPlateau.getCase(i-l,j+k).getCouleur());
-                modelPlateau.tabButton[i-l][j+k].setBackground(color.getColor());
+                vueGeneral.plateau.tabButton[i-l][j+k].setBackground(color.getColor());
             }
             return true;
         }
@@ -374,9 +391,9 @@ public class ControlPlateau implements ActionListener {
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
                 System.out.print("Couleur piece : " + modelPlateau.getCase(i+k, j+l).getCouleur() + "   ");
-                modelPlateau.tabButton[i+k][j+l].setContentAreaFilled(true);
+                vueGeneral.plateau.tabButton[i+k][j+l].setContentAreaFilled(true);
                 Color_v color = new Color_v(modelPlateau.getCase(i+k, j+l).getCouleur());
-                modelPlateau.tabButton[i+k][j+l].setBackground(color.getColor());
+                vueGeneral.plateau.tabButton[i+k][j+l].setBackground(color.getColor());
 
             }
             return true;
@@ -450,9 +467,9 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i - k, j - l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                modelPlateau.tabButton[i-k][j-l].setContentAreaFilled(true);
+                vueGeneral.plateau.tabButton[i-k][j-l].setContentAreaFilled(true);
                 Color_v color = new Color_v(modelPlateau.getCase(i-k, j-l).getCouleur());
-                modelPlateau.tabButton[i-k][j-l].setBackground(color.getColor());
+                vueGeneral.plateau.tabButton[i-k][j-l].setBackground(color.getColor());
 
             }
             return true;
@@ -526,9 +543,9 @@ public class ControlPlateau implements ActionListener {
 
                 //On actualise la couleur de la case sur la grille
                 modelPlateau.getCase(i+l,j-k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                modelPlateau.tabButton[i+l][j-k].setContentAreaFilled(true);
+                vueGeneral.plateau.tabButton[i+l][j-k].setContentAreaFilled(true);
                 Color_v color = new Color_v(modelPlateau.getCase(i+l,j-k).getCouleur());
-                modelPlateau.tabButton[i+l][j-k].setBackground(color.getColor());
+                vueGeneral.plateau.tabButton[i+l][j-k].setBackground(color.getColor());
             }
             return true;
         }

@@ -1,7 +1,7 @@
 package Vue;
 
+import Helper.Helper_Preview;
 import Model.General_m;
-import Model.Inventaire_m;
 import Model.Joueur_m;
 
 import javax.swing.*;
@@ -10,28 +10,36 @@ import java.awt.*;
 
 public class General_v extends JFrame {
     protected General_m modelGeneral;
-    protected Inventaire_m modelInventaire;
-    protected BoutonsControleJeu_v fenetreControle;
-    protected Inventaire_v fenetreInventaire;
-    //protected Joueur_v fenetreJoueur = new Joueur_v();
-    //protected VuePiece_v fenetreVuePiece = new VuePiece_v();
-    //protected VueProgressBar_v fenetreProgressBar = new VueProgressBar();
 
-    protected Overview_v overview_v;
+    public Helper_Preview helper_preview;
+
+    public BoutonsControleJeu_v boutonsControleJeu;
+    public Inventaire_v inventaire;
+    public GameStats_v gameStats;
+    public Overview_v overview;
+    public Plateau_v plateau;
+    public PlayerCard_v playerCard;
+
     protected JPanel panel_principal;
     protected JPanel fenetre_Grille;
     protected JPanel panel_droite;
 
-    public General_v(General_m modelGeneral, Inventaire_m modelInventaire){
-        this.modelInventaire = modelInventaire;
+    public General_v(General_m modelGeneral){
         this.modelGeneral = modelGeneral;
-        fenetreControle = new BoutonsControleJeu_v(modelGeneral);
-        overview_v = new Overview_v(modelGeneral);
+
+
+        overview = new Overview_v(modelGeneral);
+        inventaire = new Inventaire_v(modelGeneral);
+        plateau = new Plateau_v(modelGeneral, this);
+        helper_preview = new Helper_Preview(this, modelGeneral);
+        boutonsControleJeu = new BoutonsControleJeu_v(modelGeneral, this);
+
+
         setTitle("Blokus");
         initAttribute(modelGeneral);
 
-        fenetreControle.init();
-        fenetreControle.dessinerBoutons();
+        boutonsControleJeu.init();
+        boutonsControleJeu.dessinerBoutons();
         setSize(900, 660);
         setContentPane(panel_principal);
         setResizable(false);
@@ -56,24 +64,25 @@ public class General_v extends JFrame {
 
 
         //panel_droite.add(new BoutonsControleJeu_v().getPanelDeControle());
-        panel_droite.add(new GameStats_v(tabJoueur).getGameStats());
-        panel_droite.add(fenetreControle.getPanelDeControle());
+        GameStats_v gameStats = new GameStats_v(tabJoueur);
+        panel_droite.add(gameStats.getGameStats());
+        modelGeneral.gameStats = gameStats;
+        panel_droite.add(boutonsControleJeu.getPanelDeControle());
 
         //fenetreControle.getPanelDeControle().setBorder(new LineBorder(Color.DARK_GRAY, 1));
 
 
         //fenetreInventaire.getInventaire().setBorder(new LineBorder(Color.DARK_GRAY, 1));
-        fenetreInventaire = new Inventaire_v(modelGeneral, modelInventaire);
-        panel_droite.add(fenetreInventaire.getInventaire());
-        panel_droite.add(fenetreControle.getPanelRetourner());
-        panel_droite.add(overview_v.getOverview());
+        panel_droite.add(inventaire.getInventaire());
+        panel_droite.add(boutonsControleJeu.getPanelRetourner());
+        panel_droite.add(overview.getOverview());
 
 
         //panel_droite.add(fenetreVuePiece.getVuePiece());
 
         //panel_droite.add(fenetreProgressBar.getProgressBar());
 
-        fenetre_Grille.add(new Grille_v(610, 20, modelGeneral).getGrille());
+        fenetre_Grille.add(plateau.getGrille());
         panel_principal.add(fenetre_Grille);
         panel_principal.add(panel_droite);
     }
@@ -85,6 +94,10 @@ public class General_v extends JFrame {
     }
 
     public BoutonsControleJeu_v getFenetreControle() {
-        return fenetreControle;
+        return boutonsControleJeu;
+    }
+
+    public void informationMessage(String message, String title) {
+        JOptionPane.showMessageDialog(null, message, title , JOptionPane.INFORMATION_MESSAGE);
     }
 }
