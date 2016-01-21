@@ -72,9 +72,9 @@ public class PlayerCard_v {
     }
 
     private void mountSubComponents(){
-        //componentPanel.add(playerColor);
+        componentPanel.add(playerColor);
         componentPanel.add(playerName);
-        //componentPanel.add(playerScore);
+        componentPanel.add(playerScore);
     }
 
 

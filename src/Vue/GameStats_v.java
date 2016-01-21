@@ -68,7 +68,7 @@ public class GameStats_v {
         gameStats.setLayout(new BoxLayout(gameStats, BoxLayout.Y_AXIS));
         gameStats.setOpaque(false);
 
-        mountGameStats(4);
+        //mountGameStats(4);
     }
     private void initGameStats(String[] playersColors,String[] playersNames, int[] playersScore){
         gameStats= new JPanel();
@@ -86,11 +86,19 @@ public class GameStats_v {
         }
     }
 
+    public void updateGameStats(Joueur_m[] players){
+        gameStats.removeAll();
+        for (int i= 0; i < players.length; i++){
+            gameStats.add(new PlayerCard_v(getPlayersColors(players)[i],
+                    getPlayersNames(players)[i], getPlayersScore(players)[i]).getPlayerCard());
+        }
+        gameStats.validate();
+        gameStats.repaint();
 
+
+    }
 
     public JPanel getGameStats(){ return gameStats; }
-
-
 
 
 }

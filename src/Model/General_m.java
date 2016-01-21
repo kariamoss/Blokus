@@ -116,7 +116,7 @@ public class General_m {
         tab[2] = joueur2;
         tab[3] = joueur3;
 
-        this.gameStats = new GameStats_v(tab);
+        gameStats.updateGameStats(tab);
     }
 }
 
