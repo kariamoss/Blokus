@@ -24,10 +24,10 @@ public class Color_v {
 
 
             case "Blue":
-                this.color= Color.BLUE;
+                this.color= new Color(46,100,255);
                 break;
             case "Bleu":
-                this.color= Color.BLUE;
+                this.color= new Color(46,100,255);
                 break;
 
             case "Red":

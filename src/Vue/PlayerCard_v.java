@@ -35,7 +35,7 @@ public class PlayerCard_v {
         BoxLayout componentLayout= new BoxLayout(componentPanel, BoxLayout.X_AXIS);
         componentPanel.setLayout(componentLayout);
 
-        Border playerCardBoarder = new LineBorder(new Color_v(0,0,0).getColor(), 2);
+        Border playerCardBoarder = new LineBorder(new Color_v(0,0,0).getColor(), 1);
         componentPanel.setBorder(playerCardBoarder);
 
         mountSubComponents();
@@ -46,9 +46,11 @@ public class PlayerCard_v {
         playerColor.setOpaque(true);
         playerColor.setBackground(new Color_v(color).getColor());
 
+
         playerName= new JPanel();
         playerName.setBackground(new Color_v(color).getColor());
         playerScore= new JPanel();
+        playerScore.setBackground(new Color_v(color).getColor());
 
         initLabels(color, name, score);
     }
