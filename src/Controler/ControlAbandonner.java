@@ -3,13 +3,14 @@ package Controler;
 import Model.General_m;
 import Model.Joueur_m;
 import Model.Piece_m;
+import Helper.Comparateur;
 import Vue.General_v;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class ControlAbandonner {
     private General_m modelGeneral;
     private General_v vueGeneral;
     protected Joueur_m joueur;
+    private static final int NB_JOUEUR = 4;
 
     public ControlAbandonner(General_m modelGeneral, General_v vueGeneral) {
         this.modelGeneral = modelGeneral;
@@ -31,7 +33,6 @@ public class ControlAbandonner {
         joueur = modelGeneral.selectJoueurActif();
 
         //Message de dialogue
-        //TODO Appeller la vue pour faire le popup  : OK
         vueGeneral.informationMessage(joueur.getNom() + " abandonne", "Abandon");
 
         //On indique le joueur comme hors jeu
@@ -75,32 +76,79 @@ public class ControlAbandonner {
         }
     }
 
+    /**
+     * FinDePartie permet de gérer les actions à faire à la fin de la partie
+     * et principalement l'affichage de score et l'appel de la nouvelle partie
+     */
 
     private void finDePartie(){
 
-        //Joueur_m vainqueur = modelGeneral.selectJoueurActif();
-        String tabNom[] = new String[4];
-        int tabScore[] = new int[4];
-
         //Tri des joueur :
-        for (int i = 0;i<4;i++)
+        List <Integer> triScore = new ArrayList<Integer>();
+        List <String> triNom = new ArrayList<String>();
+
+        for (int i = 0;i<NB_JOUEUR;i++)
         {
             Joueur_m joueur = modelGeneral.getJoueur(i);
-            tabScore[i] = joueur.getScore();
-            tabNom[i] = joueur.getNom();
+            triScore.add(joueur.getScore());
+            triNom.add( joueur.getNom());
         }
 
-        Arrays.sort(tabScore);
+        trier_croissant(triScore, triNom);
 
-        String result = "Fin de partie\n\n";
-        for (int i=3;i>=0;i--){
-            result+=modelGeneral.getJoueurByScore(tabScore[i]).getNom() +  " : " + tabScore[i] + "pts\n";
-            System.out.println(modelGeneral.getJoueurByScore(tabScore[i]).getNom() +  " : " + tabScore[i] + "pts");
+        String result = "Fin de partie ! \n\n";
+
+        for (int i = 0;i<NB_JOUEUR;i++)
+        {
+            result += triNom.get(i) + ": ";
+            result += triScore.get(i) + "pts\n";
         }
 
-        JOptionPane victoire = new JOptionPane();
         JOptionPane.showMessageDialog(null, result, "Fin de la partie", JOptionPane.INFORMATION_MESSAGE);
 
-        System.exit(0);
+        System.exit(0); //TODO Revenir à l'ecran d'accueil
+    }
+
+
+    /**
+     * Trier_croissant permet de trier les deux listes envoyées en paramètre dans l'ordre
+     * Gère les variables de même valeur
+     * @param triScore
+     * @param triNom
+     */
+    static void trier_croissant(List<Integer> triScore, List<String> triNom){
+        int valeurAvantScore;
+        String valeurAvantNom;
+        int valeurScore;
+        String valeurNom;
+        int echangeScore = 0;
+        String echangeNom = "";
+
+        // i n'est jamais appellé : permet uniquement de faire le nb de boucles
+        // nécessaire
+        for(int i=0; i < NB_JOUEUR; i++){
+            // Initialisation des variables pour que le premier tour soit forcément
+            // faux au if et ainsi éviter le j-1 et ArrayOutOfBound
+            valeurAvantScore =999;
+            valeurAvantNom = "";
+            // Tri simple : les deux listes sont triées grâce à la premiere
+            for(int j=0; j < NB_JOUEUR; j++){
+                valeurScore = triScore.get(j);
+                valeurNom = triNom.get(j);
+
+                if (valeurScore >valeurAvantScore){
+                    echangeScore =valeurScore;
+                    echangeNom = valeurNom;
+
+                    triScore.set(j, triScore.get(j-1));
+                    triNom.set(j, triNom.get(j-1));
+
+                    triScore.set(j-1,echangeScore);
+                    triNom.set(j-1, echangeNom);
+                }
+                valeurAvantScore =triScore.get(j);
+                valeurAvantNom = triNom.get(j);
+            }
+        }
     }
 }

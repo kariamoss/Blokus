@@ -21,11 +21,14 @@ public class PlayerCard_v {
     public PlayerCard_v(){
         componentPanel= new JPanel();
         componentPanel.setOpaque(false);
+
     }
 
     public PlayerCard_v(String color, String playerName, int score){
         componentPanel= new JPanel();
         initComponent(color, playerName, String.valueOf(score));
+
+        componentPanel.setBackground(new Color_v(color).getColor());
     }
 
 
