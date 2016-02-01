@@ -20,11 +20,13 @@ public class BoutonsControleJeu_v extends JFrame {
     public JButton btPlay;
     public JButton btRetournerGauche;
     public JButton btRetournerDroite;
+    public JButton btRetournerMiroir;
     protected ImageIcon imgAbandonner;
     protected ImageIcon imgPause;
     protected ImageIcon imgPlay;
     protected ImageIcon imgRetournerGauche;
     protected  ImageIcon imgRetournerDroite;
+    protected  ImageIcon imgRetournerMiroir;
 
     ControlAbandonner controlAbandonner;
     ControlRotationButton controlRotationButton;
@@ -57,6 +59,7 @@ public class BoutonsControleJeu_v extends JFrame {
         imgPlay = new ImageIcon(new ImageIcon("images/boutons_controle/play.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
         imgRetournerGauche = new ImageIcon(new ImageIcon("images/boutons_controle/rotationGauche.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
         imgRetournerDroite = new ImageIcon(new ImageIcon("images/boutons_controle/rotationDroite.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        //imgRetournerMiroir = new ImageIcon(new ImageIcon("images/boutons_controle/rotationMiroir.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 
 
         btAbandonner = new JButton(imgAbandonner);
@@ -64,6 +67,8 @@ public class BoutonsControleJeu_v extends JFrame {
         btPlay = new JButton(imgPlay);
         btRetournerGauche = new JButton(imgRetournerGauche);
         btRetournerDroite = new JButton(imgRetournerDroite);
+        //btRetournerMiroir = new JButton(imgRetournerMiroir);
+
 
         btInvisible(btAbandonner);
         btInvisible(btPause);
