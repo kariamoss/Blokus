@@ -123,20 +123,40 @@ public class ControlPlateau implements ActionListener {
                 //On récupère l'orientation de la pièce active pour la positioner sur le plateau (ou pas)
                 orientation = piece.getOrientation();
 
-                switch (orientation) {
-                    case "Ouest":
-                        positionnementOk = positionnementOuest(i, j, piece);
-                        break;
-                    case "Est":
-                        positionnementOk = positionnementEst(i, j, piece);
-                        break;
-                    case "Sud":
-                        positionnementOk = positionnementSud(i, j, piece);
-                        break;
-                    case "Nord":
-                        positionnementOk = positionnementNord(i, j, piece);
-                        break;
+                if (modelGeneral.selectJoueurActif().getScore()==0){
+                    switch (orientation) {
+                        case "Ouest":
+                            positionnementOk = firstOuest(i, j, piece);
+                            break;
+                        case "Est":
+                            positionnementOk = firstEst(i, j, piece);
+                            break;
+                        case "Sud":
+                            positionnementOk = firstSud(i, j, piece);
+                            break;
+                        case "Nord":
+                            positionnementOk = firstNord(i, j, piece);
+                            break;
+                    }
                 }
+                else
+                {
+                    switch (orientation) {
+                        case "Ouest":
+                            positionnementOk = positionnementOuest(i, j, piece);
+                            break;
+                        case "Est":
+                            positionnementOk = positionnementEst(i, j, piece);
+                            break;
+                        case "Sud":
+                            positionnementOk = positionnementSud(i, j, piece);
+                            break;
+                        case "Nord":
+                            positionnementOk = positionnementNord(i, j, piece);
+                            break;
+                    }
+                }
+
             }
         }
         else {
@@ -300,6 +320,47 @@ public class ControlPlateau implements ActionListener {
     //                    SUD
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    public boolean firstSud(int i, int j, Piece_m piece){
+        boolean bool = false;
+        boolean free;
+
+        for(Case_m caseIt : piece.getListeCase()) {
+
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            free = verifCase(i-l, j+k);
+
+            if(!free){
+                return free;
+            }
+
+            if((i-l==0 && j+k==0) || (i-l==19 && j+k==0) || (i-l==0 && j+k==19) || (i-l==19 && j+k==19) ) {
+                    bool = true;
+                    break;
+            }
+        }
+
+        if (bool) {
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On actualise la couleur de la case sur la grille
+                modelPlateau.getCase(i-l,j+k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[i-l][j+k].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i-l,j+k).getCouleur());
+                vueGeneral.plateau.tabButton[i-l][j+k].setBackground(color.getColor());
+            }
+
+
+            return true;
+        }
+
+        return false;
+    }
+
 
     public boolean positionnementSud(int i, int j, Piece_m piece){
         if (checkPositionnementSud(i, j, piece))
@@ -378,6 +439,47 @@ public class ControlPlateau implements ActionListener {
     //                    OUEST
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+
+    public boolean firstOuest(int i, int j, Piece_m piece){
+        boolean bool = false;
+        boolean free;
+
+        for(Case_m caseIt : piece.getListeCase()) {
+
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            free = verifCase(i+k, j+l);
+
+            if(!free){
+                return free;
+            }
+
+            if((i+k==0 && j+l==0) || (i+k==19 && j+l==0) || (i+k==0 && j+l==19) || (i+k==19 && j+l==19) ) {
+                bool = true;
+                break;
+            }
+        }
+
+        if (bool) {
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On actualise la couleur de la case sur la grille
+                modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[i+k][j+l].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i+k,j+l).getCouleur());
+                vueGeneral.plateau.tabButton[i+k][j+l].setBackground(color.getColor());
+            }
+
+
+            return true;
+        }
+
+        return false;
+    }
 
     public boolean positionnementOuest(int i, int j, Piece_m piece){
 
@@ -458,6 +560,47 @@ public class ControlPlateau implements ActionListener {
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 
+    public boolean firstEst(int i, int j, Piece_m piece){
+        boolean bool = false;
+        boolean free;
+
+        for(Case_m caseIt : piece.getListeCase()) {
+
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            free = verifCase(i - k, j - l);
+
+            if(!free){
+                return free;
+            }
+
+            if((i - k==0 && j - l==0) || (i - k==19 && j - l==0) || (i - k==0 && j - l==19) || (i - k==19 && j - l==19) ) {
+                bool = true;
+                break;
+            }
+        }
+
+        if (bool) {
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On actualise la couleur de la case sur la grille
+                modelPlateau.getCase(i - k,j - l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[i - k][j - l].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i - k,j - l).getCouleur());
+                vueGeneral.plateau.tabButton[i - k][j - l].setBackground(color.getColor());
+            }
+
+
+            return true;
+        }
+
+        return false;
+    }
+
     public boolean positionnementEst(int i, int j, Piece_m piece){
         if (checkPositionnementEst(i, j, piece)) {
             for (Case_m caseIt : piece.getListeCase()) {
@@ -532,6 +675,47 @@ public class ControlPlateau implements ActionListener {
     //                    NORD
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+
+    public boolean firstNord(int i, int j, Piece_m piece){
+        boolean bool = false;
+        boolean free;
+
+        for(Case_m caseIt : piece.getListeCase()) {
+
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            free = verifCase(i+l, j-k);
+
+            if(!free){
+                return free;
+            }
+
+            if((i+l==0 && j-k==0) || (i+l==19 && j-k==0) || (i+l==0 && j-k==19) || (i+l==19 && j-k==19) ) {
+                bool = true;
+                break;
+            }
+        }
+
+        if (bool) {
+            for(Case_m caseIt : piece.getListeCase()) {
+                //Récupère la position de la case dans la pièce
+                int k = caseIt.getPosI();
+                int l = caseIt.getPosJ();
+
+                //On actualise la couleur de la case sur la grille
+                modelPlateau.getCase(i+l,j - l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[i+l][j-k].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(i+l,j-k).getCouleur());
+                vueGeneral.plateau.tabButton[i+l][j-k].setBackground(color.getColor());
+            }
+
+
+            return true;
+        }
+
+        return false;
+    }
 
     public boolean positionnementNord(int i, int j, Piece_m piece){
         if (checkPositionnementNord(i, j, piece))

@@ -51,7 +51,7 @@ public class Plateau_v {
 
     private void mountGrid(){
 
-        posePremieresPiece();
+        //posePremieresPiece();
         modelGeneral.selectJoueur(0);
         tabButton = new JButton[nbButtonsPerRow][nbButtonsPerRow];
         for (int i=0;i<nbButtonsPerRow;i++){
