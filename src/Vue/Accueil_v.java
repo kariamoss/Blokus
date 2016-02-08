@@ -78,6 +78,7 @@ public class Accueil_v extends JFrame {
 
         //action sur les boutons
         nouvellePartie.addActionListener(controlAccueil);
+        chargerPartie.addActionListener(controlAccueil);
 
         //chargements des sous-panels
         panelChargerPartie.add(chargerPartie);

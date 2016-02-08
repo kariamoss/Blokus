@@ -7,9 +7,7 @@ import java.awt.*;
  */
 public class Color_v {
     private Color color;
-
-
-
+    private String couleur;
 
     public Color_v(){
         color= new Color(58, 58, 58);
@@ -25,30 +23,38 @@ public class Color_v {
 
             case "Blue":
                 this.color= new Color(46,100,255);
+                this.couleur = "Blue";
                 break;
             case "Bleu":
                 this.color= new Color(46,100,255);
+                this.couleur = "Blue";
                 break;
 
             case "Red":
                 this.color= Color.RED;
+                this.couleur = "Red";
                 break;
             case "Rouge":
                 this.color= Color.RED;
+                this.couleur = "Red";
                 break;
 
             case "Yellow":
                 this.color= Color.YELLOW;
+                this.couleur = "Yellow";
                 break;
             case "Jaune":
                 this.color= Color.YELLOW;
+                this.couleur = "Yellow";
                 break;
 
             case "Green":
                 this.color= Color.GREEN;
+                this.couleur = "Green";
                 break;
             case "Vert":
                 this.color= Color.GREEN;
+                this.couleur = "Green";
                 break;
 
 
@@ -63,6 +69,7 @@ public class Color_v {
 
     public Color getColor(){ return this.color; }
 
+    public String getCouleur(){ return  couleur;}
 
 
 

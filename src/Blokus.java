@@ -1,5 +1,8 @@
+import Controler.ControlAccueil;
 import Controler.ControlGroup;
+import Model.Accueil_m;
 import Model.General_m;
+import Vue.Accueil_v;
 
 import java.io.IOException;
 
@@ -13,12 +16,9 @@ public class Blokus {
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
 
             public void run() {
-                General_m modelGeneral = new General_m();
-                try {
-                    ControlGroup control = new ControlGroup(modelGeneral);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Accueil_m accueil_m = new Accueil_m();
+                Accueil_v accueil_v = new Accueil_v();
+                ControlAccueil controlAccueil = new ControlAccueil(accueil_m,accueil_v);
             }
         });
     }

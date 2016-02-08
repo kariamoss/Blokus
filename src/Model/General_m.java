@@ -2,6 +2,7 @@ package Model;
 
 
 import Helper.ListDoubleCircJoueur;
+import Helper.Sauvegarde;
 import Vue.GameStats_v;
 
 public class General_m {
@@ -9,6 +10,10 @@ public class General_m {
     Joueur_m joueur1;
     Joueur_m joueur2;
     Joueur_m joueur3;
+
+
+
+    protected Sauvegarde sauvegarde;
 
     private boolean musiqueEtat;
 
@@ -40,6 +45,8 @@ public class General_m {
         selectJoueur(0);
 
         modelPlateau = new Plateau_m(this);
+
+        sauvegarde = new Sauvegarde();
     }
 
     public void selectJoueur(int index){
@@ -117,6 +124,17 @@ public class General_m {
         tab[3] = joueur3;
 
         gameStats.updateGameStats(tab);
+    }
+    public Sauvegarde getSauvegarde() {
+        return sauvegarde;
+    }
+
+    public Joueur_m getJoueurByColor(String couleur){
+        for (int i=0; i < 4 ; i++){
+            if( listJoueur.getJoueur(i).getCouleur().equals(couleur))
+                return  listJoueur.getJoueur(i);
+        }
+        return null;
     }
 }
 

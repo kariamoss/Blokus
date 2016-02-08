@@ -212,8 +212,6 @@ public class ControlPlateau implements ActionListener {
 
                 vueGeneral.inventaire.tabButtonInventaire[i].setIcon(icon);
             }
-
-
         }
     }
 
@@ -355,10 +353,14 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i-l,j+k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                vueGeneral.plateau.tabButton[i-l][j+k].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i-l,j+k).getCouleur());
-                vueGeneral.plateau.tabButton[i-l][j+k].setBackground(color.getColor());
+                int x = i-l;
+                int y = j+k;
+
+                modelPlateau.getCase(x,y).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(x,y).getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setBackground(color.getColor());
+                modelGeneral.getSauvegarde().sauvegardeCase(x, y, color, piece.getNumero());
             }
 
 
@@ -377,11 +379,15 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
 
+                int x = i-l;
+                int y = j+k;
+
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i-l,j+k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                vueGeneral.plateau.tabButton[i-l][j+k].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i-l,j+k).getCouleur());
-                vueGeneral.plateau.tabButton[i-l][j+k].setBackground(color.getColor());
+                modelPlateau.getCase(x,y).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(x,y).getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setBackground(color.getColor());
+                modelGeneral.getSauvegarde().sauvegardeCase(x, y, color, piece.getNumero());
             }
             return true;
         }
@@ -481,11 +487,15 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
 
+                int x = i+k;
+                int y = j+l;
+
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                vueGeneral.plateau.tabButton[i+k][j+l].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i+k,j+l).getCouleur());
-                vueGeneral.plateau.tabButton[i+k][j+l].setBackground(color.getColor());
+                modelPlateau.getCase(x,y).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(x,y).getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setBackground(color.getColor());
+                modelGeneral.getSauvegarde().sauvegardeCase(x, y, color, piece.getNumero());
             }
 
 
@@ -504,12 +514,15 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
 
+                int x = i+k;
+                int y = j+l;
+
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i+k,j+l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                System.out.print("Couleur piece : " + modelPlateau.getCase(i+k, j+l).getCouleur() + "   ");
-                vueGeneral.plateau.tabButton[i+k][j+l].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i+k, j+l).getCouleur());
-                vueGeneral.plateau.tabButton[i+k][j+l].setBackground(color.getColor());
+                modelPlateau.getCase(x,y).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(x,y).getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setBackground(color.getColor());
+                modelGeneral.getSauvegarde().sauvegardeCase(x, y, color, piece.getNumero());
 
             }
             return true;
@@ -536,12 +549,16 @@ public class ControlPlateau implements ActionListener {
 
             //Vérifie si la case est sur le plateau et vide
             free = verifCase(i+k, j+l);
+            if (!free)
+                System.out.println("VerifCase");
 
             if (!free)
                 return free;
 
             //Vérifie si les 4 bords de la case caseIt sont ide
             free = helper_preview.checkBordCase(i+k, j+l, caseIt);
+            if (!free)
+                System.out.println("checkBordCase");
 
             c++;
         }
@@ -560,6 +577,8 @@ public class ControlPlateau implements ActionListener {
             l = caseIt.getPosJ();
 
             free = helper_preview.checkCoinCase(i+k, j+l, caseIt);
+           // if (!free)
+               // System.out.println("checkCoinCase  :" +( i+k) + " ; " + (j+k));
 
             c++;
         }
@@ -609,11 +628,15 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
 
+                int x = i - k;
+                int y = j - l;
+
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i - k,j - l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                vueGeneral.plateau.tabButton[i - k][j - l].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i - k,j - l).getCouleur());
-                vueGeneral.plateau.tabButton[i - k][j - l].setBackground(color.getColor());
+                modelPlateau.getCase(x,y).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(x,y).getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setBackground(color.getColor());
+                modelGeneral.getSauvegarde().sauvegardeCase(x, y, color, piece.getNumero());
             }
 
 
@@ -630,11 +653,15 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
 
+                int x = i - k;
+                int y = j - l;
+
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i - k, j - l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                vueGeneral.plateau.tabButton[i-k][j-l].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i-k, j-l).getCouleur());
-                vueGeneral.plateau.tabButton[i-k][j-l].setBackground(color.getColor());
+                modelPlateau.getCase(x,y).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(x,y).getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setBackground(color.getColor());
+                modelGeneral.getSauvegarde().sauvegardeCase(x, y, color, piece.getNumero());
 
             }
             return true;
@@ -731,11 +758,15 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
 
+                int x = i + l;
+                int y = j - k;
+
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i+l,j - k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                vueGeneral.plateau.tabButton[i+l][j-k].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i+l,j-k).getCouleur());
-                vueGeneral.plateau.tabButton[i+l][j-k].setBackground(color.getColor());
+                modelPlateau.getCase(x,y).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(x,y).getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setBackground(color.getColor());
+                modelGeneral.getSauvegarde().sauvegardeCase(x, y, color, piece.getNumero());
             }
 
             return true;
@@ -752,11 +783,15 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
 
+                int x = i + l;
+                int y = j - k;
+
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i+l,j-k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
-                vueGeneral.plateau.tabButton[i+l][j-k].setContentAreaFilled(true);
-                Color_v color = new Color_v(modelPlateau.getCase(i+l,j-k).getCouleur());
-                vueGeneral.plateau.tabButton[i+l][j-k].setBackground(color.getColor());
+                modelPlateau.getCase(x,y).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setContentAreaFilled(true);
+                Color_v color = new Color_v(modelPlateau.getCase(x,y).getCouleur());
+                vueGeneral.plateau.tabButton[x][y].setBackground(color.getColor());
+                modelGeneral.getSauvegarde().sauvegardeCase(x, y, color, piece.getNumero());
             }
             return true;
         }

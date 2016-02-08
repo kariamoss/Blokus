@@ -57,7 +57,7 @@ public class Inventaire_m {
         List<Case_m> caseL = new ArrayList<>();
         caseL.add(case00);
         image = "images/" + couleur + "/piece" + 1 + ".png";
-        piece1 = new Piece_m(caseL, orientation, image);
+        piece1 = new Piece_m(caseL, orientation, image, 1);
         listePiece.add(piece1);
         caseL.clear();
 
@@ -65,7 +65,7 @@ public class Inventaire_m {
         caseL.add(case00);
         caseL.add(case01);
         image = "images/" + couleur + "/piece" + 2 + ".png";
-        piece2 = new Piece_m(caseL, orientation, image);
+        piece2 = new Piece_m(caseL, orientation, image, 2);
         listePiece.add(piece2);
         caseL.clear();
 
@@ -74,7 +74,7 @@ public class Inventaire_m {
         caseL.add(case0m1);
         caseL.add(case10);
         image = "images/" + couleur + "/piece" + 3 + ".png";
-        piece3 = new Piece_m(caseL, orientation, image);
+        piece3 = new Piece_m(caseL, orientation, image, 3);
         listePiece.add(piece3);
         caseL.clear();
 
@@ -83,7 +83,7 @@ public class Inventaire_m {
         caseL.add(case0m1);
         caseL.add(case01);
         image = "images/" + couleur + "/piece" + 4 + ".png";
-        piece4 = new Piece_m(caseL, orientation, image);
+        piece4 = new Piece_m(caseL, orientation, image, 4);
         listePiece.add(piece4);
         caseL.clear();
 
@@ -93,7 +93,7 @@ public class Inventaire_m {
         caseL.add(case11);
         caseL.add(case10);
         image = "images/" + couleur + "/piece" + 5 + ".png";
-        piece5 = new Piece_m(caseL, orientation, image);
+        piece5 = new Piece_m(caseL, orientation, image, 5);
         listePiece.add(piece5);
         caseL.clear();
 
@@ -103,7 +103,7 @@ public class Inventaire_m {
         caseL.add(case01);
         caseL.add(casem10);
         image = "images/" + couleur + "/piece" + 6 + ".png";
-        piece6 = new Piece_m(caseL, orientation, image);
+        piece6 = new Piece_m(caseL, orientation, image, 6);
         listePiece.add(piece6);
         caseL.clear();
 
@@ -113,7 +113,7 @@ public class Inventaire_m {
         caseL.add(case02);
         caseL.add(case03);
         image = "images/" + couleur + "/piece" + 7 + ".png";
-        piece7 = new Piece_m(caseL, orientation, image);
+        piece7 = new Piece_m(caseL, orientation, image, 7);
         listePiece.add(piece7);
         caseL.clear();
 
@@ -123,7 +123,7 @@ public class Inventaire_m {
         caseL.add(case0m2);
         caseL.add(casem10);
         image = "images/" + couleur + "/piece" + 8 + ".png";
-        piece8 = new Piece_m(caseL, orientation, image);
+        piece8 = new Piece_m(caseL, orientation, image, 8);
         listePiece.add(piece8);
         caseL.clear();
 
@@ -133,7 +133,7 @@ public class Inventaire_m {
         caseL.add(case10);
         caseL.add(case1m1);
         image = "images/" + couleur + "/piece" + 9 + ".png";
-        piece9 = new Piece_m(caseL, orientation, image);
+        piece9 = new Piece_m(caseL, orientation, image,9 );
         listePiece.add(piece9);
         caseL.clear();
 
@@ -144,7 +144,7 @@ public class Inventaire_m {
         caseL.add(case02);
         caseL.add(case03);
         image = "images/" + couleur + "/piece" + 10 + ".png";
-        piece10 = new Piece_m(caseL, orientation, image);
+        piece10 = new Piece_m(caseL, orientation, image, 10);
         listePiece.add(piece10);
         caseL.clear();
 
@@ -155,7 +155,7 @@ public class Inventaire_m {
         caseL.add(casem10);
         caseL.add(casem20);
         image = "images/" + couleur + "/piece" + 11 + ".png";
-        piece11 = new Piece_m(caseL, orientation, image);
+        piece11 = new Piece_m(caseL, orientation, image, 11);
         listePiece.add(piece11);
         caseL.clear();
 
@@ -167,7 +167,7 @@ public class Inventaire_m {
         caseL.add(casem10);
         caseL.add(casem20);
         image = "images/" + couleur + "/piece" + 12 + ".png";
-        piece12 = new Piece_m(caseL, orientation, image);
+        piece12 = new Piece_m(caseL, orientation, image , 12);
         listePiece.add(piece12);
         caseL.clear();
 
@@ -178,7 +178,7 @@ public class Inventaire_m {
         caseL.add(case10);
         caseL.add(case1m1);
         image = "images/" + couleur + "/piece" + 13 + ".png";
-        piece13 = new Piece_m(caseL, orientation, image);
+        piece13 = new Piece_m(caseL, orientation, image, 13);
         listePiece.add(piece13);
         caseL.clear();
 
@@ -190,7 +190,7 @@ public class Inventaire_m {
         caseL.add(case1m1);
         caseL.add(casem11);
         image = "images/" + couleur + "/piece" + 14 + ".png";
-        piece14 = new Piece_m(caseL, orientation, image);
+        piece14 = new Piece_m(caseL, orientation, image, 14);
         listePiece.add(piece14);
         caseL.clear();
 
@@ -201,7 +201,7 @@ public class Inventaire_m {
         caseL.add(case10);
         caseL.add(case20);
         image = "images/" + couleur + "/piece" + 15 + ".png";
-        piece15 = new Piece_m(caseL, orientation, image);
+        piece15 = new Piece_m(caseL, orientation, image, 15);
         listePiece.add(piece15);
         caseL.clear();
 
@@ -212,7 +212,7 @@ public class Inventaire_m {
         caseL.add(casem20);
         caseL.add(casem11);
         image = "images/" + couleur + "/piece" + 16 + ".png";
-        piece16 = new Piece_m(caseL, orientation, image);
+        piece16 = new Piece_m(caseL, orientation, image, 16);
         listePiece.add(piece16);
         caseL.clear();
 
@@ -223,7 +223,7 @@ public class Inventaire_m {
         caseL.add(case0m1);
         caseL.add(case1m1);
         image = "images/" + couleur + "/piece" + 17 + ".png";
-        piece17 = new Piece_m(caseL, orientation, image);
+        piece17 = new Piece_m(caseL, orientation, image, 17);
         listePiece.add(piece17);
         caseL.clear();
 
@@ -234,7 +234,7 @@ public class Inventaire_m {
         caseL.add(casem10);
         caseL.add(casem11);
         image = "images/" + couleur + "/piece" + 18 + ".png";
-        piece18 = new Piece_m(caseL, orientation, image);
+        piece18 = new Piece_m(caseL, orientation, image, 18);
         listePiece.add(piece18);
         caseL.clear();
 
@@ -245,7 +245,7 @@ public class Inventaire_m {
         caseL.add(casem10);
         caseL.add(casem11);
         image = "images/" + couleur + "/piece" + 19 + ".png";
-        piece19 = new Piece_m(caseL, orientation, image);
+        piece19 = new Piece_m(caseL, orientation, image, 19);
         listePiece.add(piece19);
         caseL.clear();
 
@@ -256,7 +256,7 @@ public class Inventaire_m {
         caseL.add(casem10);
         caseL.add(case10);
         image = "images/" + couleur + "/piece" + 20 + ".png";
-        piece20 = new Piece_m(caseL, orientation, image);
+        piece20 = new Piece_m(caseL, orientation, image, 20);
         listePiece.add(piece20);
         caseL.clear();
 
@@ -267,7 +267,7 @@ public class Inventaire_m {
         caseL.add(case02);
         caseL.add(casem10);
         image = "images/" + couleur + "/piece" + 21 + ".png";
-        piece21 = new Piece_m(caseL, orientation, image);
+        piece21 = new Piece_m(caseL, orientation, image, 21);
         listePiece.add(piece21);
         caseL.clear();
 
