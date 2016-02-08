@@ -95,7 +95,6 @@ public class ControlPlateau implements ActionListener {
 
             } else {
 
-
                 System.out.println("Clique en " + i + ";" + j + ".");
 
                 //On repasse la case cliqué à faux
@@ -335,9 +334,17 @@ public class ControlPlateau implements ActionListener {
                 return free;
             }
 
+
+        }
+
+        for(Case_m caseIt : piece.getListeCase()) {
+
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
             if((i-l==0 && j+k==0) || (i-l==19 && j+k==0) || (i-l==0 && j+k==19) || (i-l==19 && j+k==19) ) {
-                    bool = true;
-                    break;
+                bool = true;
+                break;
             }
         }
 
@@ -455,7 +462,14 @@ public class ControlPlateau implements ActionListener {
                 return free;
             }
 
-            if((i+k==0 && j+l==0) || (i+k==19 && j+l==0) || (i+k==0 && j+l==19) || (i+k==19 && j+l==19) ) {
+        }
+
+        for(Case_m caseIt : piece.getListeCase()) {
+
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
+            if ((i + k == 0 && j + l == 0) || (i + k == 19 && j + l == 0) || (i + k == 0 && j + l == 19) || (i + k == 19 && j + l == 19)) {
                 bool = true;
                 break;
             }
@@ -575,6 +589,14 @@ public class ControlPlateau implements ActionListener {
                 return free;
             }
 
+
+        }
+
+        for(Case_m caseIt : piece.getListeCase()) {
+
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
+
             if((i - k==0 && j - l==0) || (i - k==19 && j - l==0) || (i - k==0 && j - l==19) || (i - k==19 && j - l==19) ) {
                 bool = true;
                 break;
@@ -685,11 +707,17 @@ public class ControlPlateau implements ActionListener {
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
 
+            //Vérifie si la case est sur le plateau et vide
             free = verifCase(i+l, j-k);
 
-            if(!free){
+            if (!free)
                 return free;
-            }
+
+        }
+
+        for(Case_m caseIt : piece.getListeCase()) {
+            int k = caseIt.getPosI();
+            int l = caseIt.getPosJ();
 
             if((i+l==0 && j-k==0) || (i+l==19 && j-k==0) || (i+l==0 && j-k==19) || (i+l==19 && j-k==19) ) {
                 bool = true;
@@ -704,12 +732,11 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //On actualise la couleur de la case sur la grille
-                modelPlateau.getCase(i+l,j - l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
+                modelPlateau.getCase(i+l,j - k).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
                 vueGeneral.plateau.tabButton[i+l][j-k].setContentAreaFilled(true);
                 Color_v color = new Color_v(modelPlateau.getCase(i+l,j-k).getCouleur());
                 vueGeneral.plateau.tabButton[i+l][j-k].setBackground(color.getColor());
             }
-
 
             return true;
         }
