@@ -1,9 +1,5 @@
 package Helper;
 
-import Model.General_m;
-import Model.Piece_m;
-import Vue.General_v;
-
 import java.io.*;
 
 /**
@@ -15,29 +11,53 @@ public class Sauvegarde {
     PrintWriter pw = null;
     BufferedWriter bw = null;
     FileWriter fw = null;
-    boolean bool;
+    boolean fileOpen;
 
     public Sauvegarde(){
         try {
             fw = new FileWriter(fichier,true);
             bw = new BufferedWriter(fw);
             pw = new PrintWriter(bw);
-            bool = true;
+            fileOpen = true;
 
         } catch (IOException exception) {
-            System.out.println("File can't be open");
-            bool = false;
+            System.out.println("File can't be open. Err code : 1.");
+            fileOpen = false;
         }
     }
 
     public void sauvegardeCase(int i, int j, Color_v color, int numero){
-        if(bool){
+        if(fileOpen){
             try {
                 pw.println(i + ";"+ j + ";" + color.getCouleur() + ";" + (numero-1));
                 pw.flush();
             }catch(Exception e){
+                System.out.println("File can't be write in. Err code : 3.");
                 e.printStackTrace();
             }
         }
+    }
+
+    public void sauvegardeEtatAbandonJoueur(String color){
+        save("Abandon",color);
+    }
+    public void sauvegardeEtatTourJoueur(String color){
+        save("Tour", color);
+    }
+
+    public void save(String msg, String color){
+        if(fileOpen){
+            try {
+                pw.println(msg + ';' + color);
+                pw.flush();
+            }catch(Exception e){
+                System.out.println("File can't be write in. Err code : 3.");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void delete(){
+        fichier.delete();
     }
 }

@@ -47,6 +47,7 @@ public class ControlRotationButton
         BufferedImage image = null;
         try{
             image = ImageIO.read(new File(urlImage));
+            System.out.println("Image not found. Err code : 7.");
         }
         catch(Exception exc){
             System.err.println(exc);
@@ -127,6 +128,7 @@ public class ControlRotationButton
             image = ImageIO.read(new File(urlImage));
         }
         catch(Exception exc){
+            System.out.println("Image not found. Err code : 8.");
             System.err.println(exc);
         }
 
@@ -206,6 +208,7 @@ public class ControlRotationButton
         }
         catch (Exception e) {
             System.err.println(e);
+            System.out.println("Rotation encounter a problem. Err code : 8.");
         }
         return rotateImage;
     }
