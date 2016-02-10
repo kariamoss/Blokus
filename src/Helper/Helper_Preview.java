@@ -185,48 +185,48 @@ public class Helper_Preview {
         return false;
     }
 
-    public boolean checkBordCase(int i, int j, Case_m caseIt)
+    public boolean checkBordCase(int i, int j, String color)
     {
         boolean free = true;
 
         if (verifInGrid(i, j - 1)) {
-            if (modelPlateau.getCase(i, j - 1).getCouleur() == caseIt.getCouleur())
+            if (modelPlateau.getCase(i, j - 1).getCouleur().equals(color))
                 free = false;
         }
         if (verifInGrid(i - 1, j)) {
-            if (modelPlateau.getCase(i- 1, j).getCouleur() == caseIt.getCouleur())
+            if (modelPlateau.getCase(i- 1, j).getCouleur().equals(color))
                 free = false;
         }
         if (verifInGrid(i, j + 1)) {
-            if (modelPlateau.getCase(i, j + 1).getCouleur() == caseIt.getCouleur())
+            if (modelPlateau.getCase(i, j + 1).getCouleur().equals(color))
                 free = false;
         }
         if (verifInGrid(i + 1, j)) {
-            if (modelPlateau.getCase(i + 1, j).getCouleur() == caseIt.getCouleur())
+            if (modelPlateau.getCase(i + 1, j).getCouleur().equals(color))
                 free = false;
         }
 
         return free;
     }
 
-    public boolean checkCoinCase(int i, int j, Case_m caseIt)
+    public boolean checkCoinCase(int i, int j, String color)
     {
         boolean free = false;
 
         if (verifInGrid(i-1, j-1)) {
-            if (modelPlateau.getCase(i-1,j-1).getCouleur()==caseIt.getCouleur())
+            if (modelPlateau.getCase(i-1,j-1).getCouleur().equals(color))
                 free = true;
         }
         if (verifInGrid(i- 1, j + 1)) {
-            if (modelPlateau.getCase(i - 1, j + 1).getCouleur() == caseIt.getCouleur())
+            if (modelPlateau.getCase(i - 1, j + 1).getCouleur().equals(color))
                 free = true;
         }
         if (verifInGrid(i + 1, j - 1)) {
-            if (modelPlateau.getCase(i + 1, j - 1).getCouleur() == caseIt.getCouleur())
+            if (modelPlateau.getCase(i + 1, j - 1).getCouleur().equals(color))
                 free = true;
         }
         if (verifInGrid(i + 1, j + 1)) {
-            if (modelPlateau.getCase(i + 1, j + 1).getCouleur() == caseIt.getCouleur())
+            if (modelPlateau.getCase(i + 1, j + 1).getCouleur().equals(color))
                 free = true;
         }
         return free;
