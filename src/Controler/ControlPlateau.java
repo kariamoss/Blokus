@@ -104,20 +104,7 @@ public class ControlPlateau implements ActionListener {
                 String orientation = previousPiece.getOrientation();
                 int a = previousCoord[0];
                 int b = previousCoord[1];
-                switch (orientation) {
-                    case "Ouest":
-                        helper_preview.decolorPreviewOuest(a, b, previousPiece);
-                        break;
-                    case "Est":
-                        helper_preview.decolorPreviewEst(a, b, previousPiece);
-                        break;
-                    case "Sud":
-                        helper_preview.decolorPreviewSud(a, b, previousPiece);
-                        break;
-                    case "Nord":
-                        helper_preview.decolorPreviewNord(a, b, previousPiece);
-                        break;
-                }
+                helper_preview.setColorPreview(a, b, previousPiece, true);
 
                 //On récupère l'orientation de la pièce active pour la positioner sur le plateau (ou pas)
                 orientation = piece.getOrientation();
@@ -190,8 +177,6 @@ public class ControlPlateau implements ActionListener {
     }
 
 
-
-
     public void colorPreview(int i, int j, Piece_m piece)
     {
         if (previousPiece==null)
@@ -203,21 +188,7 @@ public class ControlPlateau implements ActionListener {
 
             String orientation = piece.getOrientation();
 
-            switch (orientation){
-                case "Ouest" :
-                    helper_preview.colorPreviewOuest(i, j, piece);
-                    break;
-                case "Est" :
-                    helper_preview.colorPreviewEst(i, j, piece);
-                    break;
-                case "Sud" :
-                    helper_preview.colorPreviewSud(i, j, piece);
-                    break;
-                case "Nord" :
-                    helper_preview.colorPreviewNord(i, j, piece);
-                    break;
-            }
-
+            helper_preview.setColorPreview(i, j, piece, false);
         }
         else
         {
@@ -232,20 +203,7 @@ public class ControlPlateau implements ActionListener {
             int b = previousCoord[1];
             System.out.println("Coordonnées précédente : a="+a+" / b="+b);
 
-            switch (previousOrientation){
-                case "Ouest" :
-                    helper_preview.decolorPreviewOuest(a, b, previousPiece);
-                    break;
-                case "Est" :
-                    helper_preview.decolorPreviewEst(a, b, previousPiece);
-                    break;
-                case "Sud" :
-                    helper_preview.decolorPreviewSud(a, b, previousPiece);
-                    break;
-                case "Nord" :
-                    helper_preview.decolorPreviewNord(a, b, previousPiece);
-                    break;
-            }
+            helper_preview.setColorPreview(a, b, previousPiece, true);
 
             //Récupérer l'orientation de la pièce
             //Colorier le plateau en fonction de l'orientation de la pièce : couleur : orange
@@ -253,21 +211,7 @@ public class ControlPlateau implements ActionListener {
 
             String orientation = piece.getOrientation();
 
-            switch (orientation){
-                case "Ouest" :
-                    helper_preview.colorPreviewOuest(i, j, piece);
-                    break;
-                case "Est" :
-                    helper_preview.colorPreviewEst(i, j, piece);
-                    break;
-                case "Sud" :
-                    helper_preview.colorPreviewSud(i, j, piece);
-                    break;
-                case "Nord" :
-                    helper_preview.colorPreviewNord(i, j, piece);
-                    break;
-            }
-
+            helper_preview.setColorPreview(i, j, piece, false);
         }
     }
 
@@ -292,27 +236,6 @@ public class ControlPlateau implements ActionListener {
         vueGeneral.plateau.tabButton[k][l].setBackground(color.getColor());
     }
 
-    private int[] getCoordCase(String orientation, int i, int j, int k, int l) {
-        int[] tab = new int[2];
-        switch (orientation){
-            case "Ouest" :
-                tab[0]=i+k; tab[1]=j+l;
-                break;
-            case "Est" :
-                tab[0]=i-k; tab[1]=j-l;
-                break;
-            case "Sud" :
-                tab[0]=i-l; tab[1]=j+k;
-                break;
-            case "Nord" :
-                tab[0]=i+l; tab[1]=j-k;
-                break;
-        }
-        return tab;
-    }
-
-
-
     public boolean first(int i, int j, Piece_m piece){
         boolean bool = false;
         boolean free;
@@ -323,7 +246,7 @@ public class ControlPlateau implements ActionListener {
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
             //Récupère les coordonnés combiné du clique et de la case
-            tab = getCoordCase(piece.getOrientation(), i, j, k, l);
+            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
             //Vérifie si la case est ok pour poser
             free = verifCase(tab[0], tab[1]);
             if(!free)
@@ -335,7 +258,7 @@ public class ControlPlateau implements ActionListener {
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
             //Récupère les coordonnés combiné du clique et de la case
-            tab = getCoordCase(piece.getOrientation(), i, j, k, l);
+            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
             //Regarde si on pose bien la pièce dans un des 4 coins
             if((tab[0]==0 && tab[1]==0) || (tab[0]==19 && tab[1]==0) ||
                (tab[0]==0 && tab[1]==19) || (tab[0]==19 && tab[1]==19)) {
@@ -350,7 +273,7 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
                 //Récupère les coordonnés combiné du clique et de la case
-                tab = getCoordCase(piece.getOrientation(), i, j, k, l);
+                tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
                 //On actualise la couleur de la case sur la grille
                 updateCaseColor(tab[0],tab[1]);
             }
@@ -369,7 +292,7 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //Récupère les coordonnés combiné du clique et de la case
-                tab = getCoordCase(piece.getOrientation(), i, j, k, l);
+                tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
                 //On actualise la couleur de la case sur la grille
                 updateCaseColor(tab[0],tab[1]);
             }
@@ -396,7 +319,7 @@ public class ControlPlateau implements ActionListener {
             k = caseIt.getPosI();
             l = caseIt.getPosJ();
             //Récupère les coordonnés combiné du clique et de la case
-            tab = getCoordCase(piece.getOrientation(), i, j, k, l);
+            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
             //Vérifie si la case est sur le plateau et vide
             free = verifCase(tab[0], tab[1]);
 
@@ -422,7 +345,7 @@ public class ControlPlateau implements ActionListener {
             k = caseIt.getPosI();
             l = caseIt.getPosJ();
             //Récupère les coordonnés combiné du clique et de la case
-            tab = getCoordCase(piece.getOrientation(), i, j, k, l);
+            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
             free = helper_preview.checkCoinCase(tab[0], tab[1], caseIt.getCouleur());
 
             c++;
