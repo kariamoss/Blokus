@@ -65,6 +65,9 @@ public class ControlRotationButton
         image = op.filter(image, biNew);
 
         String orientation = piece.getOrientation();
+        int i = piece.getPositionI();
+        int j = piece.getPositionJ();
+        helper_preview.setColorPreview(i, j, piece, true);  //Décolore
 
         if (piece!=null) {
             System.out.println("Rotation vers la droite / Orientation avant : " + orientation);
@@ -88,16 +91,15 @@ public class ControlRotationButton
             //récupérer l'orientation d'origine ->
 
             //Récupérer la position de la pièce
-            int i = piece.getPositionI();
-            int j = piece.getPositionJ();
+            i = piece.getPositionI();
+            j = piece.getPositionJ();
 
             System.out.println("Coordonnées de la pièce : " + i + ";" + j);
 
             if (i!=-1 && j!=-1)
             {
-                helper_preview.setColorPreview(i, j, piece, true);
-
-                helper_preview.setColorPreview(i, j, piece, false);
+                helper_preview.setColorPreview(i, j, piece, true);  //Décolore
+                helper_preview.setColorPreview(i, j, piece, false); //Colore
 
             }
 
@@ -141,7 +143,9 @@ public class ControlRotationButton
         image = op.filter(image, biNew);
 
         String orientation = piece.getOrientation();
-
+        int i = piece.getPositionI();
+        int j = piece.getPositionJ();
+        helper_preview.setColorPreview(i, j, piece, true); //décolore
         if (piece!=null) {
             System.out.println("Rotation vers la gauche / Orientation avant : " + orientation);
 
@@ -164,18 +168,16 @@ public class ControlRotationButton
                     break;
             }
             //Rotation de la pièce
-            //récupérer l'orientation d'origine ->
 
             //Récupérer la position de la pièce
-            int i = piece.getPositionI();
-            int j = piece.getPositionJ();
+            i = piece.getPositionI();
+            j = piece.getPositionJ();
 
             System.out.println("Coordonnées de la pièce : " + i + ";" + j);
 
             if (i!=-1 && j!=-1)
             {
-                helper_preview.setColorPreview(i, j, piece, true);
-                helper_preview.setColorPreview(i, j, piece, false);
+                helper_preview.setColorPreview(i, j, piece, false); //colore
 
             }
 
