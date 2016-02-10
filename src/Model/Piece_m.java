@@ -14,8 +14,9 @@ public class Piece_m {
     boolean used;
     int positionI = -1;
     int positionJ = -1;
+    int numero;
 
-    public Piece_m(List<Case_m> liste, String orientation, String image){
+    public Piece_m(List<Case_m> liste, String orientation, String image, int numero){
         this.orientation = orientation;
         for (Case_m aListe : liste) {
             listeCase.add(aListe);
@@ -27,6 +28,7 @@ public class Piece_m {
         listeOrientation.append("Est");
         listeOrientation.append("Sud");
 
+        this.numero = numero;
         used = false;
     }
 
@@ -94,4 +96,14 @@ public class Piece_m {
     public void setPositionJ(int positionJ) {
         this.positionJ = positionJ;
     }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+
 }

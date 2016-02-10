@@ -55,7 +55,7 @@ public class Helper_Preview {
                 //On enlève l'image de prévisualisation sur le bouton
                 vuePlateau.tabButton[a+k][b+l].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
-                if (modelPlateau.getCase(a+k, b+l).getCouleur()=="White")
+                if (modelPlateau.getCase(a+k, b+l).getCouleur().equals("White"))
                 {
                     vuePlateau.tabButton[a+k][b+l].setContentAreaFilled(false);
                 }
@@ -93,7 +93,7 @@ public class Helper_Preview {
                 //On enlève l'image de prévisualisation sur le bouton
                 vuePlateau.tabButton[a- k][b - l].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
-                if (modelPlateau.getCase(a - k, b - l).getCouleur()=="White")
+                if (modelPlateau.getCase(a - k, b - l).getCouleur().equals("White"))
                 {
                     vuePlateau.tabButton[a - k][b - l].setContentAreaFilled(false);
                 }
@@ -131,7 +131,7 @@ public class Helper_Preview {
                 //On enlève l'image de prévisualisation sur le bouton
                 vuePlateau.tabButton[a-l][b+k].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
-                if (modelPlateau.getCase(a-l,b+k).getCouleur()=="White")
+                if (modelPlateau.getCase(a-l,b+k).getCouleur().equals("White"))
                 {
                     vuePlateau.tabButton[a-l][b+k].setContentAreaFilled(false);
                 }
@@ -169,7 +169,7 @@ public class Helper_Preview {
                 //On enlève l'image de prévisualisation sur le bouton
                 vuePlateau.tabButton[a+l][b-k].setIcon(null);
                 //On passe le contenu du bouton à faux si il n'y a pas de case posée
-                if (modelPlateau.getCase(a+l,b-k).getCouleur()=="White")
+                if (modelPlateau.getCase(a+l,b-k).getCouleur().equals("White"))
                 {
                     vuePlateau.tabButton[a+l][b-k].setContentAreaFilled(false);
                 }
@@ -190,6 +190,7 @@ public class Helper_Preview {
         boolean free = true;
 
         if (verifInGrid(i, j - 1)) {
+<<<<<<< HEAD
             if (modelPlateau.getCase(i, j - 1).getCouleur().equals(color))
                 free = false;
         }
@@ -203,6 +204,21 @@ public class Helper_Preview {
         }
         if (verifInGrid(i + 1, j)) {
             if (modelPlateau.getCase(i + 1, j).getCouleur().equals(color))
+=======
+            if (modelPlateau.getCase(i, j - 1).getCouleur() .equals( caseIt.getCouleur()))
+                free = false;
+        }
+        if (verifInGrid(i - 1, j)) {
+            if (modelPlateau.getCase(i- 1, j).getCouleur() .equals(caseIt.getCouleur()))
+                free = false;
+        }
+        if (verifInGrid(i, j + 1)) {
+            if (modelPlateau.getCase(i, j + 1).getCouleur() .equals( caseIt.getCouleur()))
+                free = false;
+        }
+        if (verifInGrid(i + 1, j)) {
+            if (modelPlateau.getCase(i + 1, j).getCouleur() .equals(caseIt.getCouleur()))
+>>>>>>> 4eab73b91e8d843f4fd8b967000a0f62af5b13a6
                 free = false;
         }
 
@@ -211,9 +227,11 @@ public class Helper_Preview {
 
     public boolean checkCoinCase(int i, int j, String color)
     {
+
         boolean free = false;
 
         if (verifInGrid(i-1, j-1)) {
+<<<<<<< HEAD
             if (modelPlateau.getCase(i-1,j-1).getCouleur().equals(color))
                 free = true;
         }
@@ -227,6 +245,21 @@ public class Helper_Preview {
         }
         if (verifInGrid(i + 1, j + 1)) {
             if (modelPlateau.getCase(i + 1, j + 1).getCouleur().equals(color))
+=======
+            if (modelPlateau.getCase(i-1,j-1).getCouleur().equals(caseIt.getCouleur()))
+                free = true;
+        }
+        if (verifInGrid(i- 1, j + 1)) {
+            if (modelPlateau.getCase(i - 1, j + 1).getCouleur() .equals( caseIt.getCouleur()))
+                free = true;
+        }
+        if (verifInGrid(i + 1, j - 1)) {
+            if (modelPlateau.getCase(i + 1, j - 1).getCouleur().equals(caseIt.getCouleur()))
+                free = true;
+        }
+        if (verifInGrid(i + 1, j + 1)) {
+            if (modelPlateau.getCase(i + 1, j + 1).getCouleur().equals( caseIt.getCouleur()))
+>>>>>>> 4eab73b91e8d843f4fd8b967000a0f62af5b13a6
                 free = true;
         }
         return free;
