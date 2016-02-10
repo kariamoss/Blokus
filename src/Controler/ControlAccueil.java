@@ -5,6 +5,7 @@ import Model.General_m;
 import Vue.Accueil_v;
 import Vue.General_v;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -39,6 +40,9 @@ public class ControlAccueil implements ActionListener {
             accueil_v.undisplay();
             control.vue.chargement.chargementCase();
 
+        }
+        if(e.getSource() == accueil_v.quitter){
+            System.exit(0);
         }
     }
     public void suppressionSauvegarde(){

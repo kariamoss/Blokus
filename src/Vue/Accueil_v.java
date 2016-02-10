@@ -7,6 +7,7 @@ import Model.General_m;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -24,18 +25,19 @@ public class Accueil_v extends JFrame {
     public JButton options;
     public JButton quitter;
     public Accueil_m accueil_m;
-    private JLabel imageFond;
     private JPanel panelNouvellePartie;
     private JPanel panelChargerPartie;
     private JPanel panelOptions;
     private JPanel panelQuitter;
-    private ImageIcon imgBlokus;
-    private PanelPerso panelFond;
-
+    public PanelPerso panelFond;
     public BufferedImage buffImg;
+    public Font font;
+
+
     public Accueil_v(){
         setTitle("Blokus");
         initAttribute(modelGeneral);
+        this.setLayout(null);
 
 
         setSize(900, 660);
@@ -47,13 +49,8 @@ public class Accueil_v extends JFrame {
     public void initAttribute(General_m modelGeneral){
         this.modelGeneral = modelGeneral;
         controlAccueil = new ControlAccueil(accueil_m, this);
-        imgBlokus = new ImageIcon("images/accueil/blokus1.jpg");
-        imageFond = new JLabel(imgBlokus);
-        try {
-            buffImg = ImageIO.read(new File("images/accueil/blokus1.jpg"));
-        }catch (IOException e){
-            System.out.println("Background image error");
-        }
+       // font = new Font("font/Blokus.ttf",Font.BOLD,15);
+
 
     }
     public void display() {
@@ -63,15 +60,18 @@ public class Accueil_v extends JFrame {
     
     public void draw() {
         //panels
+        loadImage();
         panelGeneral = new JPanel();
-        panelFond = new PanelPerso();
         panelNouvellePartie = new JPanel();
         panelChargerPartie = new JPanel();
         panelOptions = new JPanel();
         panelQuitter = new JPanel();
+        panelFond = new PanelPerso(buffImg);
+        //panelFond.setBounds(0,0,900,600);
 
         //boutons
         nouvellePartie = new JButton("Nouvelle partie");
+        //nouvellePartie.setFont(font);
         chargerPartie = new JButton("Charger Partie");
         options = new JButton("Options");
         quitter = new JButton("Quitter");
@@ -79,32 +79,42 @@ public class Accueil_v extends JFrame {
         //action sur les boutons
         nouvellePartie.addActionListener(controlAccueil);
         chargerPartie.addActionListener(controlAccueil);
+        quitter.addActionListener(controlAccueil);
 
         //chargements des sous-panels
-        panelChargerPartie.add(chargerPartie);
         panelNouvellePartie.add(nouvellePartie);
+        panelNouvellePartie.setOpaque(false);
+        panelChargerPartie.add(chargerPartie);
+        panelChargerPartie.setOpaque(false);
         panelOptions.add(options);
+        panelOptions.setOpaque(false);
         panelQuitter.add(quitter);
+        panelQuitter.setOpaque(false);
 
 
+            JPanel panelTest = new JPanel();
         // ajout au panel general
-        panelGeneral.setOpaque(false);
-        imageFond.setBounds(0, 0, 900, 660);
-       // panelGeneral.add(imageFond);
-      //  imageFond.setLayout(new FlowLayout(FlowLayout.CENTER));
-        panelGeneral.setPreferredSize(new Dimension(900, 660));
-        nouvellePartie.setBackground(new Color(255, 255, 0));
-        nouvellePartie.setOpaque(false);
-        panelGeneral.add(nouvellePartie);
+        panelGeneral.add(panelNouvellePartie);
         panelGeneral.add(panelChargerPartie);
         panelGeneral.add(panelOptions);
         panelGeneral.add(panelQuitter);
-        panelGeneral.setLayout(new BoxLayout(panelGeneral, BoxLayout.Y_AXIS));
+        panelGeneral.setLayout(new BorderLayout());
+        panelGeneral.add(Box.createVerticalStrut(150), BorderLayout.NORTH);
+        panelGeneral.add(Box.createHorizontalGlue(), BorderLayout.EAST);
+        panelGeneral.add(Box.createHorizontalStrut(200), BorderLayout.WEST);
+        panelGeneral.setOpaque(false);
+        panelGeneral.setLayout(new BoxLayout(panelGeneral, BoxLayout.X_AXIS));
+        panelFond.setLayout(new BorderLayout());
+        panelFond.add(panelGeneral,BorderLayout.SOUTH);
 
-
-        setContentPane(panelGeneral);
-       // panel.setLocation(150,200);
-
+        setContentPane(panelFond);
     }
 
+    public void loadImage(){
+        try {
+            buffImg = ImageIO.read(new File("images/accueil/blokus1.jpg"));
+        }catch (IOException e){
+            System.out.println("Background image error");
+        }
+    }
 }
