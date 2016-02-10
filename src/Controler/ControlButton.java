@@ -55,24 +55,10 @@ public class ControlButton implements ActionListener {
 
         if (pieceActuelle!=null)
         {
-            String orientation  = pieceActuelle.getOrientation();
             int a = pieceActuelle.getPositionI();
             int b = pieceActuelle.getPositionJ();
+            helper_preview.setColorPreview(a, b, pieceActuelle, true);
 
-            switch (orientation){
-                case "Ouest" :
-                    helper_preview.decolorPreviewOuest(a, b, pieceActuelle);
-                    break;
-                case "Est" :
-                    helper_preview.decolorPreviewEst(a, b, pieceActuelle);
-                    break;
-                case "Sud" :
-                    helper_preview.decolorPreviewSud(a, b, pieceActuelle);
-                    break;
-                case "Nord" :
-                    helper_preview.decolorPreviewNord(a, b, pieceActuelle);
-                    break;
-            }
         }
 
         joueur.getInventaire().selectPiece(i);

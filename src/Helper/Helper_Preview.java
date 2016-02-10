@@ -73,7 +73,7 @@ public class Helper_Preview {
         }
     }
 
-    
+
     public boolean verifInGrid(int i, int j)
     {
         if(i>=0 && i<20 && j>=0 && j<20){

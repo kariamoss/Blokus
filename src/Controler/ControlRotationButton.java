@@ -95,44 +95,11 @@ public class ControlRotationButton
 
             if (i!=-1 && j!=-1)
             {
-                //Enlever la prévisualisation
-                switch (orientation){
-                    case "Ouest" :
-                        helper_preview.decolorPreviewOuest(i, j, piece);
-                        break;
-                    case "Est" :
-                        helper_preview.decolorPreviewEst(i, j, piece);
-                        break;
-                    case "Sud" :
-                        helper_preview.decolorPreviewSud(i, j, piece);
-                        break;
-                    case "Nord" :
-                        helper_preview.decolorPreviewNord(i, j, piece);
-                        break;
-                }
+                helper_preview.setColorPreview(i, j, piece, true);
 
+                helper_preview.setColorPreview(i, j, piece, false);
 
-                //Récupérer la nouvelle orientation
-                orientation = piece.getOrientation();
-
-                //Mettre la prévisualisation
-                switch (orientation){
-                    case "Ouest" :
-                        helper_preview.colorPreviewOuest(i, j, piece);
-                        break;
-                    case "Est" :
-                        helper_preview.colorPreviewEst(i, j, piece);
-                        break;
-                    case "Sud" :
-                        helper_preview.colorPreviewSud(i, j, piece);
-                        break;
-                    case "Nord" :
-                        helper_preview.colorPreviewNord(i, j, piece);
-                        break;
-                }
             }
-
-
 
             ImageIcon icon = new ImageIcon(image);
             vueGeneral.overview.overviewButton.setIcon(icon);
@@ -207,41 +174,9 @@ public class ControlRotationButton
 
             if (i!=-1 && j!=-1)
             {
-                //Enlever la prévisualisation
-                switch (orientation){
-                    case "Ouest" :
-                        helper_preview.decolorPreviewOuest(i, j, piece);
-                        break;
-                    case "Est" :
-                        helper_preview.decolorPreviewEst(i, j, piece);
-                        break;
-                    case "Sud" :
-                        helper_preview.decolorPreviewSud(i, j, piece);
-                        break;
-                    case "Nord" :
-                        helper_preview.decolorPreviewNord(i, j, piece);
-                        break;
-                }
+                helper_preview.setColorPreview(i, j, piece, true);
+                helper_preview.setColorPreview(i, j, piece, false);
 
-
-                //Récupérer la nouvelle orientation
-                orientation = piece.getOrientation();
-
-                //Mettre la prévisualisation
-                switch (orientation){
-                    case "Ouest" :
-                        helper_preview.colorPreviewOuest(i, j, piece);
-                        break;
-                    case "Est" :
-                        helper_preview.colorPreviewEst(i, j, piece);
-                        break;
-                    case "Sud" :
-                        helper_preview.colorPreviewSud(i, j, piece);
-                        break;
-                    case "Nord" :
-                        helper_preview.colorPreviewNord(i, j, piece);
-                        break;
-                }
             }
 
 
