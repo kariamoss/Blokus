@@ -229,11 +229,13 @@ public class ControlPlateau implements ActionListener {
         return false;
     }
 
-    public void updateCaseColor(int k, int l){
+    public void updateCaseColor(int k, int l, Piece_m piece){
         modelPlateau.getCase(k,l).setCouleur(modelGeneral.selectJoueurActif().getCouleur());
         vueGeneral.plateau.tabButton[k][l].setContentAreaFilled(true);
         Color_v color = new Color_v(modelPlateau.getCase(k,l).getCouleur());
         vueGeneral.plateau.tabButton[k][l].setBackground(color.getColor());
+        modelGeneral.getSauvegarde().sauvegardeCase(k, l, color, piece.getNumero());
+
     }
 
     public boolean first(int i, int j, Piece_m piece){
@@ -275,7 +277,7 @@ public class ControlPlateau implements ActionListener {
                 //Récupère les coordonnés combiné du clique et de la case
                 tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
                 //On actualise la couleur de la case sur la grille
-                updateCaseColor(tab[0],tab[1]);
+                updateCaseColor(tab[0],tab[1], piece);
             }
             return true;
         }
@@ -294,7 +296,7 @@ public class ControlPlateau implements ActionListener {
                 //Récupère les coordonnés combiné du clique et de la case
                 tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
                 //On actualise la couleur de la case sur la grille
-                updateCaseColor(tab[0],tab[1]);
+                updateCaseColor(tab[0],tab[1], piece);
             }
             return true;
         }
