@@ -38,40 +38,196 @@ public class ControlRotationButton
         //vueGeneral.boutonsControleJeu.setRotationButtonControler(this);
     }
 
-    public void droite(){
-
-        Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
-
-        //Chargement de l'image
-        String urlImage = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive().getImage();
-        BufferedImage image = null;
-        try{
-            image = ImageIO.read(new File(urlImage));
-        }
-        catch(Exception exc){
-            System.err.println(exc);
-        }
-
+    public BufferedImage rotateMiroir(BufferedImage image){
         //Récupère les dimension de l'image d'origine
         int h = image.getHeight();
         int w = image.getWidth();
 
-        //Redimensionnement à 110*110 (coéficient de 0.85 par rapport à l'image d'origine
-        double scale = 0.85;
         AffineTransform tx = new AffineTransform();
-        tx.scale(scale, scale);
+
+        tx.scale(-1, 1);
+        tx.translate(-image.getWidth(null), 0);
+
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-        BufferedImage biNew = new BufferedImage((int)(w*scale), (int)(h*scale), image.getType());
+        BufferedImage biNew = new BufferedImage((int)(w), (int)(h), image.getType());
         image = op.filter(image, biNew);
 
-        String orientation = piece.getOrientation();
-        int i = piece.getPositionI();
-        int j = piece.getPositionJ();
-        helper_preview.setColorPreview(i, j, piece, true);  //Décolore
+        return image;
+    }
 
+
+    public void miroir(){
+
+        Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
+        if (piece!=null){
+            //On décolore la piece actuelle
+            int i = piece.getPositionI();
+            int j = piece.getPositionJ();
+            helper_preview.setColorPreview(i, j, piece, true);  //Décolore
+
+
+            //Chargement de l'image
+            String urlImage = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive().getImage();
+            BufferedImage image = null;
+            try{
+                image = ImageIO.read(new File(urlImage));
+            }
+            catch(Exception exc){
+                System.err.println(exc);
+            }
+
+            //Récupère les dimension de l'image d'origine
+            int h = image.getHeight();
+            int w = image.getWidth();
+
+            //Redimensionnement à 110*110 (coéficient de 0.85 par rapport à l'image d'origine
+            double scale = 0.85;
+            AffineTransform tx = new AffineTransform();
+            tx.scale(scale, scale);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            BufferedImage biNew = new BufferedImage((int)(w*scale), (int)(h*scale), image.getType());
+            image = op.filter(image, biNew);
+
+            switch (piece.getOrientation()){
+                case "Nord" :
+                    //Nord - 90
+                    image = rotate(image, 90);
+                    break;
+                case "Est" :
+                    //Est - 180
+                    image = rotate(image, 180);
+                    break;
+                case "Sud" :
+                    //Sud - 270
+                    image = rotate(image, 270);
+                    break;
+            }
+
+            //On change l'attribut miroir de la piece
+            if(piece.isMiroir()) {
+                piece.setMiroir(false);
+            }
+            else {
+                piece.setMiroir(true);
+                image = rotateMiroir(image);
+            }
+
+
+            //On recolorie la piece avec le changement de miroir
+            helper_preview.setColorPreview(i, j, piece, false); //Colore
+
+            ImageIcon icon = new ImageIcon(image);
+            vueGeneral.overview.overviewButton.setIcon(icon);
+        }
+        else
+        {
+            System.out.println("Aucune pièce sélectionnée");
+        }
+
+    }
+
+    public void droite(){
+
+        Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
         if (piece!=null) {
-            System.out.println("Rotation vers la droite / Orientation avant : " + orientation);
+
+            /*----PARTIE OVERVIEW-----*/
+            //Chargement de l'image
+            String urlImage = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive().getImage();
+            BufferedImage image = null;
+            try{
+                image = ImageIO.read(new File(urlImage));
+            }
+            catch(Exception exc){
+                System.err.println(exc);
+            }
+
+            //Récupère les dimension de l'image d'origine
+            int h = image.getHeight();
+            int w = image.getWidth();
+
+            String orientation = piece.getOrientation();
+
+            //Redimensionnement à 110*110 (coéficient de 0.85 par rapport à l'image d'origine
+            double scale = 0.85;
+            AffineTransform tx = new AffineTransform();
+            tx.scale(scale, scale);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            BufferedImage biNew = new BufferedImage((int)(w*scale), (int)(h*scale), image.getType());
+            image = op.filter(image, biNew);
+
+            switch (orientation){
+                case "Ouest" :
+                    //Sud - 90
+                    image = rotate(image, 90);
+                    break;
+                case "Nord" :
+                    //Est - 180
+                    image = rotate(image, 180);
+                    break;
+                case "Est" :
+                    //Nord - 270
+                    image = rotate(image, 270);
+                    break;
+            }
+
+            if(piece.isMiroir())
+                image = rotateMiroir(image);
+
+            ImageIcon icon = new ImageIcon(image);
+            vueGeneral.overview.overviewButton.setIcon(icon);
+
+
+            /*----PARTIE PLATEAU-----*/
+            System.out.println("Rotation vers la droite / Orientation avant : " + piece.getOrientation());
+            int i = piece.getPositionI();
+            int j = piece.getPositionJ();
+            helper_preview.setColorPreview(i, j, piece, true);  //Décolore
+
             piece.rotateRight();
+
+            helper_preview.setColorPreview(i, j, piece, false); //Colore
+
+
+            System.out.println("Orientation après : " + piece.getOrientation());
+
+        }
+        else
+        {
+            System.out.println("Aucune pièce sélectionnée");
+        }
+    }
+
+
+    public void gauche(){
+
+        Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
+        if (piece!=null) {
+
+            /*----PARTIE OVERVIEW-----*/
+            //Chargement de l'image
+            String urlImage = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive().getImage();
+            BufferedImage image = null;
+            try{
+                image = ImageIO.read(new File(urlImage));
+            }
+            catch(Exception exc){
+                System.err.println(exc);
+            }
+
+            //Récupère les dimension de l'image d'origine
+            int h = image.getHeight();
+            int w = image.getWidth();
+
+            String orientation = piece.getOrientation();
+
+            //Redimensionnement à 110*110 (coéficient de 0.85 par rapport à l'image d'origine
+            double scale = 0.85;
+            AffineTransform tx = new AffineTransform();
+            tx.scale(scale, scale);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            BufferedImage biNew = new BufferedImage((int)(w*scale), (int)(h*scale), image.getType());
+            image = op.filter(image, biNew);
 
             switch (orientation){
                 case "Ouest" :
@@ -87,106 +243,26 @@ public class ControlRotationButton
                     image = rotate(image, 270);
                     break;
             }
-            //Rotation de la pièce
-            //récupérer l'orientation d'origine ->
 
-            //Récupérer la position de la pièce
-            i = piece.getPositionI();
-            j = piece.getPositionJ();
-
-            System.out.println("Coordonnées de la pièce : " + i + ";" + j);
-
-            if (i!=-1 && j!=-1)
-            {
-                helper_preview.setColorPreview(i, j, piece, true);  //Décolore
-                helper_preview.setColorPreview(i, j, piece, false); //Colore
-
-            }
+            if(piece.isMiroir())
+                image = rotateMiroir(image);
 
             ImageIcon icon = new ImageIcon(image);
             vueGeneral.overview.overviewButton.setIcon(icon);
 
-            System.out.println("Orientation après : " + orientation);
 
-        }
-        else
-        {
-            System.out.println("Aucune pièce sélectionnée");
-        }
-    }
+            /*----PARTIE PLATEAU-----*/
+            System.out.println("Rotation vers la droite / Orientation avant : " + piece.getOrientation());
+            int i = piece.getPositionI();
+            int j = piece.getPositionJ();
+            helper_preview.setColorPreview(i, j, piece, true);  //Décolore
 
+            piece.rotateRight();
 
-    public void gauche(){
-
-        Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
-
-        //Chargement de l'image
-        String urlImage = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive().getImage();
-        BufferedImage image = null;
-        try{
-            image = ImageIO.read(new File(urlImage));
-        }
-        catch(Exception exc){
-            System.err.println(exc);
-        }
-
-        //Récupère les dimension de l'image d'origine
-        int h = image.getHeight();
-        int w = image.getWidth();
-
-        //Redimensionnement à 110*110 (coéficient de 0.85 par rapport à l'image d'origine
-        double scale = 0.85;
-        AffineTransform tx = new AffineTransform();
-        tx.scale(scale, scale);
-        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-        BufferedImage biNew = new BufferedImage((int)(w*scale), (int)(h*scale), image.getType());
-        image = op.filter(image, biNew);
-
-        String orientation = piece.getOrientation();
-        int i = piece.getPositionI();
-        int j = piece.getPositionJ();
-        helper_preview.setColorPreview(i, j, piece, true); //décolore
-        if (piece!=null) {
-            System.out.println("Rotation vers la gauche / Orientation avant : " + orientation);
-
-            //Rotation de la modélisation
-            piece.rotateLeft();
-
-            //Rotation de l'image
-            switch (orientation) {
-                case "Ouest":
-                    //Sud - 270
-                    image = rotate(image, 270);
-                    break;
-                case "Sud":
-                    //Est - 180
-                    image = rotate(image, 180);
-                    break;
-                case "Est":
-                    //Nord - 90
-                    image = rotate(image, 90);
-                    break;
-            }
-            //Rotation de la pièce
-
-            //Récupérer la position de la pièce
-            i = piece.getPositionI();
-            j = piece.getPositionJ();
-
-            System.out.println("Coordonnées de la pièce : " + i + ";" + j);
-
-            if (i!=-1 && j!=-1)
-            {
-                helper_preview.setColorPreview(i, j, piece, false); //colore
-
-            }
+            helper_preview.setColorPreview(i, j, piece, false); //Colore
 
 
-
-            ImageIcon icon = new ImageIcon(image);
-            vueGeneral.overview.overviewButton.setIcon(icon);
-
-            System.out.println("Orientation après : " + orientation);
+            System.out.println("Orientation après : " + piece.getOrientation());
 
         }
         else

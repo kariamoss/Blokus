@@ -26,20 +26,52 @@ public class Helper_Preview {
     }
 
 
-    public int[] getCoordCase(String orientation, int i, int j, int k, int l) {
+    public int[] getCoordCase(String orientation, int i, int j, int k, int l, boolean miroir) {
         int[] tab = new int[2];
         switch (orientation){
             case "Ouest" :
-                tab[0]=i+k; tab[1]=j+l;
+                if (miroir) {
+                    tab[0] = i + k;
+                    tab[1] = j - l;
+                }
+                else{
+                    tab[0] = i + k;
+                    tab[1] = j + l;
+                }
+
                 break;
             case "Est" :
-                tab[0]=i-k; tab[1]=j-l;
+                if (miroir) {
+                    tab[0] = i - k;
+                    tab[1] = j + l;
+                }
+                else {
+                    tab[0] = i - k;
+                    tab[1] = j - l;
+                }
+
                 break;
             case "Sud" :
-                tab[0]=i-l; tab[1]=j+k;
+                if (miroir){
+                    tab[0] = i - l;
+                    tab[1] = j - k;
+                }
+                else{
+                    tab[0] = i - l;
+                    tab[1] = j + k;
+                }
+
                 break;
             case "Nord" :
-                tab[0]=i+l; tab[1]=j-k;
+                if (miroir){
+                    tab[0] = i + l;
+                    tab[1] = j + k;
+                }
+                else{
+                    tab[0] = i + l;
+                    tab[1] = j - k;
+                }
+
                 break;
         }
         return tab;
@@ -53,7 +85,7 @@ public class Helper_Preview {
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
 
-            tab = getCoordCase(piece.getOrientation(), a, b, k, l);
+            tab = getCoordCase(piece.getOrientation(), a, b, k, l, piece.isMiroir());
             //On vérifie si la case est sur le plateau
             if (verifInGrid(tab[0], tab[1])) {
                 if(preview){

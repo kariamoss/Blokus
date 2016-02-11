@@ -67,6 +67,11 @@ public class ControlPlateau implements ActionListener {
             if (piece != previousPiece) {
                 //On passe le clique à faux
                 modelPlateau.setClickToFalse(i, j);
+                //On remet le miroir de la pièce précédente à faux et son orientation à Ouest
+                if(previousPiece!=null) {
+                    previousPiece.setMiroir(false);
+                    previousPiece.setOrientation("Ouest");
+                }
             }
             //Sinon si l'orientation actuelle est différente de la pièce précédente
             else if (piece.getOrientation() != previousPiece.getOrientation()) {
@@ -248,7 +253,7 @@ public class ControlPlateau implements ActionListener {
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
             //Récupère les coordonnés combiné du clique et de la case
-            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
+            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l, piece.isMiroir());
             //Vérifie si la case est ok pour poser
             free = verifCase(tab[0], tab[1]);
             if(!free)
@@ -260,7 +265,7 @@ public class ControlPlateau implements ActionListener {
             int k = caseIt.getPosI();
             int l = caseIt.getPosJ();
             //Récupère les coordonnés combiné du clique et de la case
-            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
+            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l, piece.isMiroir());
             //Regarde si on pose bien la pièce dans un des 4 coins
             if((tab[0]==0 && tab[1]==0) || (tab[0]==19 && tab[1]==0) ||
                (tab[0]==0 && tab[1]==19) || (tab[0]==19 && tab[1]==19)) {
@@ -275,7 +280,7 @@ public class ControlPlateau implements ActionListener {
                 int k = caseIt.getPosI();
                 int l = caseIt.getPosJ();
                 //Récupère les coordonnés combiné du clique et de la case
-                tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
+                tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l, piece.isMiroir());
                 //On actualise la couleur de la case sur la grille
                 updateCaseColor(tab[0],tab[1], piece);
             }
@@ -294,7 +299,7 @@ public class ControlPlateau implements ActionListener {
                 int l = caseIt.getPosJ();
 
                 //Récupère les coordonnés combiné du clique et de la case
-                tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
+                tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l, piece.isMiroir());
                 //On actualise la couleur de la case sur la grille
                 updateCaseColor(tab[0],tab[1], piece);
             }
@@ -321,7 +326,7 @@ public class ControlPlateau implements ActionListener {
             k = caseIt.getPosI();
             l = caseIt.getPosJ();
             //Récupère les coordonnés combiné du clique et de la case
-            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
+            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l, piece.isMiroir());
             //Vérifie si la case est sur le plateau et vide
             free = verifCase(tab[0], tab[1]);
 
@@ -347,7 +352,7 @@ public class ControlPlateau implements ActionListener {
             k = caseIt.getPosI();
             l = caseIt.getPosJ();
             //Récupère les coordonnés combiné du clique et de la case
-            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l);
+            tab = helper_preview.getCoordCase(piece.getOrientation(), i, j, k, l, piece.isMiroir());
             free = helper_preview.checkCoinCase(tab[0], tab[1], caseIt.getCouleur());
 
             c++;
