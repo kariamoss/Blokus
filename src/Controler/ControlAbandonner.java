@@ -10,6 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
 
@@ -37,18 +41,14 @@ public class ControlAbandonner {
 
         //On indique le joueur comme hors jeu
         joueur.setEnJeu(false);
-        modelGeneral.setNbJoueuEnJeu();
+        modelGeneral.getSauvegarde().sauvegardeEtatAbandonJoueur(joueur.getCouleur());
 
 
         //On remet l'overview à null
         vueGeneral.overview.overviewButton.setIcon(null);
         vueGeneral.overview.overviewButton.setBorderPainted(false);
 
-
-
-
-
-        if (modelGeneral.getNbJoueuEnJeu()>0){
+        if (modelGeneral.getNbJoueurEnJeu()>0){
             //On passe au joueur suivant
             modelGeneral.joueurSuivant();
 
@@ -105,6 +105,9 @@ public class ControlAbandonner {
         }
 
         JOptionPane.showMessageDialog(null, result, "Fin de la partie", JOptionPane.INFORMATION_MESSAGE);
+
+        modelGeneral.getSauvegarde().delete();
+
 
         System.exit(0); //TODO Revenir à l'ecran d'accueil
     }

@@ -16,7 +16,6 @@ public class General_v extends JFrame {
 
     public BoutonsControleJeu_v boutonsControleJeu;
     public Inventaire_v inventaire;
-    public Chargement chargement;
     public GameStats_v gameStats;
     public Overview_v overview;
     public Plateau_v plateau;
@@ -33,7 +32,6 @@ public class General_v extends JFrame {
         overview = new Overview_v(modelGeneral);
         inventaire = new Inventaire_v(modelGeneral);
         plateau = new Plateau_v(modelGeneral, this);
-        chargement = new Chargement(modelGeneral, this);
         helper_preview = new Helper_Preview(this, modelGeneral);
         boutonsControleJeu = new BoutonsControleJeu_v(modelGeneral, this);
 
@@ -47,7 +45,6 @@ public class General_v extends JFrame {
         setContentPane(panel_principal);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
 
@@ -90,6 +87,11 @@ public class General_v extends JFrame {
         panel_principal.add(panel_droite);
     }
 
+    public void actualise(){
+        this.validate();
+        this.repaint();
+        this.display();
+    }
 
 
     public void display() {

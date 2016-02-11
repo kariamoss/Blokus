@@ -1,6 +1,7 @@
 package Model;
 
 
+import Helper.Chargement;
 import Helper.ListDoubleCircJoueur;
 import Helper.Sauvegarde;
 import Vue.GameStats_v;
@@ -20,11 +21,10 @@ public class General_m {
 
     ListDoubleCircJoueur listJoueur = new ListDoubleCircJoueur();
 
-    int nbJoueuEnJeu;
 
 
     public GameStats_v gameStats;
-
+    public Chargement chargement;
     public Plateau_m modelPlateau;
 
     public General_m()
@@ -34,7 +34,6 @@ public class General_m {
         joueur2 = new Joueur_m("Yellow", "Yvonne");
         joueur3 = new Joueur_m("Green", "Gerard");
 
-        nbJoueuEnJeu = 4;
         musiqueEtat = true;
 
         listJoueur.append(joueur0);
@@ -45,6 +44,8 @@ public class General_m {
         selectJoueur(0);
 
         modelPlateau = new Plateau_m(this);
+
+        chargement = new Chargement(this);
 
         sauvegarde = new Sauvegarde();
     }
@@ -66,6 +67,19 @@ public class General_m {
         return null;
     }
 
+    public void setJoueurActif(String color){
+        Joueur_m joueurActif = getJoueurByColor(color);
+
+        for(int i = 0; i< listJoueur.size; i++){
+            listJoueur.getJoueur(i).setTourDeJeu(false);
+        }
+
+        do {
+            joueurActif = listJoueur.find(joueurActif).value;
+        }while(!joueurActif.isEnJeu());
+        joueurActif.setTourDeJeu(true);
+    }
+
     public void joueurSuivant()
     {
         Joueur_m joueurActif = selectJoueurActif();
@@ -79,6 +93,7 @@ public class General_m {
             joueurActif = listJoueur.find(joueurActif).next.value;
         }while(!joueurActif.isEnJeu());
         joueurActif.setTourDeJeu(true);
+        sauvegarde.sauvegardeEtatTourJoueur(joueurActif.getCouleur());
     }
 
     public boolean isMusiquePlayed() { return musiqueEtat; }
@@ -98,13 +113,15 @@ public class General_m {
         return modelPlateau;
     }
 
-    public int getNbJoueuEnJeu() {
-        return nbJoueuEnJeu;
+    public int getNbJoueurEnJeu() {
+        int nb = 0;
+        for (int i=0; i < 4 ; i++){
+            if( listJoueur.getJoueur(i).isEnJeu())
+                nb++;
+        }
+        return nb;
     }
 
-    public void setNbJoueuEnJeu() {
-        nbJoueuEnJeu--;
-    }
 
     public Joueur_m getJoueurByScore(int score){
         for(int i=0;i<4;i++)

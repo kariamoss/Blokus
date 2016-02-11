@@ -21,7 +21,7 @@ public class Accueil_m {
         try {
             buffImg = ImageIO.read(new File("images/accueil/blokus1.jpg"));
         }catch (IOException e){
-            System.out.println("Background image error");
+            System.out.println("Background not found. Err code : 9.");
         }
     }
 
