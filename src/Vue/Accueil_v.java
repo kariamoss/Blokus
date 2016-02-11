@@ -7,7 +7,6 @@ import Model.General_m;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,7 +29,7 @@ public class Accueil_v extends JFrame {
     private JPanel panelOptions;
     private JPanel panelQuitter;
     public PanelPerso panelFond;
-    public BufferedImage buffImg;
+    public BufferedImage bgImg;
     public Font font;
 
 
@@ -49,7 +48,12 @@ public class Accueil_v extends JFrame {
     public void initAttribute(General_m modelGeneral){
         this.modelGeneral = modelGeneral;
         controlAccueil = new ControlAccueil(accueil_m, this);
-       // font = new Font("font/Blokus.ttf",Font.BOLD,15);
+        /*try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("font/BLokus.ttf")).deriveFont(Font.BOLD,14);
+        } catch(Exception e){
+            e.printStackTrace();
+        }*/
+        font = new Font("Arial",Font.BOLD,14);
 
 
     }
@@ -66,15 +70,21 @@ public class Accueil_v extends JFrame {
         panelChargerPartie = new JPanel();
         panelOptions = new JPanel();
         panelQuitter = new JPanel();
-        panelFond = new PanelPerso(buffImg);
+        panelFond = new PanelPerso(bgImg);
         //panelFond.setBounds(0,0,900,600);
 
         //boutons
         nouvellePartie = new JButton("Nouvelle partie");
-        //nouvellePartie.setFont(font);
         chargerPartie = new JButton("Charger Partie");
         options = new JButton("Options");
         quitter = new JButton("Quitter");
+        boutonsAccueil(nouvellePartie);
+        boutonsAccueil(chargerPartie);
+        boutonsAccueil(options);
+        boutonsAccueil(quitter);
+
+
+        //param sur les boutons
 
         //action sur les boutons
         nouvellePartie.addActionListener(controlAccueil);
@@ -91,13 +101,13 @@ public class Accueil_v extends JFrame {
         panelQuitter.add(quitter);
         panelQuitter.setOpaque(false);
 
-
-            JPanel panelTest = new JPanel();
         // ajout au panel general
-        panelGeneral.add(panelNouvellePartie);
-        panelGeneral.add(panelChargerPartie);
-        panelGeneral.add(panelOptions);
         panelGeneral.add(panelQuitter);
+        panelGeneral.add(panelOptions);
+        panelGeneral.add(panelChargerPartie);
+        panelGeneral.add(panelNouvellePartie);
+
+        //params du panel general
         panelGeneral.setLayout(new BorderLayout());
         panelGeneral.add(Box.createVerticalStrut(150), BorderLayout.NORTH);
         panelGeneral.add(Box.createHorizontalGlue(), BorderLayout.EAST);
@@ -112,9 +122,20 @@ public class Accueil_v extends JFrame {
 
     public void loadImage(){
         try {
-            buffImg = ImageIO.read(new File("images/accueil/blokus1.jpg"));
+            bgImg = ImageIO.read(new File("images/accueil/blokus1.jpg"));
         }catch (IOException e){
             System.out.println("Background image error");
         }
+
+
     }
+    //gere la mise en forme des boutons de l'accueil
+    public void boutonsAccueil(JButton button){
+        button.setFont(font);
+        button.setForeground(Color.white);
+        button.setOpaque(false);
+        button.setBackground(new Color(0, 0, 0, 0));
+        button.setBorderPainted(false);
+    }
+
 }
