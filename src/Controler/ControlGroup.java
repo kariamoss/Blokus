@@ -19,14 +19,19 @@ public class ControlGroup {
     public Accueil_v accueil_v;
     public ControlAccueil controlAccueil;
 
-    public ControlGroup(General_m modelGeneral) {
-        this.model = modelGeneral;
-        vue = new General_v(model);
+    public ControlGroup(General_m modelGeneral, boolean chargement) {
+        if(chargement){
+            this.model = modelGeneral;
+        }
+        else{
+            this.model = modelGeneral;
+            vue = new General_v(model);
 
-        controlAbandonner = new ControlAbandonner(model, vue);
-        controlButton = new ControlButton(vue, model);
-        controlPlateau = new ControlPlateau (model, vue);
+            controlAbandonner = new ControlAbandonner(model, vue);
+            controlButton = new ControlButton(vue, model);
+            controlPlateau = new ControlPlateau (model, vue);
 
-        vue.display();
+            vue.display();
+        }
     }
 }

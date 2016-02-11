@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 /**
  * Created by Fox Mc-Tag on 19/11/2015.
@@ -51,7 +52,6 @@ public class Plateau_v {
 
     private void mountGrid(){
 
-        modelGeneral.selectJoueur(0);
         tabButton = new JButton[nbButtonsPerRow][nbButtonsPerRow];
         for (int i=0;i<nbButtonsPerRow;i++){
             for (int j=0;j<nbButtonsPerRow;j++){
@@ -64,7 +64,7 @@ public class Plateau_v {
                 //tabButton[i][j].addActionListener(controlButton);
                 tabButton[i][j].setBorder(new LineBorder(Color.DARK_GRAY,1));
 
-                if (modelPlateau.getCase(i, j).getCouleur()!="White"){
+                if (!Objects.equals(modelPlateau.getCase(i, j).getCouleur(), "White")){
                     tabButton[i][j].setContentAreaFilled(true);
                     Color_v color = new Color_v(modelPlateau.getCase(i, j).getCouleur());
                     tabButton[i][j].setBackground(color.getColor());

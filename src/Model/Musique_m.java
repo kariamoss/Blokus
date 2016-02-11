@@ -36,6 +36,7 @@ public class Musique_m extends Thread
         catch (IOException ex)
         {
             Logger.getLogger(Musique_m.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Music not found. Err code : 10.");
         }
     }
 
@@ -52,6 +53,7 @@ public class Musique_m extends Thread
         catch (IOException ex)
         {
             Logger.getLogger(Musique_m.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Music not found. Err code : 11.");
         }
     }
 

@@ -65,20 +65,7 @@ public class ControlPlateauUnitTest {
         p1.rotateRight();
         Assert.assertEquals(p1.getOrientation(),"Nord");
 
-        switch(p1.getOrientation()){
-            case "Ouest":
-                plateau_c.positionnementOuest(10,10,p1);
-                break;
-            case "Sud":
-                plateau_c.positionnementSud(10,10,p1);
-                break;
-            case "Est":
-                plateau_c.positionnementEst(10,10,p1);
-                break;
-            case "Nord":
-                plateau_c.positionnementNord(10,10,p1);
-                break;
-        }
+        plateau_c.positionnement(10,10,p1);
 
         for(int i = 0; i < plateau.getTaillePlateau(); i++){
             for(int j = 0; j < plateau.getTaillePlateau(); j++){

@@ -15,6 +15,7 @@ public class Piece_m {
     int positionI = -1;
     int positionJ = -1;
     int numero;
+    boolean miroir;
 
     public Piece_m(List<Case_m> liste, String orientation, String image, int numero){
         this.orientation = orientation;
@@ -30,6 +31,7 @@ public class Piece_m {
 
         this.numero = numero;
         used = false;
+        miroir = false;
     }
 
     public List<Case_m> getListeCase() {
@@ -105,5 +107,11 @@ public class Piece_m {
         this.numero = numero;
     }
 
+    public void setMiroir(boolean miroir) {
+        this.miroir = miroir;
+    }
 
+    public boolean isMiroir() {
+        return miroir;
+    }
 }
