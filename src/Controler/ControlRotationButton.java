@@ -156,23 +156,43 @@ public class ControlRotationButton
             BufferedImage biNew = new BufferedImage((int)(w*scale), (int)(h*scale), image.getType());
             image = op.filter(image, biNew);
 
-            switch (orientation){
-                case "Ouest" :
-                    //Sud - 90
-                    image = rotate(image, 90);
-                    break;
-                case "Nord" :
-                    //Est - 180
-                    image = rotate(image, 180);
-                    break;
-                case "Est" :
-                    //Nord - 270
-                    image = rotate(image, 270);
-                    break;
+            if(piece.isMiroir()){
+                image = rotateMiroir(image);
+                switch (orientation){
+                    case "Ouest" :
+                        //Nord - 90
+                        image = rotate(image, 270);
+                        break;
+                    case "Nord" :
+                        //Est - 180
+                        image = rotate(image, 180);
+                        break;
+                    case "Est" :
+                        //Sud - 270
+                        image = rotate(image, 90);
+                        break;
+                }
+
+            }
+            else{
+                switch (orientation){
+                    case "Ouest" :
+                        //Sud - 90
+                        image = rotate(image, 90);
+                        break;
+                    case "Nord" :
+                        //Est - 180
+                        image = rotate(image, 180);
+                        break;
+                    case "Est" :
+                        //Nord - 270
+                        image = rotate(image, 270);
+                        break;
+                }
             }
 
-            if(piece.isMiroir())
-                image = rotateMiroir(image);
+
+
 
             ImageIcon icon = new ImageIcon(image);
             vueGeneral.overview.overviewButton.setIcon(icon);
@@ -184,7 +204,13 @@ public class ControlRotationButton
             int j = piece.getPositionJ();
             helper_preview.setColorPreview(i, j, piece, true);  //Décolore
 
-            piece.rotateRight();
+            if(piece.isMiroir()){
+                piece.rotateLeft();
+            }
+            else{
+                piece.rotateRight();
+            }
+
 
             helper_preview.setColorPreview(i, j, piece, false); //Colore
 
@@ -229,35 +255,59 @@ public class ControlRotationButton
             BufferedImage biNew = new BufferedImage((int)(w*scale), (int)(h*scale), image.getType());
             image = op.filter(image, biNew);
 
-            switch (orientation){
-                case "Ouest" :
-                    //Nord - 90
-                    image = rotate(image, 90);
-                    break;
-                case "Nord" :
-                    //Est - 180
-                    image = rotate(image, 180);
-                    break;
-                case "Est" :
-                    //Sud - 270
-                    image = rotate(image, 270);
-                    break;
+            if(piece.isMiroir()) {
+                image = rotateMiroir(image);
+                switch (orientation){
+                    case "Ouest" :
+                        //Sud - 90
+                        image = rotate(image, 90);
+                        break;
+                    case "Nord" :
+                        //Est - 180
+                        image = rotate(image, 180);
+                        break;
+                    case "Est" :
+                        //Nord - 270
+                        image = rotate(image, 270);
+                        break;
+                }
+            }else{
+                switch (orientation){
+                    case "Ouest" :
+                        //Nord - 90
+                        image = rotate(image, 270);
+                        break;
+                    case "Nord" :
+                        //Est - 180
+                        image = rotate(image, 180);
+                        break;
+                    case "Est" :
+                        //Sud - 270
+                        image = rotate(image, 90);
+                        break;
+                }
             }
 
-            if(piece.isMiroir())
-                image = rotateMiroir(image);
+
+
 
             ImageIcon icon = new ImageIcon(image);
             vueGeneral.overview.overviewButton.setIcon(icon);
 
 
             /*----PARTIE PLATEAU-----*/
-            System.out.println("Rotation vers la droite / Orientation avant : " + piece.getOrientation());
+            System.out.println("Rotation vers la gauche / Orientation avant : " + piece.getOrientation());
             int i = piece.getPositionI();
             int j = piece.getPositionJ();
             helper_preview.setColorPreview(i, j, piece, true);  //Décolore
 
-            piece.rotateRight();
+            if(piece.isMiroir()){
+                piece.rotateRight();
+            }
+            else {
+                piece.rotateLeft();
+            }
+
 
             helper_preview.setColorPreview(i, j, piece, false); //Colore
 
