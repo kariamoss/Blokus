@@ -1,0 +1,12 @@
+19;0;Red;15
+19;1;Red;15
+18;0;Red;15
+17;0;Red;15
+18;1;Red;15
+Tour;Blue
+19;18;Blue;15
+19;19;Blue;15
+18;18;Blue;15
+17;18;Blue;15
+18;19;Blue;15
+Tour;Yellow

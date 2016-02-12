@@ -51,7 +51,24 @@ public class Chargement {
         List<Color_v> listColor = new ArrayList<Color_v>();
 
         try{
-            while((ligne = br.readLine() ) != null){
+            if((ligne = br.readLine()) == null){
+                try{
+                    br.close();
+                    fr.close();
+                    br = null;
+                    fr = null;
+                    fichier.delete();
+                }catch(Exception e){
+                    e.printStackTrace();
+                    System.out.println("File can't be close. Err code : 4.");
+                }
+
+                JOptionPane.showMessageDialog(null, "Vous n'avez aucune partie en cours"
+                        , "Chargement impossible", JOptionPane.INFORMATION_MESSAGE);
+
+                return;
+            }
+            do{
                 String[] split = ligne.split(";");
 
                 //On vérifie si la ligne correspond à l'abandon d'un joueur
@@ -60,22 +77,22 @@ public class Chargement {
                     nbAbandon++;
                     if(nbAbandon == 4){
                         //On libère le fichier pour être utiliser dans nouvelle partie
-                        try{
-                            br.close();
-                            fr.close();
-                            br = null;
-                            fr = null;
-                            fichier.delete();
-                        }catch(Exception e){
-                            e.printStackTrace();
-                            System.out.println("File can't be close. Err code : 4.");
-                        }
-
-                        JOptionPane.showMessageDialog(null, "Vous n'avez aucune partie en cours"
-                                , "Chargement impossible", JOptionPane.INFORMATION_MESSAGE);
-
-                        return;
+                    try{
+                        br.close();
+                        fr.close();
+                        br = null;
+                        fr = null;
+                        fichier.delete();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        System.out.println("File can't be close. Err code : 4.");
                     }
+
+                    JOptionPane.showMessageDialog(null, "Vous n'avez aucune partie en cours"
+                            , "Chargement impossible", JOptionPane.INFORMATION_MESSAGE);
+
+                    return;
+                }
                 }
                 else if(split[0].equals("Tour")){
                     model.setJoueurActif(split[1]);
@@ -101,7 +118,7 @@ public class Chargement {
                     listColor.add(color);
 
                 }
-            }
+            }while((ligne = br.readLine() ) != null);
         }catch(IOException e){
             e.printStackTrace();
             System.out.println("File can't be write in. Err code : 5.");
