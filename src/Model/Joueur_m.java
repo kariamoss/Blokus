@@ -8,6 +8,7 @@ public class Joueur_m {
     String couleur;
     boolean enJeu;
     boolean tourDeJeu;
+    boolean is_Ia;
     int score;
     String nom;
 
@@ -18,6 +19,7 @@ public class Joueur_m {
         enJeu = true;
         tourDeJeu = false;
         score = 0;
+        is_Ia = false;
     }
 
 
@@ -72,7 +74,7 @@ public class Joueur_m {
         this.score = score;
     }
 
-
+    public boolean is_Ia(){ return is_Ia;}
 
 }
 

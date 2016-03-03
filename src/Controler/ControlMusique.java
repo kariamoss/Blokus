@@ -17,7 +17,7 @@ public class ControlMusique
     {
         this.modelGeneral = model;
         vueGeneral = vue;
-        this.vue = vueGeneral.boutonsControleJeu; //TODO A verifier : OK
+        this.vue = vueGeneral.boutonsControleJeu;
         musique = new Musique_m(model.getMusiquePath());
         musique.start();
     }

@@ -17,12 +17,14 @@ public class Helper_Preview {
 
     Plateau_v vuePlateau; //TODO Changer model en vue pour les tabButton : OK
     Plateau_m modelPlateau;
+    General_m modelGeneral;
     ImageIcon previewImage = new ImageIcon(new ImageIcon("images/preview.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT ));
 
     public Helper_Preview(General_v vueGeneral, General_m modelGeneral)
     {
         modelPlateau = modelGeneral.modelPlateau;
         vuePlateau = vueGeneral.plateau;
+        this.modelGeneral = modelGeneral;
     }
 
 
@@ -79,6 +81,7 @@ public class Helper_Preview {
 
 
     public void setColorPreview(int a, int b, Piece_m piece, boolean preview){
+        if(modelGeneral.selectJoueurActif().is_Ia()){ return;}
         int[] tab = new int[2];
         for(Case_m caseIt : piece.getListeCase()) {
             //Récupère la position de la case dans la pièce

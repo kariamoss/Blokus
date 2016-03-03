@@ -2,10 +2,7 @@ package Controler;
 
 import Helper.Color_v;
 import Helper.Helper_Preview;
-import Model.Case_m;
-import Model.General_m;
-import Model.Piece_m;
-import Model.Plateau_m;
+import Model.*;
 import Vue.General_v;
 
 import javax.swing.*;
@@ -25,6 +22,7 @@ public class ControlPlateau implements ActionListener {
     private General_v vueGeneral;
     int i;
     int j;
+    IA_m iA;
 
     Helper_Preview helper_preview;
 
@@ -43,15 +41,17 @@ public class ControlPlateau implements ActionListener {
         this.modelPlateau = modelGeneral.modelPlateau;
 
         vueGeneral.plateau.setButtonControler(this);
+        iA = new IA_m( modelGeneral,  vueGeneral, this);
 
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        boolean positionnementOk = false;
+        if (modelGeneral.selectJoueurActif().is_Ia()) return;
+
+
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
 
-        //TODO Chercher i et j (utiliser e.getSource() : OK
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 if (e.getSource() == vueGeneral.plateau.tabButton[i][j]) {
@@ -61,6 +61,13 @@ public class ControlPlateau implements ActionListener {
             }
         }
 
+        control(i, j, piece);
+
+    }
+
+    public void control(int i, int j, Piece_m piece) {
+
+        boolean positionnementOk = false;
 
         if (piece!=null) {
             //Si la pièce actuelle est différente de la pièce précédente
@@ -96,11 +103,11 @@ public class ControlPlateau implements ActionListener {
                 piece.setPositionI(i);
                 piece.setPositionJ(j);
 
-                System.out.println("Cliquez une seconde fois pour confirmer");
+                //System.out.println("Cliquez une seconde fois pour confirmer");
 
             } else {
 
-                System.out.println("Clique en " + i + ";" + j + ".");
+                //System.out.println("Clique en " + i + ";" + j + ".");
 
                 //On repasse la case cliqué à faux
                 modelPlateau.setClickToFalse(i, j);
@@ -129,7 +136,7 @@ public class ControlPlateau implements ActionListener {
 
 
         if (positionnementOk){
-            System.out.println("Positionnement OK\n\n");
+            //System.out.println("Positionnement OK\n\n");
 
             //On augmente le score du joueur
             modelGeneral.selectJoueurActif().setScore(modelGeneral.selectJoueurActif().getScore()+piece.getListeCase().size());
@@ -156,37 +163,42 @@ public class ControlPlateau implements ActionListener {
             piece.setPositionI(i);
             piece.setPositionJ(j);
 
-            System.out.println("Coordonnées de la pièce : " + piece.getPositionI() + ";" + piece.getPositionJ());
+            //System.out.println("Coordonnées de la pièce : " + piece.getPositionI() + ";" + piece.getPositionJ());
 
 
             //On change d'inventaire
-            List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
+            dessinerInventaire();
 
-            for (int i =0;i<listPiece.size()-1;i++)
-            {
-                vueGeneral.inventaire.tabButtonInventaire[i].setEnabled(true);
-                if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
-                {
-                    vueGeneral.inventaire.tabButtonInventaire[i].setEnabled(false);
-                }
-                ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
-                Image image = imageIcon.getImage();
-                Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
-                ImageIcon icon = new ImageIcon(newImage);
 
-                vueGeneral.inventaire.tabButtonInventaire[i].setIcon(icon);
+            if(modelGeneral.selectJoueurActif().is_Ia()){
+                iA.runIA();
             }
-
-
         }
     }
 
+    public void dessinerInventaire(){
+        List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();
+        for (i =0;i<listPiece.size()-1;i++)
+        {
+            vueGeneral.inventaire.tabButtonInventaire[i].setEnabled(true);
+            if(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).isUsed())
+            {
+                vueGeneral.inventaire.tabButtonInventaire[i].setEnabled(false);
+            }
+            ImageIcon imageIcon = new ImageIcon(listPiece.get(i).getImage());
+            Image image = imageIcon.getImage();
+            Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
+            ImageIcon icon = new ImageIcon(newImage);
+
+            vueGeneral.inventaire.tabButtonInventaire[i].setIcon(icon);
+        }
+    }
 
     public void colorPreview(int i, int j, Piece_m piece)
     {
         if (previousPiece==null)
         {
-            System.out.println("Pas de pièce précédente");
+            //System.out.println("Pas de pièce précédente");
             //Récupérer l'orientation de la pièce
             //Colorier le plateau en fonction de l'orientation de la pièce : couleur : orange
             //Si on sort du plateau, ignorer
@@ -197,16 +209,16 @@ public class ControlPlateau implements ActionListener {
         }
         else
         {
-            System.out.println("Il y a une pièce précédente");
+            //System.out.println("Il y a une pièce précédente");
             //Récupérer l'orientation de la pièce précédente
             //Récupérer les coordonnées de la pièce précédente
             //Enlever le background et l'icon de la pièce précédente en fonction de l'orientation et de previousCoord
 
             String previousOrientation = previousPiece.getOrientation();
-            System.out.println("Orientation de la pièce précédente :"+previousOrientation);
+            //System.out.println("Orientation de la pièce précédente :"+previousOrientation);
             int a = previousCoord[0];
             int b = previousCoord[1];
-            System.out.println("Coordonnées précédente : a="+a+" / b="+b);
+            //System.out.println("Coordonnées précédente : a="+a+" / b="+b);
 
             helper_preview.setColorPreview(a, b, previousPiece, true);
 
@@ -226,10 +238,10 @@ public class ControlPlateau implements ActionListener {
         //Si oui, vérifie que la case n'est pas déjà occupé
         if(i>=0 && i<20 && j>=0 && j<20){
             if (modelPlateau.getCase(i,j).getCouleur().equals("White")){
-                System.out.println("Couleur case : " +modelPlateau.getCase(i, j).getCouleur());
+                //System.out.println("Couleur case : " +modelPlateau.getCase(i, j).getCouleur());
                 return true ;
             }
-            System.out.println("Couleur case : " +modelPlateau.getCase(i, j).getCouleur());
+            //System.out.println("Couleur case : " +modelPlateau.getCase(i, j).getCouleur());
         }
         return false;
     }
@@ -306,7 +318,7 @@ public class ControlPlateau implements ActionListener {
             return true;
         }
         else {
-            System.out.println("Placement impossible");
+            //System.out.println("Placement impossible");
             return false;
         }
 
