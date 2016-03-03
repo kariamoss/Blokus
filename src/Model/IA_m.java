@@ -32,11 +32,11 @@ public class IA_m{
             iA = modelGeneral.selectJoueurActif();
             List<Piece_m> listPiece = iA.getInventaire().getListPiece();
 
-            //Booleens pour la gestion de l'hasard dans les parties
+            //TODO Booleens pour la gestion de l'hasard dans les parties
             Random random = new Random();
 
             boolean coteHaut = random.nextBoolean();
-            boolean coteBas = random.nextBoolean();
+            boolean coteGauche = random.nextBoolean();
             boolean turnLeft = random.nextBoolean();
             boolean pieceBefore = random.nextBoolean();
 
@@ -45,8 +45,13 @@ public class IA_m{
                 //Si la piece n'est pas déjà utilisée
                 if (!listPiece.get(i).isUsed()) {
                     //On test les cases du tableau
-                    for (int x = 0; x < 20; x++) {
-                        for (int y = 0; y < 20; y++) {
+                    for (int x = (coteHaut) ? 0 : 19; (coteHaut) ? x < 20 : x > 0; x = (coteHaut) ? x+1 : x-1) {
+                        if(pieceBefore){
+                            pieceBefore = false;
+                            break;
+                        }
+                        for (int y = (coteGauche) ? 0 : 19; (coteGauche) ? y < 20 : y > 0; y = (coteGauche) ? y+1 : y-1) {
+
                             //On test pour chaque position de la piece
                             for (int z = 0; z < 4; z++) {
                                 controlPlateau.control(x, y, listPiece.get(i));
@@ -62,6 +67,8 @@ public class IA_m{
             }
             iA.setEnJeu(false);
             modelGeneral.joueurSuivant();
+            vueGeneral.informationMessage(iA.getNom() + " abandonne", "Abandon");
+            if(modelGeneral.selectJoueurActif().is_Ia()) runIA();
             controlPlateau.dessinerInventaire();
         }
     }
