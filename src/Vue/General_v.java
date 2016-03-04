@@ -19,6 +19,7 @@ public class General_v extends JFrame {
     public GameStats_v gameStats;
     public Overview_v overview;
     public Plateau_v plateau;
+    public Menu_v menu;
     public PlayerCard_v playerCard;
 
     protected JPanel panel_principal;
@@ -32,6 +33,7 @@ public class General_v extends JFrame {
         overview = new Overview_v(modelGeneral);
         inventaire = new Inventaire_v(modelGeneral);
         plateau = new Plateau_v(modelGeneral, this);
+        menu = new Menu_v(this);
         helper_preview = new Helper_Preview(this, modelGeneral);
         boutonsControleJeu = new BoutonsControleJeu_v(modelGeneral, this);
 
@@ -44,7 +46,7 @@ public class General_v extends JFrame {
         setSize(900, 660);
         setContentPane(panel_principal);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
 
@@ -85,6 +87,7 @@ public class General_v extends JFrame {
         fenetre_Grille.add(plateau.getGrille());
         panel_principal.add(fenetre_Grille);
         panel_principal.add(panel_droite);
+        setJMenuBar(menu.barre_menu);
     }
 
     public void actualise(){
@@ -97,6 +100,8 @@ public class General_v extends JFrame {
     public void display() {
         setVisible(true);
     }
+
+    public void undisplay(){setVisible(false);}
 
     public BoutonsControleJeu_v getFenetreControle() {
         return boutonsControleJeu;
