@@ -148,6 +148,19 @@ public class General_m {
         }
         return null;
     }
+
+    public void setNomJoueur0(String nom){
+        joueur0.setNom(nom);
+    }
+    public void setNomJoueur1(String nom){
+        joueur1.setNom(nom);
+    }
+    public void setNomJoueur2(String nom){
+        joueur2.setNom(nom);
+    }
+    public void setNomJoueur3(String nom){
+        joueur3.setNom(nom);
+    }
 }
 
 
