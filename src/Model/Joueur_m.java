@@ -76,5 +76,7 @@ public class Joueur_m {
 
     public boolean is_Ia(){ return is_Ia;}
 
+    public boolean set_Ia(boolean isIA){ return is_Ia = isIA;}
+
 }
 

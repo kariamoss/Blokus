@@ -17,9 +17,9 @@ public class ParamPartie_v extends JFrame{
     private JPanel panelTypePartie;
     private JPanel panelGeneral;
     private JPanel panelJoueur1;
-    private JPanel panelJoueur2;
-    private JPanel panelJoueur3;
-    private JPanel panelJoueur4;
+    public JPanel panelJoueur2;
+    public JPanel panelJoueur3;
+    public JPanel panelJoueur4;
     private JPanel panelJoueurs;
     private General_m modelGeneral;
     public JCheckBox reseauCB;
@@ -73,9 +73,13 @@ public class ParamPartie_v extends JFrame{
         iaJoueur3= new JCheckBox();
         iaJoueur4= new JCheckBox();
         humainJoueur1= new JCheckBox();
+        humainJoueur1.setSelected(true);
         humainJoueur2= new JCheckBox();
+        humainJoueur2.setSelected(true);
         humainJoueur3= new JCheckBox();
+        humainJoueur3.setSelected(true);
         humainJoueur4= new JCheckBox();
+        humainJoueur4.setSelected(true);
         valider = new JButton("Créer la partie");
     }
 
@@ -92,6 +96,7 @@ public class ParamPartie_v extends JFrame{
 
         reseauCB = new JCheckBox();
         localCB = new JCheckBox();
+        localCB.setSelected(true);
 
         textFieldNomJoueur1 = new JTextField("Joueur1");
         textFieldNomJoueur2 = new JTextField("Joueur2");

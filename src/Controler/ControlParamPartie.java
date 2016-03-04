@@ -39,6 +39,9 @@ public class ControlParamPartie implements ActionListener {
         }
 
         if (e.getSource() == vue.reseauCB) {
+            vue.humainJoueur2.setSelected(false);
+            vue.humainJoueur3.setSelected(false);
+            vue.humainJoueur4.setSelected(false);
             vue.humainJoueur2.setEnabled(false);
             vue.humainJoueur3.setEnabled(false);
             vue.humainJoueur4.setEnabled(false);
@@ -46,6 +49,11 @@ public class ControlParamPartie implements ActionListener {
             vue.iaJoueur2.setEnabled(false);
             vue.iaJoueur3.setEnabled(false);
             vue.iaJoueur4.setEnabled(false);
+            vue.panelJoueur2.setVisible(false);
+            vue.panelJoueur3.setVisible(false);
+            vue.panelJoueur4.setVisible(false);
+            vue.valider.setEnabled(false);
+
         }
 
         if(e.getSource() == vue.localCB){
@@ -56,6 +64,10 @@ public class ControlParamPartie implements ActionListener {
             vue.iaJoueur2.setEnabled(true);
             vue.iaJoueur3.setEnabled(true);
             vue.iaJoueur4.setEnabled(true);
+            vue.panelJoueur2.setVisible(true);
+            vue.panelJoueur3.setVisible(true);
+            vue.panelJoueur4.setVisible(true);
+            vue.valider.setEnabled(true);
 
         }
 
@@ -63,19 +75,27 @@ public class ControlParamPartie implements ActionListener {
             modelGeneral = new General_m();
             //met dans le modele le nom des joueurs
             String nom= vue.textFieldNomJoueur1.getText();
-            modelGeneral.setNomJoueur0(nom);
+            modelGeneral.getJoueurByColor("Red").setNom(nom);
+            modelGeneral.getJoueurByColor("Red").set_Ia(vue.iaJoueur1.isSelected());
             nom = vue.textFieldNomJoueur2.getText();
-            modelGeneral.setNomJoueur1(nom);
+            modelGeneral.getJoueurByColor("Blue").setNom(nom);
+            modelGeneral.getJoueurByColor("Blue").set_Ia(vue.iaJoueur2.isSelected());
             nom = vue.textFieldNomJoueur3.getText();
-            modelGeneral.setNomJoueur2(nom);
+            modelGeneral.getJoueurByColor("Yellow").setNom(nom);
+            modelGeneral.getJoueurByColor("Yellow").set_Ia(vue.iaJoueur3.isSelected());
             nom = vue.textFieldNomJoueur4.getText();
-            modelGeneral.setNomJoueur3(nom);
+            modelGeneral.getJoueurByColor("Green").setNom(nom);
+            modelGeneral.getJoueurByColor("Green").set_Ia(vue.iaJoueur4.isSelected());
             general_v = new General_v(modelGeneral);
             controlAbandonner = new ControlAbandonner(modelGeneral, general_v);
             controlButton = new ControlButton(general_v, modelGeneral);
             controlPlateau = new ControlPlateau (modelGeneral, general_v);
             vue.undisplay();
             general_v.display();
+        }
+
+        if(e.getSource() == vue.localCB){
+            vue.iaJoueur1.setEnabled(false);
         }
     }
 }

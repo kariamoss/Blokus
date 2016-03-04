@@ -8,9 +8,9 @@ import Vue.GameStats_v;
 
 public class General_m {
     Joueur_m joueur0;
-    JoueurIA_m joueur1;
-    JoueurIA_m joueur2;
-    JoueurIA_m joueur3;
+    Joueur_m joueur1;
+    Joueur_m joueur2;
+    Joueur_m joueur3;
 
     protected Sauvegarde sauvegarde;
 
@@ -25,9 +25,9 @@ public class General_m {
     public General_m()
     {
         joueur0 = new Joueur_m("Red", "Roger");
-        joueur1 = new JoueurIA_m("Blue", "Bernard");
-        joueur2 = new JoueurIA_m("Yellow", "Yvonne");
-        joueur3 = new JoueurIA_m("Green", "Gerard");
+        joueur1 = new Joueur_m("Blue", "Bernard");
+        joueur2 = new Joueur_m("Yellow", "Yvonne");
+        joueur3 = new Joueur_m("Green", "Gerard");
 
         musiqueEtat = true;
 
