@@ -1,9 +1,11 @@
 package Controler;
 
+import Model.Accueil_m;
 import Model.General_m;
 import Model.Joueur_m;
 import Model.Piece_m;
 import Helper.Comparateur;
+import Vue.Accueil_v;
 import Vue.General_v;
 
 import javax.swing.*;
@@ -108,8 +110,11 @@ public class ControlAbandonner {
 
         modelGeneral.getSauvegarde().delete();
 
-
-        System.exit(0); //TODO Revenir à l'ecran d'accueil
+        vueGeneral.undisplay();
+        Accueil_v accueil_v = new Accueil_v();
+        Accueil_m accueil_m = new Accueil_m();
+        ControlAccueil control = new ControlAccueil(accueil_m, accueil_v);
+        accueil_v.display();
     }
 
 
