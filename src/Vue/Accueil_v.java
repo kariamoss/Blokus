@@ -124,7 +124,7 @@ public class Accueil_v extends JFrame {
         try {
             bgImg = ImageIO.read(new File("images/accueil/blokus1.jpg"));
         }catch (IOException e){
-            System.out.println("Background not found. Err code : 12.");
+            System.out.println("Background not found.");
         }
 
 
@@ -135,7 +135,7 @@ public class Accueil_v extends JFrame {
         button.setForeground(Color.white);
         button.setOpaque(false);
         button.setBackground(new Color(0, 0, 0, 0));
-        button.setBorderPainted(false);
+        button.setBorderPainted(true);
     }
 
 }
