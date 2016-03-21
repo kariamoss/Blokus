@@ -43,7 +43,7 @@ public class General_v extends JFrame {
 
         boutonsControleJeu.init();
         boutonsControleJeu.dessinerBoutons();
-        setSize(900, 660);
+        setSize(900, 680);
         setContentPane(panel_principal);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
