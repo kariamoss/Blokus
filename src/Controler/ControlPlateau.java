@@ -42,12 +42,17 @@ public class ControlPlateau implements ActionListener {
 
         vueGeneral.plateau.setButtonControler(this);
         iA = new IA_m( modelGeneral,  vueGeneral, this);
+        if(modelGeneral.selectJoueurActif().is_Ia()){
+            iA.runIA();
+        }
 
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        if (modelGeneral.selectJoueurActif().is_Ia()) return;
+        if(modelGeneral.selectJoueurActif().is_Ia()){
+            iA.runIA();
+        }
 
 
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
@@ -169,10 +174,6 @@ public class ControlPlateau implements ActionListener {
             //On change d'inventaire
             dessinerInventaire();
 
-
-            if(modelGeneral.selectJoueurActif().is_Ia()){
-                iA.runIA();
-            }
         }
     }
 

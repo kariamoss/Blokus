@@ -60,7 +60,7 @@ public class ControlParamPartie implements ActionListener {
             vue.humainJoueur2.setEnabled(true);
             vue.humainJoueur3.setEnabled(true);
             vue.humainJoueur4.setEnabled(true);
-            vue.iaJoueur1.setEnabled(false);
+            vue.iaJoueur1.setEnabled(true);
             vue.iaJoueur2.setEnabled(true);
             vue.iaJoueur3.setEnabled(true);
             vue.iaJoueur4.setEnabled(true);
