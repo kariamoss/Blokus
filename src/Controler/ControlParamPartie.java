@@ -86,16 +86,12 @@ public class ControlParamPartie implements ActionListener {
             nom = vue.textFieldNomJoueur4.getText();
             modelGeneral.getJoueurByColor("Green").setNom(nom);
             modelGeneral.getJoueurByColor("Green").set_Ia(vue.iaJoueur4.isSelected());
+            vue.undisplay();
             general_v = new General_v(modelGeneral);
-            controlAbandonner = new ControlAbandonner(modelGeneral, general_v);
+            general_v.display();
             controlButton = new ControlButton(general_v, modelGeneral);
             controlPlateau = new ControlPlateau (modelGeneral, general_v);
-            vue.undisplay();
-            general_v.display();
-        }
 
-        if(e.getSource() == vue.localCB){
-            vue.iaJoueur1.setEnabled(false);
         }
     }
 }

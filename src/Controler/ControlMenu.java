@@ -32,7 +32,6 @@ public class ControlMenu implements ActionListener {
             general_v.undisplay();
             Accueil_v accueil_v = new Accueil_v();
             Accueil_m accueil_m = new Accueil_m();
-            ControlAccueil control = new ControlAccueil(accueil_m, accueil_v);
             accueil_v.display();
         }
     }

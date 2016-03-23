@@ -25,13 +25,14 @@ import java.util.List;
 public class ControlAbandonner {
     private General_m modelGeneral;
     private General_v vueGeneral;
+    private ControlPlateau controlPlateau;
     protected Joueur_m joueur;
     private static final int NB_JOUEUR = 4;
+
 
     public ControlAbandonner(General_m modelGeneral, General_v vueGeneral) {
         this.modelGeneral = modelGeneral;
         this.vueGeneral = vueGeneral;
-
         //vueGeneral.boutonsControleJeu.setAbandonButtonControler(this);
     }
 
@@ -53,6 +54,7 @@ public class ControlAbandonner {
         if (modelGeneral.getNbJoueurEnJeu()>0){
             //On passe au joueur suivant
             modelGeneral.joueurSuivant();
+
 
             //On change d'inventaire
             List<Piece_m> listPiece = modelGeneral.selectJoueurActif().getInventaire().getListPiece();

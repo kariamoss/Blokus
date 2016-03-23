@@ -1,5 +1,6 @@
 package Vue;
 
+import Controler.ControlAbandonner;
 import Helper.Chargement;
 import Helper.Helper_Preview;
 import Model.General_m;
@@ -28,7 +29,6 @@ public class General_v extends JFrame {
 
     public General_v(General_m modelGeneral){
         this.modelGeneral = modelGeneral;
-
 
         overview = new Overview_v(modelGeneral);
         inventaire = new Inventaire_v(modelGeneral);

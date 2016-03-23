@@ -15,6 +15,7 @@ public class General_m {
     protected Sauvegarde sauvegarde;
 
     private boolean musiqueEtat;
+    public boolean tourSuivant;
 
     ListDoubleCircJoueur listJoueur = new ListDoubleCircJoueur();
 
@@ -43,6 +44,7 @@ public class General_m {
         chargement = new Chargement(this);
 
         sauvegarde = new Sauvegarde();
+        tourSuivant = false;
     }
 
     public void selectJoueur(int index){
@@ -88,6 +90,7 @@ public class General_m {
             joueurActif = listJoueur.find(joueurActif).next.value;
         }while(!joueurActif.isEnJeu());
         joueurActif.setTourDeJeu(true);
+        tourSuivant = true;
         sauvegarde.sauvegardeEtatTourJoueur(joueurActif.getCouleur());
     }
 

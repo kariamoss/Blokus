@@ -45,14 +45,11 @@ public class ControlPlateau implements ActionListener {
         if(modelGeneral.selectJoueurActif().is_Ia()){
             iA.runIA();
         }
-
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        if(modelGeneral.selectJoueurActif().is_Ia()){
-            iA.runIA();
-        }
+        if (modelGeneral.selectJoueurActif().is_Ia()) return;
 
 
         Piece_m piece = modelGeneral.selectJoueurActif().getInventaire().selectPieceActive();
@@ -174,6 +171,10 @@ public class ControlPlateau implements ActionListener {
             //On change d'inventaire
             dessinerInventaire();
 
+
+            if(modelGeneral.selectJoueurActif().is_Ia()){
+                iA.runIA();
+            }
         }
     }
 

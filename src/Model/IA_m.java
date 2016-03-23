@@ -16,6 +16,7 @@ public class IA_m{
     General_m modelGeneral;
     Plateau_m modelPlateau;
     ControlPlateau controlPlateau;
+    ThreadEcouteIA threadEcouteIA;
 
 
     public IA_m(General_m modelGeneral, General_v vueGeneral, ControlPlateau controlPlateau )
@@ -24,6 +25,9 @@ public class IA_m{
         this.vueGeneral = vueGeneral;
         this.modelPlateau = modelGeneral.modelPlateau;
         this.controlPlateau = controlPlateau;
+        threadEcouteIA = new ThreadEcouteIA();
+        threadEcouteIA.initThread(this, modelGeneral, vueGeneral);
+        threadEcouteIA.start();
     }
 
     public void runIA() {
@@ -32,7 +36,6 @@ public class IA_m{
             iA = modelGeneral.selectJoueurActif();
             List<Piece_m> listPiece = iA.getInventaire().getListPiece();
 
-            //TODO Booleens pour la gestion de l'hasard dans les parties
             Random random = new Random();
 
             boolean coteHaut = random.nextBoolean();
@@ -54,11 +57,16 @@ public class IA_m{
 
                             //On test pour chaque position de la piece
                             for (int z = 0; z < 4; z++) {
-                                controlPlateau.control(x, y, listPiece.get(i));
                                 listPiece.get(i).rotateLeft();
-                                if(listPiece.get(i).isUsed()){
-                                    System.out.println("IA "+ iA.getCouleur() + "joue la piece numéro" +i);
-                                    return;
+                                //On test pour chaque "miroir" de la piece
+                                for(int w = 0; w < 2;w ++){
+                                    controlPlateau.control(x, y, listPiece.get(i));
+                                    listPiece.get(i).setMiroir(w==0);
+
+                                    if(listPiece.get(i).isUsed()){
+                                        System.out.println("IA "+ iA.getCouleur() + "joue la piece numéro" +i);
+                                        return;
+                                    }
                                 }
                             }
                         }
@@ -68,6 +76,7 @@ public class IA_m{
             iA.setEnJeu(false);
             modelGeneral.joueurSuivant();
             vueGeneral.informationMessage(iA.getNom() + " abandonne", "Abandon");
+
             if(modelGeneral.selectJoueurActif().is_Ia()) runIA();
             controlPlateau.dessinerInventaire();
         }

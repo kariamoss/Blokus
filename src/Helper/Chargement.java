@@ -130,8 +130,8 @@ public class Chargement {
         vue = new General_v(model);
         vue.display();
 
+
         //Puis les controleurs qui en dépendent
-        controlAbandonner = new ControlAbandonner(model, vue);
         controlButton = new ControlButton(vue, model);
         controlPlateau = new ControlPlateau(model, vue);
 
