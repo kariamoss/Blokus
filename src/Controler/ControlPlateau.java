@@ -41,6 +41,8 @@ public class ControlPlateau implements ActionListener {
         this.modelPlateau = modelGeneral.modelPlateau;
 
         vueGeneral.plateau.setButtonControler(this);
+
+
         iA = new IA_m( modelGeneral,  vueGeneral, this);
         if(modelGeneral.selectJoueurActif().is_Ia()){
             iA.runIA();
@@ -186,7 +188,7 @@ public class ControlPlateau implements ActionListener {
             Image image = imageIcon.getImage();
             Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
             ImageIcon icon = new ImageIcon(newImage);
-
+            if(i==20)break;
             vueGeneral.inventaire.tabButtonInventaire[i].setIcon(icon);
         }
     }

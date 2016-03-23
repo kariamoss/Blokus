@@ -44,6 +44,8 @@ public class Sauvegarde {
     public void sauvegardeEtatTourJoueur(String color){
         save("Tour", color);
     }
+    public void sauvegardeEtatJoueurIA(String color){ save("IA", color);}
+    public void sauvegardeNomJoueur(String color, String name){ save("Nom;"+color, name);}
 
     public void save(String msg, String color){
         if(fileOpen){

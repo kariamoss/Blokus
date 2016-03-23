@@ -97,6 +97,12 @@ public class Chargement {
                 else if(split[0].equals("Tour")){
                     model.setJoueurActif(split[1]);
                 }
+                else if(split[0].equals("IA")){
+                    model.getJoueurByColor(split[1]).set_Ia(true);
+                }
+                else if(split[0].equals("Nom")){
+                    model.getJoueurByColor(split[1]).setNom(split[2]);
+                }
                 else{
                     int i = Integer.parseInt(split[0]);
                     int j = Integer.parseInt(split[1]);
@@ -130,11 +136,6 @@ public class Chargement {
         vue = new General_v(model);
         vue.display();
 
-
-        //Puis les controleurs qui en dépendent
-        controlButton = new ControlButton(vue, model);
-        controlPlateau = new ControlPlateau(model, vue);
-
         //On ré-actualise la vue
         for(int k = 0; k < listI.size(); k++){
             vue.plateau.tabButton[listI.get(k)][listJ.get(k)].setContentAreaFilled(true);
@@ -149,6 +150,13 @@ public class Chargement {
                 vue.inventaire.tabButtonInventaire[k].setEnabled(false);
             }
         }
+
+
+        //Puis les controleurs qui en dépendent
+        controlButton = new ControlButton(vue, model);
+        controlPlateau = new ControlPlateau(model, vue);
+
+
     }
 
 }
