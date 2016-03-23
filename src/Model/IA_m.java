@@ -38,6 +38,7 @@ public class IA_m{
     public void runIA() {
         if (modelGeneral.selectJoueurActif().is_Ia()) {
             Joueur_m iA;
+
             iA = modelGeneral.selectJoueurActif();
             List<Piece_m> listPiece = iA.getInventaire().getListPiece();
 

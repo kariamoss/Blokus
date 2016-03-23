@@ -74,18 +74,39 @@ public class ControlParamPartie implements ActionListener {
         if(e.getSource()==vue.valider){
             modelGeneral = new General_m();
             //met dans le modele le nom des joueurs
+
             String nom= vue.textFieldNomJoueur1.getText();
             modelGeneral.getJoueurByColor("Red").setNom(nom);
             modelGeneral.getJoueurByColor("Red").set_Ia(vue.iaJoueur1.isSelected());
+            modelGeneral.getSauvegarde().sauvegardeNomJoueur("Red",nom);
+            if(modelGeneral.getJoueurByColor("Red").is_Ia()){
+                modelGeneral.getSauvegarde().sauvegardeEtatJoueurIA("Red");
+            }
+
             nom = vue.textFieldNomJoueur2.getText();
             modelGeneral.getJoueurByColor("Blue").setNom(nom);
             modelGeneral.getJoueurByColor("Blue").set_Ia(vue.iaJoueur2.isSelected());
+            modelGeneral.getSauvegarde().sauvegardeNomJoueur("Blue",nom);
+            if(modelGeneral.getJoueurByColor("Blue").is_Ia()){
+                modelGeneral.getSauvegarde().sauvegardeEtatJoueurIA("Blue");
+            }
+
             nom = vue.textFieldNomJoueur3.getText();
             modelGeneral.getJoueurByColor("Yellow").setNom(nom);
             modelGeneral.getJoueurByColor("Yellow").set_Ia(vue.iaJoueur3.isSelected());
+            modelGeneral.getSauvegarde().sauvegardeNomJoueur("Yellow",nom);
+            if(modelGeneral.getJoueurByColor("Yellow").is_Ia()){
+                modelGeneral.getSauvegarde().sauvegardeEtatJoueurIA("Yellow");
+            }
+
             nom = vue.textFieldNomJoueur4.getText();
             modelGeneral.getJoueurByColor("Green").setNom(nom);
             modelGeneral.getJoueurByColor("Green").set_Ia(vue.iaJoueur4.isSelected());
+            modelGeneral.getSauvegarde().sauvegardeNomJoueur("Green",nom);
+            if(modelGeneral.getJoueurByColor("Green").is_Ia()){
+                modelGeneral.getSauvegarde().sauvegardeEtatJoueurIA("Green");
+            }
+
             vue.undisplay();
             general_v = new General_v(modelGeneral);
             general_v.display();
