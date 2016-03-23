@@ -5,6 +5,7 @@ import Controler.ControlRotationButton;
 import Model.General_m;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,12 +55,12 @@ public class BoutonsControleJeu_v extends JFrame {
     }
 
     public void init(){
-        imgAbandonner = new ImageIcon(new ImageIcon("images/boutons_controle/giveup_PLS.jpg").getImage().getScaledInstance(65, 48, Image.SCALE_DEFAULT ));
-        imgPause = new ImageIcon(new ImageIcon("images/boutons_controle/pause31.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        imgPlay = new ImageIcon(new ImageIcon("images/boutons_controle/play.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        imgRetournerGauche = new ImageIcon(new ImageIcon("images/boutons_controle/rotationGauche.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        imgRetournerDroite = new ImageIcon(new ImageIcon("images/boutons_controle/rotationDroite.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        imgRetournerMiroir = new ImageIcon(new ImageIcon("images/boutons_controle/rotationMiroir.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        imgAbandonner = new ImageIcon(new ImageIcon("images/boutons_controle/giveup_PLS.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT ));
+        imgPause = new ImageIcon(new ImageIcon("images/boutons_controle/pause31.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        imgPlay = new ImageIcon(new ImageIcon("images/boutons_controle/play.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        imgRetournerGauche = new ImageIcon(new ImageIcon("images/boutons_controle/rotationGauche.png").getImage().getScaledInstance(64, 64, Image.SCALE_DEFAULT));
+        imgRetournerDroite = new ImageIcon(new ImageIcon("images/boutons_controle/rotationDroite.png").getImage().getScaledInstance(64, 64, Image.SCALE_DEFAULT));
+        imgRetournerMiroir = new ImageIcon(new ImageIcon("images/boutons_controle/rotationMiroir.png").getImage().getScaledInstance(64, 64, Image.SCALE_DEFAULT));
 
 
         btAbandonner = new JButton(imgAbandonner);
@@ -69,6 +70,15 @@ public class BoutonsControleJeu_v extends JFrame {
         btRetournerDroite = new JButton(imgRetournerDroite);
         btRetournerMiroir = new JButton(imgRetournerMiroir);
 
+        btRetournerGauche.setBorder(new LineBorder(Color.DARK_GRAY, 1));
+        btRetournerGauche.setContentAreaFilled(false);
+        btRetournerGauche.setPreferredSize(new Dimension(64, 64));
+        btRetournerDroite.setBorder(new LineBorder(Color.DARK_GRAY, 1));
+        btRetournerDroite.setContentAreaFilled(false);
+        btRetournerDroite.setPreferredSize(new Dimension(64, 64));
+        btRetournerMiroir.setBorder(new LineBorder(Color.DARK_GRAY, 1));
+        btRetournerMiroir.setContentAreaFilled(false);
+        btRetournerMiroir.setPreferredSize(new Dimension(64, 64));
 
         btInvisible(btAbandonner);
         btInvisible(btPause);

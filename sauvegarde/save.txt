@@ -1,0 +1,4 @@
+Nom;Red;Joueur1
+Nom;Blue;Joueur2
+Nom;Yellow;Joueur3
+Nom;Green;Joueur4
