@@ -70,7 +70,7 @@ public class ControlPlateau implements ActionListener {
     public void control(int i, int j, Piece_m piece) {
 
         boolean positionnementOk = false;
-
+        modelGeneral.tourSuivant = false;
         if (piece!=null) {
             //Si la pièce actuelle est différente de la pièce précédente
             if (piece != previousPiece) {
@@ -170,11 +170,6 @@ public class ControlPlateau implements ActionListener {
 
             //On change d'inventaire
             dessinerInventaire();
-
-
-            if(modelGeneral.selectJoueurActif().is_Ia()){
-                iA.runIA();
-            }
         }
     }
 
