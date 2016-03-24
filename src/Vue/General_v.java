@@ -37,7 +37,6 @@ public class General_v extends JFrame {
         helper_preview = new Helper_Preview(this, modelGeneral);
         boutonsControleJeu = new BoutonsControleJeu_v(modelGeneral, this);
 
-
         setTitle("Blokus");
         initAttribute(modelGeneral);
 

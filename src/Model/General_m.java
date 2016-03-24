@@ -11,6 +11,7 @@ public class General_m {
     Joueur_m joueur1;
     Joueur_m joueur2;
     Joueur_m joueur3;
+    public NetworkManager networkManager;
 
     protected Sauvegarde sauvegarde;
 
@@ -21,6 +22,8 @@ public class General_m {
     public GameStats_v gameStats;
     public Chargement chargement;
     public Plateau_m modelPlateau;
+
+    public boolean partieReseau;
 
     public General_m()
     {
@@ -43,6 +46,7 @@ public class General_m {
         chargement = new Chargement(this);
 
         sauvegarde = new Sauvegarde();
+
     }
 
     public void selectJoueur(int index){
@@ -147,6 +151,17 @@ public class General_m {
                 return  listJoueur.getJoueur(i);
         }
         return null;
+    }
+
+    public void setPartieReseau(){
+        partieReseau = true;
+        networkManager = new NetworkManager(this);
+        networkManager.connect();
+        getJoueurByColor("Blue").setNom("");
+        getJoueurByColor("Yellow").setNom("");
+        getJoueurByColor("Green").setNom("");
+
+
     }
 
     public void setNomJoueur0(String nom){

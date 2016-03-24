@@ -47,6 +47,12 @@ public class ControlPlateau implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
+        if(modelGeneral.partieReseau){
+            if(!modelGeneral.networkManager.canPlay())
+                return;
+        }
+
+
         if (modelGeneral.selectJoueurActif().is_Ia()) return;
 
 
@@ -62,6 +68,8 @@ public class ControlPlateau implements ActionListener {
         }
 
         control(i, j, piece);
+
+        //is(modelGeneral.)
 
     }
 

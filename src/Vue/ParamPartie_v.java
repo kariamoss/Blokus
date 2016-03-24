@@ -1,11 +1,16 @@
 package Vue;
 
 import Controler.ControlParamPartie;
+import Controler.PanelPerso;
 import Model.General_m;
 import Model.ParamPartie_m;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by mathi on 01/03/2016.
@@ -43,14 +48,17 @@ public class ParamPartie_v extends JFrame{
     public JTextField textFieldNomJoueur2;
     public JTextField textFieldNomJoueur3;
     public JTextField textFieldNomJoueur4;
+    public PanelPerso panelFond;
+    public BufferedImage bgImg;
+    private Font font;
+    private JLabel partieReseau;
+    private JLabel partieLocale;
 
 
     public ParamPartie_v(General_m modelGeneral){
         setTitle("Blokus");
         initAttribute(modelGeneral);
-        this.setLayout(null);
-
-
+        this.getContentPane().setLayout(null);
         setSize(900, 660);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,9 +66,9 @@ public class ParamPartie_v extends JFrame{
     }
 
     public void initAttribute(General_m general_m){
+        this.setAlwaysOnTop(true);
         paramPartie_m = new ParamPartie_m();
-        controlParamPartie = new ControlParamPartie(paramPartie_m,this);
-        setLayout(new CardLayout());
+        controlParamPartie = new ControlParamPartie(general_m, paramPartie_m,this);
         this.modelGeneral = general_m;
         bgTypePartie = new ButtonGroup();
         bgJoueur1 = new ButtonGroup();
@@ -82,9 +90,19 @@ public class ParamPartie_v extends JFrame{
         humainJoueur4= new JCheckBox();
         humainJoueur4.setSelected(true);
         valider = new JButton("Créer la partie");
+        font = new Font("Arial",Font.BOLD,14);
+        partieReseau = new JLabel("Partie en Réseau");
+        partieLocale = new JLabel("Partie Locale");
+        partieReseau.setFont(font);
+        partieLocale.setFont(font);
+        partieReseau.setForeground(Color.WHITE);
+        partieLocale.setForeground(Color.WHITE);
+        this.setLayout(null);
     }
 
     public void draw(){
+
+        loadImage();
         panelGeneral = new JPanel();
         panelTypePartie = new JPanel();
         panelJoueur1 = new JPanel();
@@ -92,6 +110,7 @@ public class ParamPartie_v extends JFrame{
         panelJoueur3 = new JPanel();
         panelJoueur4 = new JPanel();
         panelJoueurs = new JPanel();
+        panelFond = new PanelPerso(bgImg);
 
         retourAccueil = new JButton("Retour à l'accueil");
 
@@ -148,9 +167,9 @@ public class ParamPartie_v extends JFrame{
         //panel du type de la partie
         bgTypePartie.add(reseauCB);
         bgTypePartie.add(localCB);
-        panelTypePartie.add(new JLabel("Partie en Réseau"));
+        panelTypePartie.add(partieReseau);
         panelTypePartie.add(reseauCB);
-        panelTypePartie.add(new JLabel("Partie Locale"));
+        panelTypePartie.add(partieLocale);
         panelTypePartie.add(localCB);
         panelTypePartie.add(retourAccueil);
         panelTypePartie.setBackground(Color.white);
@@ -176,15 +195,30 @@ public class ParamPartie_v extends JFrame{
         panelJoueurs.add(panelJoueur3);
         panelJoueurs.add(panelJoueur4);
 
-
+        //visibilité des panels
+        boutonsParamPartie(valider);
+        boutonsParamPartie(retourAccueil);
+        retourAccueil.setOpaque(false);
+        panelTypePartie.setOpaque(false);
+        panelJoueurs.setOpaque(false);
 
         // ajout des sous-panels au panel general
         panelGeneral.add(panelTypePartie);
         panelGeneral.add(panelJoueurs);
         panelGeneral.add(valider);
 
-        //dessine le panel général
-        setContentPane(panelGeneral);
+        // mise en forme
+        panelGeneral.setLayout(new BorderLayout());
+        panelGeneral.add(Box.createVerticalStrut(110), BorderLayout.NORTH);
+        //panelGeneral.add(Box.createHorizontalGlue(), BorderLayout.EAST);
+        //panelGeneral.add(Box.createHorizontalStrut(200), BorderLayout.WEST);
+        panelGeneral.setOpaque(false);
+        panelGeneral.setLayout(new BoxLayout(panelGeneral, BoxLayout.Y_AXIS));
+        panelFond.setLayout(new BorderLayout());
+        panelFond.add(panelGeneral,BorderLayout.SOUTH);
+
+        //dessine le panel de fond
+        setContentPane(panelFond);
 
     }
 
@@ -192,5 +226,22 @@ public class ParamPartie_v extends JFrame{
         setVisible(true);
     }
     public void undisplay(){setVisible(false);}
+
+    public void loadImage(){
+        try {
+            bgImg = ImageIO.read(new File("images/accueil/blokus1.jpg"));
+        }catch (IOException e){
+            System.out.println("Background not found.");
+        }
+    }
+
+    //gere la mise en forme des boutons de paramétrage de la partie
+    public void boutonsParamPartie(JButton button){
+        button.setFont(font);
+        button.setForeground(Color.white);
+        button.setOpaque(false);
+        button.setBackground(new Color(0, 0, 0, 0));
+        button.setBorderPainted(true);
+    }
 
 }

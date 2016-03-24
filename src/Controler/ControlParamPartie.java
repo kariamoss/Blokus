@@ -22,16 +22,21 @@ public class ControlParamPartie implements ActionListener {
     private ParamPartie_v vue;
     private Accueil_m accueil_m;
     public General_v general_v;
+    private boolean partieReseau;
 
 
 
-    public ControlParamPartie(ParamPartie_m paramPartie_m, ParamPartie_v paramPartie_v){
+    public ControlParamPartie(General_m modelGeneral, ParamPartie_m paramPartie_m, ParamPartie_v paramPartie_v){
+        this.modelGeneral = modelGeneral;
         this.vue = paramPartie_v;
         accueil_m = new Accueil_m();
+        partieReseau = false;
 
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
+
         if (e.getSource() == vue.retourAccueil) {
             vue.undisplay();
             Accueil_v accueil_v = new Accueil_v();
@@ -53,6 +58,7 @@ public class ControlParamPartie implements ActionListener {
             vue.panelJoueur3.setVisible(false);
             vue.panelJoueur4.setVisible(false);
             vue.valider.setEnabled(false);
+            partieReseau = true;
 
         }
 
@@ -68,24 +74,34 @@ public class ControlParamPartie implements ActionListener {
             vue.panelJoueur3.setVisible(true);
             vue.panelJoueur4.setVisible(true);
             vue.valider.setEnabled(true);
+            partieReseau = false;
 
         }
 
         if(e.getSource()==vue.valider){
-            modelGeneral = new General_m();
-            //met dans le modele le nom des joueurs
-            String nom= vue.textFieldNomJoueur1.getText();
-            modelGeneral.getJoueurByColor("Red").setNom(nom);
-            modelGeneral.getJoueurByColor("Red").set_Ia(vue.iaJoueur1.isSelected());
-            nom = vue.textFieldNomJoueur2.getText();
-            modelGeneral.getJoueurByColor("Blue").setNom(nom);
-            modelGeneral.getJoueurByColor("Blue").set_Ia(vue.iaJoueur2.isSelected());
-            nom = vue.textFieldNomJoueur3.getText();
-            modelGeneral.getJoueurByColor("Yellow").setNom(nom);
-            modelGeneral.getJoueurByColor("Yellow").set_Ia(vue.iaJoueur3.isSelected());
-            nom = vue.textFieldNomJoueur4.getText();
-            modelGeneral.getJoueurByColor("Green").setNom(nom);
-            modelGeneral.getJoueurByColor("Green").set_Ia(vue.iaJoueur4.isSelected());
+            //modelGeneral = new General_m();
+            if (partieReseau){
+                modelGeneral.setPartieReseau();
+                String nom= vue.textFieldNomJoueur1.getText();
+                modelGeneral.getJoueurByColor("Red").setNom(nom);
+
+            }
+
+            else {
+                //met dans le modele le nom des joueurs
+                String nom= vue.textFieldNomJoueur1.getText();
+                modelGeneral.getJoueurByColor("Red").setNom(nom);
+                modelGeneral.getJoueurByColor("Red").set_Ia(vue.iaJoueur1.isSelected());
+                nom = vue.textFieldNomJoueur2.getText();
+                modelGeneral.getJoueurByColor("Blue").setNom(nom);
+                modelGeneral.getJoueurByColor("Blue").set_Ia(vue.iaJoueur2.isSelected());
+                nom = vue.textFieldNomJoueur3.getText();
+                modelGeneral.getJoueurByColor("Yellow").setNom(nom);
+                modelGeneral.getJoueurByColor("Yellow").set_Ia(vue.iaJoueur3.isSelected());
+                nom = vue.textFieldNomJoueur4.getText();
+                modelGeneral.getJoueurByColor("Green").setNom(nom);
+                modelGeneral.getJoueurByColor("Green").set_Ia(vue.iaJoueur4.isSelected());
+            }
             general_v = new General_v(modelGeneral);
             controlAbandonner = new ControlAbandonner(modelGeneral, general_v);
             controlButton = new ControlButton(general_v, modelGeneral);
@@ -94,8 +110,6 @@ public class ControlParamPartie implements ActionListener {
             general_v.display();
         }
 
-        if(e.getSource() == vue.localCB){
-            vue.iaJoueur1.setEnabled(false);
-        }
+
     }
 }

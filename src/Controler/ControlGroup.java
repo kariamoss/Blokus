@@ -23,16 +23,13 @@ public class ControlGroup {
     public ParamPartie_v paramPartie_v;
 
     public ControlGroup(General_m modelGeneral, boolean chargement) {
-        if(chargement){
-            this.model = modelGeneral;
-        }
-        else{
-            this.model = modelGeneral;
-           // vue = new General_v(model);
+        this.model = modelGeneral;
+        if(!chargement){
+            // vue = new General_v(model);
             paramPartie_v = new ParamPartie_v(modelGeneral);
             //controlAbandonner = new ControlAbandonner(model, vue);
-           // controlButton = new ControlButton(vue, model);
-           // controlPlateau = new ControlPlateau (model, vue);
+            // controlButton = new ControlButton(vue, model);
+            // controlPlateau = new ControlPlateau (model, vue);
 
             paramPartie_v.display();
         }

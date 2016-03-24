@@ -31,8 +31,12 @@ public class ControlButton implements ActionListener {
 
     public void actionPerformed(ActionEvent e)
     {
+        if(modelGeneral.partieReseau){
+            if(!modelGeneral.networkManager.canPlay())
+                return;
+        }
 
-        //TODO Chercher i avec un e.getSource()
+
 
         for (int i = 0; i < 20; i++) {
             if (e.getSource() == vueGeneral.inventaire.tabButtonInventaire[i]){

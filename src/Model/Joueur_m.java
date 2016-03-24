@@ -23,7 +23,6 @@ public class Joueur_m {
     }
 
 
-
     // GETTERS / SETTERS
 
     public String getNom() {
