@@ -40,7 +40,8 @@ public class Inventaire_v {
            // TODO Set ActionListener dans une fonction : OK
 
 
-            tabButtonInventaire[i].setBorder(new LineBorder(Color.DARK_GRAY, 2));
+            tabButtonInventaire[i].setBorder(new LineBorder(Color.DARK_GRAY, 1));
+            tabButtonInventaire[i].setContentAreaFilled(false);
             tabButtonInventaire[i].setPreferredSize(new Dimension(45,45));
 
             ImageIcon imageIcon = new ImageIcon(modelGeneral.selectJoueurActif().getInventaire().getPiece(i).getImage());

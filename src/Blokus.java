@@ -18,7 +18,6 @@ public class Blokus {
             public void run() {
                 Accueil_m accueil_m = new Accueil_m();
                 Accueil_v accueil_v = new Accueil_v();
-                ControlAccueil controlAccueil = new ControlAccueil(accueil_m,accueil_v);
             }
         });
     }

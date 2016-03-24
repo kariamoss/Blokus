@@ -41,8 +41,12 @@ public class ControlPlateau implements ActionListener {
         this.modelPlateau = modelGeneral.modelPlateau;
 
         vueGeneral.plateau.setButtonControler(this);
-        iA = new IA_m( modelGeneral,  vueGeneral, this);
 
+
+        iA = new IA_m( modelGeneral,  vueGeneral, this);
+        if(modelGeneral.selectJoueurActif().is_Ia()){
+            iA.runIA();
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -76,7 +80,7 @@ public class ControlPlateau implements ActionListener {
     public void control(int i, int j, Piece_m piece) {
 
         boolean positionnementOk = false;
-
+        modelGeneral.tourSuivant = false;
         if (piece!=null) {
             //Si la pièce actuelle est différente de la pièce précédente
             if (piece != previousPiece) {
@@ -176,11 +180,6 @@ public class ControlPlateau implements ActionListener {
 
             //On change d'inventaire
             dessinerInventaire();
-
-
-            if(modelGeneral.selectJoueurActif().is_Ia()){
-                iA.runIA();
-            }
         }
     }
 
@@ -197,7 +196,7 @@ public class ControlPlateau implements ActionListener {
             Image image = imageIcon.getImage();
             Image newImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH) ;
             ImageIcon icon = new ImageIcon(newImage);
-
+            if(i==20)break;
             vueGeneral.inventaire.tabButtonInventaire[i].setIcon(icon);
         }
     }

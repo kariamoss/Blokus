@@ -77,7 +77,6 @@ public class ParamPartie_v extends JFrame{
         bgJoueur4 = new ButtonGroup();
 
         iaJoueur1= new JCheckBox();
-        iaJoueur1.setEnabled(false);
         iaJoueur2= new JCheckBox();
         iaJoueur3= new JCheckBox();
         iaJoueur4= new JCheckBox();
