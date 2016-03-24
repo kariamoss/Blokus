@@ -2,7 +2,7 @@ package Model;
 
 import Vue.General_v;
 
-public class ThreadEcouteIA extends Thread{
+class ThreadEcouteIA extends Thread{
     IA_m ia_m;
     General_v general_v;
     General_m general_m;
